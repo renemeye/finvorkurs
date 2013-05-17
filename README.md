@@ -19,3 +19,8 @@ Installation
 		foo$ redis-server
 		```
 6. ```rails s```
+
+TODO
+------
+- [ ] Initial admin user
+
