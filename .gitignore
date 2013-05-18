@@ -16,3 +16,6 @@
 /tmp
 .DS_Store
 *.swp
+
+#ignore redis dump
+dump.rdb
