@@ -19,3 +19,6 @@
 
 #ignore redis dump
 dump.rdb
+
+#ignore created Diagram
+erd.pdf
