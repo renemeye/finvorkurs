@@ -23,6 +23,7 @@ Installation
 Development
 -----------
 
-We are developing with this branchning model:
+Since Version 1.0.0, we are developing with this branchning model:
 	* http://nvie.com/posts/a-successful-git-branching-model/
 
+Have a look to GitHub Issues if you want more information.
