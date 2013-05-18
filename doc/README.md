@@ -9,4 +9,5 @@ ER-Diagram
 	* Steps
 		1. Install graphviz
 		2. Generate ER-Diagram: ```$ rake erd```
+		3. Move to doc folder: ```$ mv erd.pdf doc/ER-Diagram.pdf```
  
