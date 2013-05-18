@@ -16,3 +16,6 @@
 /tmp
 .DS_Store
 *.swp
+
+#ignore created Diagram
+erd.pdf
