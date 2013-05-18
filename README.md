@@ -20,7 +20,9 @@ Installation
 		```
 6. ```rails s```
 
-TODO
-------
-- [ ] Initial admin user
+Development
+-----------
+
+We are developing with this branchning model:
+	* http://nvie.com/posts/a-successful-git-branching-model/
 
