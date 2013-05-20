@@ -18,7 +18,13 @@ Getting started - **The simple way**
 		```
 		foo$ redis-server
 		```
-6. ```rails s```
+6. Initialise Database
+	* Create DB: ```$ rake db:create```
+	* Migrate to current layout: ```$ rake db:migrate```
+	* Create initialial admin-user ```$ rake admin:create```
+		* Follow Instructions
+7. Start Server: ```rails s```
+	* Website now running on: http://localhost:3000
 
 Getting started - **The recomended way**
 -----------------------------------------
@@ -32,7 +38,14 @@ Getting started - **The recomended way**
 		foo$ brew install redis
 		```
 5. Install [forman](https://github.com/ddollar/foreman)
-6. ```foreman start -f Procfile.development```
+6. Initialise Database
+	* Create DB: ```$ rake db:create```
+	* Migrate to current layout: ```$ rake db:migrate```
+	* Create initialial admin-user ```$ rake admin:create```
+		* Follow Instructions
+7. ```foreman start -f Procfile.development```
+	* Website now running on: http://localhost:3000
+	* Visit-Counter now running on: http://localhost:4242
 
 
 
