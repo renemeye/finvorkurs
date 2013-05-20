@@ -47,7 +47,20 @@ Getting started - **The recomended way**
 	* Website now running on: http://localhost:3000
 	* Visit-Counter now running on: http://localhost:4242
 
+Configuration
+-------------
+Config entries are compiled from:
 
+    config/settings.yml
+    config/settings/#{environment}.yml
+    config/environments/#{environment}.yml
+    
+    config/settings.local.yml
+    config/settings/#{environment}.local.yml
+    config/environments/#{environment}.local.yml    
+
+Settings defined in files that are lower in the list override settings higher.
+**It is highly recommended** to copy one of the existing *.yml files and store your settings in the equivalent *.local.yml
 
 Documentation
 -------------
