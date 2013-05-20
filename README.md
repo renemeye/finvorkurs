@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/renemeye/finvorkurs.png)](https://travis-ci.org/FIN-Vorkurs/finvorkurs)
+[![Build Status](https://travis-ci.org/renemeye/finvorkurs.png)](https://travis-ci.org/renemeye/finvorkurs)
 
 FIN-Vorkurs
 ===========
