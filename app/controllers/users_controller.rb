@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       @user.destroy
       session.delete :user_id
 	  redirect_to root_url, :notice => "Account gelöscht"
-    elsif current_user.role == User::ADMIN
+    elsif current_user.admin?
       @user.destroy
       redirect_to :users, :notice => "Account gelöscht"
     else
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def send_notification_to_admins user
-    admins = User.find_all_by_role User::ADMIN
+    admins = User.find_all_by_role User::ROLES[:admin]
     admins.each do |a|
       a.send_new_user_notification user
     end

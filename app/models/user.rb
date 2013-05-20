@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige Emailadresse'}
   validates :name, presence: true, :if => proc { |u| not u.courses.empty? }
 
+	ROLES = {
+		:admin => 2,
+		:tutor => 1,
+		:user => 0
+	}	
+
   def generate_token column
     begin
       self[column] = SecureRandom.urlsafe_base64
@@ -53,9 +59,15 @@ class User < ActiveRecord::Base
     "#{self.email} has created an Account"
   end
 
+	#Define user? admin? tutor? method
+	ROLES.each do |meth, code|
+		define_method("#{meth}?") { self.role == code }
+	end
 
-  ADMIN = 2
-  TUTOR = 1
-  USER = 0
+	#Define user! admin! tutor! method
+	ROLES.each do |meth, code|
+		define_method("#{meth}!") { self.role = code }
+	end
+
 
 end

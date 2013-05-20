@@ -3,7 +3,7 @@ namespace :admin do
   task :create => :environment do
     begin
       user = User.new
-      user.role = User::ADMIN
+      user.admin!
       puts "login email address:"
       user.email = STDIN.gets.chomp
       system 'stty -echo' # will not be echoed
