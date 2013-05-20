@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin!
     user = current_user and 
-      user.role >= User::ADMIN or 
+      user.admin? or 
         redirect_to login_url, :notice => "Nur für Admins!"
   end
 

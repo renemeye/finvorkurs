@@ -1,0 +1,3 @@
+# Defines the design of the whole page
+# Possible Values: [FIN, OvGU]
+design: OvGU
