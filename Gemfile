@@ -8,6 +8,7 @@ gem 'rails'
 group :development do
   gem 'sqlite3'
 	gem 'rails-erd'
+	gem 'foreman'
 end
 
 group :test do
