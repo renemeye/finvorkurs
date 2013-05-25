@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids
   validates :password, :presence => true, :on => :create
   validates :email, :uniqueness => true
-  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige Emailadresse'}
+  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
   validates :name, presence: true, :if => proc { |u| not u.courses.empty? }
 
 	ROLES = {
