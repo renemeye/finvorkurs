@@ -1,6 +1,22 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
 
+  has_many :enrollments, dependent: :destroy
+  has_many :courses, through: :enrollments
+  has_many :replies, dependent: :destroy
+  has_many :answers, through: :replies
+  has_many :questions, through: :answers
+  has_many :test_results, dependent: :destroy
+  has_many :groups, through: :enrollments
+
+  attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids
+  #validates :password, :presence => true, :on => :create, 
+	validates :password_digest, presence: true, :unless => Proc.new { |user| user.preregistered? }
+  validates :email, :uniqueness => true
+  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
+  validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
+
+
 	#self defined version of has_secure_password in order to have an :unless at the validations
 	require 'bcrypt'
 	attr_reader :password
@@ -13,21 +29,6 @@ class User < ActiveRecord::Base
 		end
 	end
 	# end self defined version of has_secure_password
-
-  has_many :enrollments, dependent: :destroy
-  has_many :courses, through: :enrollments
-  has_many :replies, dependent: :destroy
-  has_many :answers, through: :replies
-  has_many :questions, through: :answers
-  has_many :test_results, dependent: :destroy
-  has_many :groups, through: :enrollments
-
-  attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids
-  #validates :password, :presence => true, :on => :create, 
-	validates :password_digest, presence: true, :unless => Proc.new { |user| user.preregistered?}
-  validates :email, :uniqueness => true
-  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
-  validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
 
 	ROLES = {
 		:admin => 3,
