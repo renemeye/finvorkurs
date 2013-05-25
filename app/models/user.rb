@@ -1,6 +1,19 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  has_secure_password
+
+	#self defined version of has_secure_password in order to have an :unless at the validations
+	require 'bcrypt'
+	attr_reader :password
+	validates_confirmation_of :password, :unless => Proc.new { |user| user.preregistered?}
+	validates_presence_of     :password_digest, :unless => Proc.new { |user| user.preregistered?}
+	include InstanceMethodsOnActivation
+	if respond_to?(:attributes_protected_by_default)
+		def self.attributes_protected_by_default
+			super + ['password_digest']
+		end
+	end
+	# end self defined version of has_secure_password
+
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
   has_many :replies, dependent: :destroy
@@ -8,16 +21,19 @@ class User < ActiveRecord::Base
   has_many :questions, through: :answers
   has_many :test_results, dependent: :destroy
   has_many :groups, through: :enrollments
+
   attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids
-  validates :password, :presence => true, :on => :create
+  #validates :password, :presence => true, :on => :create, 
+	validates :password_digest, presence: true, :unless => Proc.new { |user| user.preregistered?}
   validates :email, :uniqueness => true
-  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige Emailadresse'}
-  validates :name, presence: true, :if => proc { |u| not u.courses.empty? }
+  validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
+  validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
 
 	ROLES = {
-		:admin => 2,
-		:tutor => 1,
-		:user => 0
+		:admin => 3,
+		:tutor => 2,
+		:registered => 1,
+		:preregistered => 0
 	}	
 
   def generate_token column
@@ -68,6 +84,5 @@ class User < ActiveRecord::Base
 	ROLES.each do |meth, code|
 		define_method("#{meth}!") { self.role = code }
 	end
-
 
 end
