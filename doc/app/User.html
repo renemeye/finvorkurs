@@ -236,17 +236,7 @@
       <h3 class="section-header">Constants</h3>
       <dl>
       
-        <dt id="ADMIN">ADMIN
-        
-        <dd class="description">
-        
-      
-        <dt id="TUTOR">TUTOR
-        
-        <dd class="description">
-        
-      
-        <dt id="USER">USER
+        <dt id="ROLES">ROLES
         
         <dd class="description">
         
@@ -279,7 +269,7 @@
 
           
           <div class="method-source-code" id="answers_for-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">answers_for</span> <span class="ruby-identifier">course</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">answers</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:question</span>).<span class="ruby-identifier">where</span> <span class="ruby-identifier">questions</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">course_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">course</span>}
 <span class="ruby-keyword">end</span></pre>
@@ -309,7 +299,7 @@
 
           
           <div class="method-source-code" id="generate_token-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_token</span> <span class="ruby-identifier">column</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">self</span>[<span class="ruby-identifier">column</span>] = <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">urlsafe_base64</span>
@@ -341,7 +331,7 @@
 
           
           <div class="method-source-code" id="in_course-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">in_course?</span> <span class="ruby-identifier">course</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">courses</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">course</span>
 <span class="ruby-keyword">end</span></pre>
@@ -371,7 +361,7 @@
 
           
           <div class="method-source-code" id="message-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">message</span>
   <span class="ruby-node">&quot;#{self.email} has created an Account&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -401,7 +391,7 @@
 
           
           <div class="method-source-code" id="send_enrollment_confirmation-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_enrollment_confirmation</span> <span class="ruby-identifier">course</span>
   <span class="ruby-constant">UserMailer</span>.<span class="ruby-identifier">send_enrollment_confirmation_to_user</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">course</span>).<span class="ruby-identifier">deliver</span>
 <span class="ruby-keyword">end</span></pre>
@@ -431,7 +421,7 @@
 
           
           <div class="method-source-code" id="send_new_user_notification-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_new_user_notification</span> <span class="ruby-identifier">user</span>
   <span class="ruby-constant">UserMailer</span>.<span class="ruby-identifier">new_user_notification</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">user</span>).<span class="ruby-identifier">deliver</span>
 <span class="ruby-keyword">end</span></pre>
@@ -461,7 +451,7 @@
 
           
           <div class="method-source-code" id="send_newsletter-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_newsletter</span> <span class="ruby-identifier">post</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">present?</span>
     <span class="ruby-constant">UserMailer</span>.<span class="ruby-identifier">send_newsletter_to_user</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">post</span>).<span class="ruby-identifier">deliver</span>
@@ -493,7 +483,7 @@
 
           
           <div class="method-source-code" id="send_password_reset-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_password_reset</span>
   <span class="ruby-identifier">generate_token</span> <span class="ruby-value">:password_reset_token</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_reset_sent_at</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>

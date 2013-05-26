@@ -13,7 +13,7 @@ class EnrollmentsController < ApplicationController
     if @user.courses << @course && @user.update_attributes(params[:user])
       @user.send_enrollment_confirmation @course
       Log.new(message: "#{@user.name} enrolled to #{@course.title}").save
-      redirect_to courses_path, :notice => "Deine Kursanmeldung war erfolgreich. Du erhältst eine Bestätigung per Email"
+      redirect_to courses_path, :notice => "Deine Kursanmeldung war erfolgreich. Du erhältst eine Bestätigung per E-Mail"
     else
       @user.courses.delete @course
       @enrollment = Enrollment.new
