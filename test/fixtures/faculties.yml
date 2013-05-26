@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+FIN:
+  name: Fakultät für Informatik
+  short_name: FIN
+
+FWW:
+  name: Fakultät für Wirtschaftswissenschaften
+  short_name: FWW

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :questions, through: :answers
   has_many :test_results, dependent: :destroy
   has_many :groups, through: :enrollments
+	has_and_belongs_to_many :degree_programs
 
   attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids
   #validates :password, :presence => true, :on => :create, 
