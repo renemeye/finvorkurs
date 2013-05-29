@@ -19,10 +19,8 @@
 	<% end %>
 	<%= ie { f.label :email, "E-Mail" } %>
 	<%= f.email_field :email, :placeholder => "E-Mail" %>
-	<%= ie { f.label :password, "Passwort" } %>
-	<%= f.password_field :password, :placeholder => "Passwort" %>
-	<%= ie { f.label :password_confirmation, "Passwort wiederholen" } %>
-	<%= f.password_field :password_confirmation, :placeholder => "Passwort wiederholen" %>
+	<%= ie { f.label :degree_programs, "Interessiert an Studiengängen" } %>
+	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen", :'data-class' => "input"} %>
 	<%= ie { raw '<br />' } %>
 	<%= f.submit "Registrieren" %>
 <% end %>

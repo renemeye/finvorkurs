@@ -1,3 +1,15 @@
 # Defines the design of the whole page
-# Possible Values: [FIN, OvGU]
+# Possible values: [FIN, OvGU]
 design: OvGU
+
+mail:
+  from: "no-reply@anywhere.com"
+  smtp:
+    server_address: "mail.anywhere.com"
+    port: 587
+    user_name: "user"
+    password: "myOwnSecret"
+
+  #All Mails are getting bypassed to this adress while in devolpment Mode
+  development_bypass_target: "nobody@example.com"
+

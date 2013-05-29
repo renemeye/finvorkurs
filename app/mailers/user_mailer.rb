@@ -1,6 +1,6 @@
 # Coding: UTF-8
 class UserMailer < ActionMailer::Base
-  default from: "vorkurs@farafin.de"
+  default from: Settings.mail.from
 
   def password_reset user
     @user = user
