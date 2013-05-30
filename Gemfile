@@ -8,6 +8,7 @@ gem 'rails'
 group :development do
   gem 'sqlite3'
 	gem 'rails-erd'
+	gem 'foreman'
 end
 
 group :test do
@@ -38,6 +39,8 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
+gem 'chosen-rails'
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -57,3 +60,6 @@ gem 'bcrypt-ruby'
 
 #Configuration
 gem "rails_config"
+
+#A nicer Way to use forms
+gem 'formtastic'

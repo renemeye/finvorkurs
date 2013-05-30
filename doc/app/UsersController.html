@@ -296,7 +296,7 @@
     <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>
     <span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value">:user_id</span>
         <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Account gelöscht&quot;</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">ADMIN</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">admin?</span>
     <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>
     <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:users</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Account gelöscht&quot;</span>
   <span class="ruby-keyword">else</span>

@@ -9,25 +9,28 @@
       </ul>
     </div>
   <% end %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%= f.label :name, "Name"%>
-  <%= f.text_field :name %>
-  <%= f.label :password, "Neues Password" %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation, "Neues Password wiederholen" %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "Ändern", :class => "btn btn-primary" %>
-  <h2> Kursanmeldungen </h2>
-  <ul>
-    <% @user.enrollments.each do |e| %>
-      <li>
-        <%= e.course.title %>
-        <%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?" %>
-      </li>
-    <% end %>
-  </ul>
-  <h2>Account löschen</h2>
+	<%= ie { f.label :email, "E-Mail" } %>
+	<%= f.email_field :email, :placeholder => "E-Mail" %>
+	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen", :'data-class' => "input"} %>
+	<% unless @user.preregistered? %>
+		<%= f.label :name, "Name"%>
+		<%= f.text_field :name %>
+		<%= f.label :password, "Neues Password" %>
+		<%= f.password_field :password %>
+		<%= f.label :password_confirmation, "Neues Password wiederholen" %>
+		<%= f.password_field :password_confirmation %>
+		<h2> Kursanmeldungen </h2>
+		<ul>
+			<% @user.enrollments.each do |e| %>
+				<li>
+					<%= e.course.title %>
+					<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?" %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+	</br>
+	<%= f.submit "Änderungen Speichern", :class => "btn btn-primary" %>
   <%= link_to "Account permanent löschen", @user, :method => :delete, 
     :confirm => "Achtung! Account wirklich löschen?", :class => "btn btn-danger" %>
 <% end %>

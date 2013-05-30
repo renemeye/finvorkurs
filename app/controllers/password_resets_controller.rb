@@ -7,9 +7,9 @@ class PasswordResetsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       user.send_password_reset
-      redirect_to root_url, :notice => "Email mit Anweisungen gesendet"
+      redirect_to root_url, :notice => "E-Mail mit Anweisungen gesendet"
     else
-      flash.now.alert = "Kein User mit dieser Emailadresse gefunden"
+      flash.now.alert = "Kein User mit dieser E-Mail-Adresse gefunden"
       render :new
     end
   end

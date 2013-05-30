@@ -1,6 +1,6 @@
 # Coding: UTF-8
 class UserMailer < ActionMailer::Base
-  default from: "vorkurs@farafin.de"
+  default from: Settings.mail.from
 
   def password_reset user
     @user = user
@@ -23,4 +23,9 @@ class UserMailer < ActionMailer::Base
     @course = course
     mail to: user.email, subject: "[FIN Vorkurs] Anmeldebestätigung #{course.title}"
   end
+
+	def new_email_confirmation_mail user
+		@user = user
+		mail to: user.email, subject: "[OvGU Vorkurse] Bestätige deine E-Mail-Adresse"
+	end
 end
