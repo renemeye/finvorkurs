@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
+		#TODO: Try to change this to params[:auth_token] on an new route ... just to avoid possible collision
+    @current_user ||= User.find_by_preregistration_auth_token(params[:id]) if params[:id]
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+		return @current_user
   end
 
   def authenticate_user!

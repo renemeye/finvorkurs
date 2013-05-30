@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
   validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
 
+
 	#self defined version of has_secure_password in order to have an :unless at the validations
 	require 'bcrypt'
 	attr_reader :password
@@ -29,6 +30,7 @@ class User < ActiveRecord::Base
 		end
 	end
 	# end self defined version of has_secure_password
+	
 
 	ROLES = {
 		:admin => 3,
@@ -53,6 +55,10 @@ class User < ActiveRecord::Base
   def send_new_user_notification user
     UserMailer.new_user_notification(self, user).deliver
   end
+
+	def send_email_confirmation_mail
+		UserMailer.new_email_confirmation_mail(self).deliver
+	end
 
   def send_newsletter post
     if self.present?
