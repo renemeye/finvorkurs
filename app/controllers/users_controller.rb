@@ -12,8 +12,20 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
-    check_permission!
+    @user=@current_user 
+		redirect_to root_url, :notice => "Keine Berechtigung. War das eventuell ein veralteter Link?" if @user.nil?
+		check_permission!
+
+		unless @user.email_confirmation
+			flash[:notice] = "E-Mail-Adresse bestätigt."
+			@user.email_confirmation = true
+			@user.save
+		end
+
+		unless session[:user_id] == @user.id
+			session[:user_id] = @user.id
+			redirect_to edit_user_path @user.id
+		end
   end
 
   def update
@@ -28,10 +40,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+		@user.generate_token :preregistration_auth_token
     if @user.save
-      session[:user_id] = @user.id
-      send_notification_to_admins @user
-      redirect_to root_url, :notice => "Registrierung erfolgreich!"
+			@user.send_email_confirmation_mail
+      send_notification_to_admins @user if Settings.administration.send_new_user_registered_notification
+      redirect_to root_url, :notice => "Vielen Dank für dein Interesse. Bitte sieh in dein Postfach und bestätige noch deine E-Mail-Adresse."
     else
       render "new"
     end
@@ -65,4 +78,11 @@ class UsersController < ApplicationController
       a.send_new_user_notification user
     end
   end
+
+	def get_user_by_id_or_auth_token id_or_token
+    user = User.find_by_preregistration_auth_token(id_or_token)
+		if user.nil?
+			user = User.find_by_id(id_or_token)
+		end
+	end
 end

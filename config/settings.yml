@@ -2,6 +2,9 @@
 # Possible values: [FIN, OvGU]
 design: OvGU
 
+administration:
+  send_new_user_registered_notification: true
+
 mail:
   from: "no-reply@anywhere.com"
   smtp:
