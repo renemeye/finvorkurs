@@ -18,9 +18,9 @@
 		</div>
 	<% end %>
 	<%= ie { f.label :email, "E-Mail" } %>
-	<%= f.email_field :email, :placeholder => "E-Mail" %>
+	<%= f.email_field :email, :placeholder => "E-Mail-Adresse" %>
 	<%= ie { f.label :degree_programs, "Interessiert an Studiengängen" } %>
-	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen", :'data-class' => "input"} %>
+	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen"} %>
 	<%= ie { raw '<br />' } %>
 	<%= f.submit "Registrieren" %>
 <% end %>

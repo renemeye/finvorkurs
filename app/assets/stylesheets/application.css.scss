@@ -5,6 +5,10 @@
 @import "formtastic";
 @import "chosen";
 
+select#user_degree_program_ids{
+	width: 280px;
+}
+
 body {
   margin: 0 1em;
 }
