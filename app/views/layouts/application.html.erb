@@ -2,18 +2,23 @@
 <html>
 <head>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-  <title>FIN Vorkurs</title>
+	<title><%= Settings.design %> Vorkurse</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%=Settings.design.downcase %>-design">
   <div id="user_bar"><%= render "user_bar" %></div>
   <header>
     <%= link_to root_url do %>
-      <h1>
-        <span class="fin">FIN</span><span class="dots">::</span><span class="vorkurs">Vorkurs</span>
-      </h1>
+			<h1>
+				<% if Settings.design.downcase == "ovgu" %>
+					<%= image_tag "logo.png", :class=>"logo", :id=>"mainLogo" %>
+					Vorkurse
+				<% elsif %>
+					<span class="fin">FIN</span><span class="dots">::</span><span class="vorkurs">Vorkurs</span>
+				<% end %>
+			</h1>
     <% end %>
     <nav>
     <ul>
