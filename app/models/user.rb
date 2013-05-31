@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 		end
 	end
 	# end self defined version of has_secure_password
-	
+
 
 	ROLES = {
 		:admin => 3,
