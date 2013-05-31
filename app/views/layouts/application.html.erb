@@ -22,13 +22,23 @@
     <% end %>
     <nav>
     <ul>
+    <% if Settings.menu.downloads %>
       <% if current_user %>
         <li><%= link_to "Downloads", downloads_path %></li>
       <% end %>
+    <% end %>
+    <% if Settings.menu.programs %>
         <li><%= link_to "Programm", schedules_path %></li>
-        <li><%= link_to "Kurse", courses_path %></li>
+    <% end %>
+    <% if Settings.menu.news %>
         <li><%= link_to "Neuigkeiten", posts_path %></li>
+    <% end %>
+    <% if Settings.menu.courses %>
+        <li><%= link_to "Kurse", courses_path %></li>
+    <% end %>
+    <% if Settings.menu.legals %>
         <li><%= link_to "Impressum", legal_path %></li>
+    <% end %>
       </ul>
     </nav>
   </header>
