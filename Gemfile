@@ -16,7 +16,8 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+ # gem 'pg'
+ gem 'mysql2'
 end
 
 gem 'thin'
@@ -41,7 +42,7 @@ end
 
 gem 'chosen-rails'
 
-gem 'jquery-rails'
+gem "jquery-rails", "2.3.0"
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'

@@ -1,1 +1,1 @@
-web: RAILS_RELATIVE_URL_ROOT=/finvorkurs bundle exec thin start -e production
+web: bundle exec thin start -e production

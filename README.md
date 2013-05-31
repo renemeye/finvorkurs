@@ -47,6 +47,13 @@ Getting started - **The recomended way**
 	* Website now running on: http://localhost:3000
 	* Visit-Counter now running on: http://localhost:4242
 
+Run on Server
+-------------
+* If all is Downloaded, Setup and Cofigured:
+* Start production (might be in a screen or in an init.d file)
+  * ```foreman start -f Procfile -e .env```
+
+
 Configuration
 -------------
 Config entries are compiled from:
