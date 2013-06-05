@@ -82,7 +82,7 @@ ActiveAdmin.register User do
     f.inputs "User" do
       f.input :email
       f.input :name
-      f.input :role, as: :select, collection: {'User' => 0, 'Tutor' => 1, 'Admin' => 2}
+      f.input :role, as: :select, collection: User::ROLES
     end
     f.buttons
   end
