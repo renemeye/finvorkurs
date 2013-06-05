@@ -37,7 +37,7 @@ ActiveAdmin.register Group do
         f.input :enrollments, as: :check_boxes, collection: sorted + (Enrollment.where('course_id = ?', f.object.course.id) - sorted)
       end
     end
-    f.buttons
+    f.actions
   end
 
 end
