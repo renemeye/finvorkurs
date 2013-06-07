@@ -11,14 +11,12 @@
   <div id="user_bar"><%= render "user_bar" %></div>
   <header>
     <%= link_to root_url do %>
-			<h1>
-				<% if Settings.design.downcase == "ovgu" %>
-					<%= image_tag "logo.png", :class=>"logo", :id=>"mainLogo" %>
-					Vorkurse
-				<% elsif %>
-					<span class="fin">FIN</span><span class="dots">::</span><span class="vorkurs">Vorkurs</span>
-				<% end %>
-			</h1>
+			<% if Settings.design.downcase == "ovgu" %>
+				<%= image_tag "logo.png", :class=>"logo", :id=>"mainLogo" %>
+				<span class="vorkurs">Vorkurse</span>
+			<% elsif %>
+				<span class="fin">FIN</span><span class="dots">::</span><span class="vorkurs">Vorkurs</span>
+			<% end %>
     <% end %>
     <nav>
     <ul>

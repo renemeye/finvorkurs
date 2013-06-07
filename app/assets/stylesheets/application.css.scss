@@ -23,6 +23,45 @@ section#signup, section#login, section#password_reset {
 }
 
 body.ovgu-design{ 
+	header{
+		padding: 1.5em 1em;
+		margin: 0 -1em;
+		box-shadow: 0 5px 10px #eee;
+		overflow: auto;
+
+		a{
+			float: left;
+
+			img#mainLogo{
+				border: none;
+				margin: 0;
+				float: left;
+			}
+
+			.vorkurs {
+				line-height: 1em;
+				font-size: 3.5em;
+				margin-left: 20px;
+				font-weight: bold;
+				text-shadow: 2px 2px 3px #ccc;
+			}
+		}
+
+		nav {
+			ul{
+				li {
+					position: relative; 
+					top: 50%; 
+					height: 1em; 
+					margin-top: -0.5em;
+				}
+			}
+			line-height: 63px;
+			float: right;
+			width: auto;
+		}
+	}
+
 	div#user_bar {
 		background-color: #7a003f;
 		line-height: 2em;
@@ -32,38 +71,25 @@ body.ovgu-design{
 		text-align: right;
 	}
 
-	header a{
-		width: auto;
-		min-width: 182px;
-		display: table-cell;
-		text-align: center;
-	}
-
-	img#mainLogo{
-		border: none;
-		min-width: 182px;
-		height: 63px;
-		margin: 0;
-	}
-
 	nav {
 		padding: 0;
 	}
 }
 
-header {
-  padding: 1.5em 1em;
-  margin: 0 -1em;
-  display: table;
-  box-shadow: 0 5px 10px #eee;
-	h1 {
-		display: table-cell;
-		font-weight: bold;
-		text-shadow: 1px 1px 3px #ccc;
-	}
-}
 
 body.fin-design {
+	header {
+		padding: 1.5em 1em;
+		margin: 0 -1em;
+		display: table;
+		box-shadow: 0 5px 10px #eee;
+		h1 {
+			display: table-cell;
+			font-weight: bold;
+			text-shadow: 1px 1px 3px #ccc;
+		}
+	}
+
 	div#user_bar {
 		width: 100%;
 		background-color: #37a;
