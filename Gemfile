@@ -9,6 +9,7 @@ group :development do
   gem 'sqlite3'
 	gem 'rails-erd'
 	gem 'foreman'
+	gem 'rack-mini-profiler'
 end
 
 group :test do

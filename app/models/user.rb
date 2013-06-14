@@ -92,4 +92,6 @@ class User < ActiveRecord::Base
 		define_method("#{meth}!") { self.role = code }
 	end
 
+
+
 end

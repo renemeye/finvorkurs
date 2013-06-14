@@ -67,6 +67,18 @@ ActiveAdmin.register User do
         end
       end
 
+			row "Interested in Degree Programs" do
+				if user.degree_programs.count == 0
+					"No specified degree programs."
+				else
+					ul do
+						user.degree_programs.each do |program|
+							li link_to "#{program.name} (#{program.degree})", :action=>"show", :controller=>"degree_programs", :id=>program.id
+						end
+					end
+				end
+			end
+
       row "Enrollments" do
         ul do
           user.enrollments.each do |enrollment|
@@ -83,7 +95,7 @@ ActiveAdmin.register User do
       f.input :name
       f.input :password
       f.input :password_confirmation
-      f.input :role, as: :select, collection: User::ROLES
+      f.input :role, as: :select, collection: User::ROLES, :hint => "Unless preregistered is chosen, the user need to have a password.", :include_blank => false
     end
     f.actions
   end
