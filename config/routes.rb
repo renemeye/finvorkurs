@@ -1,4 +1,4 @@
-require 'gollum/frontend/app'
+#require 'gollum/frontend/app'
 
 FinVorkurs::Application.routes.draw do
 
@@ -28,10 +28,10 @@ FinVorkurs::Application.routes.draw do
       end
     end
 
-    Precious::App.set(:gollum_path, "/home/git/vorkurs_wiki.git")
-    Precious::App.set(:default_markup, :markdown)
-    Precious::App.set(:wiki_options, {:universal_toc => false})
-    mount Precious::App, at: 'wiki'
+ #   Precious::App.set(:gollum_path, "/home/git/vorkurs_wiki.git")
+#    Precious::App.set(:default_markup, :markdown)
+ #   Precious::App.set(:wiki_options, {:universal_toc => false})
+  #  mount Precious::App, at: 'wiki'
 
     # The priority is based upon order of creation:
     # first created -> highest priority.
