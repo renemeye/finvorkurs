@@ -19,13 +19,15 @@ FinVorkurs::Application.routes.draw do
               :schedules,
               :downloads
 
+    resources :tests do
+        resources :questions do
+            resources :answers
+        end
+        resources :replies
+    end
+
     resources :courses do
       resources :enrollments
-      resources :tests
-      resources :replies
-      resources :questions do
-        resources :answers
-      end
     end
 
  #   Precious::App.set(:gollum_path, "/home/git/vorkurs_wiki.git")

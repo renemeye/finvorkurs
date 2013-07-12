@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
   has_many :replies
-  attr_accessible :correct, :text
+  attr_accessible :correct, :text, :question_id
 end

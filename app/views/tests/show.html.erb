@@ -1,0 +1,35 @@
+<section class="centered">
+<h1><%= @test.name %></h1>
+<h2>Test zur Selbsteinschätzung</h2>
+<p><%= @test.description %></p>
+
+<%
+	@status = (@current_user.started_test? @test)?(@current_user.completed_test? @test)? :done : :resume : :none
+    if @status == :done
+		@appell = "Ergebnisse ansehen"
+    elsif @status == :resume
+		@appell = "Weiter machen"
+    else
+		@appell = "Starten"
+    end
+%>
+
+<% unless @status == :done %>
+	<%= link_to @appell, (@test.resume_test_path(@user) || test_questions_path(@test)), :class => "btn btn-primary" %> 
+<% else %>
+
+	<h2>Ergebnisse</h2>
+	<% @test.questions.each do |question| %>
+		<div class="well well-large">
+			<b><%=question.text%> <span class="label label-important">Falsch</span></b>
+			<ul>
+				<% question.answers.each do |answer| %>
+				<li><%=answer.text%></li>
+				<% end %>
+			</ul>
+		</div>
+
+	<% end %>
+<% end %>
+
+<section>

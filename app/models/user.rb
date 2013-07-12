@@ -74,8 +74,23 @@ class User < ActiveRecord::Base
     self.courses.include? course
   end
 
-  def answers_for course
-    self.answers.joins(:question).where questions: {course_id: course}
+  def answers_for test
+    self.answers.joins(:question).where questions: {test_id: test}
+  end
+
+  def completed_test? test
+    self.answers_for(test).count >= test.questions.count
+  end
+
+  def completed_all_tests?
+    Test.all.each do |test|
+      return false unless self.completed_test? test
+    end
+    return true
+  end
+
+  def started_test? test
+    self.answers_for(test).count > 0
   end
 
   def message
