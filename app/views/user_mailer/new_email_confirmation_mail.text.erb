@@ -11,8 +11,12 @@ Wir haben dein Interesse an den folgenden Studiengängen aufgenommen:
 Derzeit hast du noch kein Interesse an bestimmten Studiengängen angemeldet.
 <% end %>
 
+<% if Settings.mode == "preregistration" %>
 Dieses Interesse kannst du natürlich jederzeit ändern oder wiederrufen. Wir würden dich im folgenden allerdings gerne über weitere Neuigkeiten und Ankündigungen zu den Vorkursen auf dem laufenden halten. 
 Wenn du dies möchtest, dann Bestätige bitte die Gültigkeit deiner E-Mail-Adresse mit dem folgenden Link:
+<% else %>
+Bitte vervollständige deine Anmeldung unter folgendem Link:
+<% end %>
 
 <%=edit_user_url @user.preregistration_auth_token %> 
 

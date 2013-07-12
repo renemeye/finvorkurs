@@ -1,0 +1,73 @@
+<% if @user.nil? %>
+	<div>
+		<h2>Schritt 1</h2>
+		<a href="/users/new" class="btn btn-block">Neu Registrieren</a>
+		<div class="or">oder</div>
+		<div class="login">
+			<%=render 'sessions/login'%>
+		</div>
+	</div>
+<% elsif @user.preregistered? %>
+	<div>
+		<h2>Schritt 1</h2>
+		<p>Vorregistriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
+		<p><%=link_to "Vervollständige jetzt deinen Account!", edit_user_path(@user.id), class:"btn btn-info" %></p>
+	</div>
+<% elsif @user.registered? %>
+	<div>
+		<h2>Schritt 1 <span class="check">&#x2714;</span></h2>
+		<%if @user.name != ""%> Hallo, <b><%=@user.name%></b> <%end%>
+		<p>Registriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
+		<p><%=link_to "Hier kannst du deine Angaben ändern", edit_user_path(@user.id), class:"btn btn-info" %></p>
+	</div>
+<% end %>
+
+
+
+<% #Step 2
+if @user.nil? || @user.preregistered?
+	 @disabled = "disabled" 
+   end 
+%>
+<div class="<%=@disabled %>-step">
+	<h2>Schritt 2</h2>
+	<p>Mache beide Eignungstests:</p>
+	<div class="<%=@disabled %> btn btn-block btn-danger btn-deactivate">Level 1 &#x21d2; Los geht's</div>
+	<div class="<%=@disabled %> btn btn-block btn-danger">Level 2 &#x21d2; Los geht's</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="disabled-step">
+	<h2>Schritt 3</h2>
+	<p>Registriere dich für Kurse:</p>
+	<form class="enrollment" action="">
+		<label for="" class="checkbox">
+			<input type="checkbox" disabled value="lol">Grundkurs
+		</label>
+		<label for="" class="checkbox">
+			<input type="checkbox" disabled value="lol">Aufbaukurs für:
+		</label>
+		<div class="course1">
+			<label for="" class="radio">
+				<input type="radio" disabled name="level1course">Mathematik Studium
+			</label>
+			<label class="radio">
+				<input type="radio" disabled name="level1course">Informatik Fakultät
+			</label>
+			<label for="" class="radio">
+				<input type="radio" disabled name="level1course">Elektro- und Informationstechnik
+			</label>
+			<label for="" class="radio">
+				<input type="radio" disabled name="level1course">Maschienenbau
+			</label>
+		</div>
+	</form>
+</div>

@@ -1,3 +1,113 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#howto {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	&>div{
+		text-align: center;
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		width: 28%;
+		padding-right: 56px;
+		height: 300px;
+		&:after{
+			content: "X";
+			text-indent:-9999px;
+		//	background-color: red;
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: 2px;
+			z-index: -1;
+
+			width:39px;
+			height:56px;
+			*margin-right:.3em;
+			line-height:14px;
+			vertical-align:text-top;
+			background-image:url("arrows.png");
+			background-position:-176px -44px;
+			background-repeat:no-repeat;
+			margin-top:1px;
+			@include rotate(90deg);
+			//@include scale(1,2);
+			//@include transform(1, 90deg, 0, 0, 0deg, 0deg);
+
+		}
+
+		&:last-child {
+			//Hide last arrow
+			padding-right: 0;
+		}
+
+		&:last-child:after {
+			//Hide last arrow
+			display: none;
+		}
+		
+		h1 {
+			font-size: 15pt;
+		}
+
+		.login input {
+			width: 100%;
+			margin-bottom: 6px;
+		}
+
+		.or {
+			font-size: 14pt;
+			margin-top: 10px;
+		}
+
+		.check {
+			color: $green;
+		}
+	}
+
+	form.enrollment {
+		text-align: left;
+		input{
+			width: auto;
+		}
+		.course1{
+			padding-left: 20px;
+		}
+	}
+
+	div.disabled-step {
+		color: #aaa;
+		&:after{
+			background-position:-6px -44px;
+		}
+	}
+}
+
+@media screen and (max-width: 835px) {
+	#howto {
+		&>div{
+			width: 32%;
+			padding-right: 10px;
+			&:after{
+				display:none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 680px) {
+	#howto {
+		&>div{
+			height: auto;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			&:after{
+				display:none;
+			}
+		}
+	}
+}

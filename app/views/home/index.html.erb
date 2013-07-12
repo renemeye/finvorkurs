@@ -1,7 +1,20 @@
 <%= render "teaser" %>
-<section id="signup">
-	<%=render 'users/newform', :locals => {:user => @user} %>
-</section>
+
+<% if Settings.mode == "preregistration" %>
+	<% unless @user.nil? %>
+		<section id="signup">
+			<%=render 'users/newform', :locals => {:user => @user} %>
+		</section>
+	<% end %>
+<% end %>
+
+<% if Settings.mode == "registration" %>
+
+	<section id="howto">
+		<h1>Die Anmeldung läuft:</h1>
+		<%=render 'howto'%>
+	</section>
+<% end %>
 
 <%= render 'features' %>
 

@@ -1,9 +1,16 @@
+$green: #46a546;
+
+@import "compass";
+@import "compass/css3";
+@import "compass/css3/transform-legacy";
 @import "bootstrap";
 @import "typography";
 @import "courses";
 @import "questions";
 @import "formtastic";
 @import "chosen";
+@import "home";
+@import "bootstrap-arrows";
 
 select#user_degree_program_ids{
 	width: 350px;
@@ -74,6 +81,10 @@ body.ovgu-design{
 	nav {
 		padding: 0;
 	}
+
+	img {
+		border: none;
+	}
 }
 
 
@@ -130,7 +141,7 @@ nav {
 		text-align: center;
 		margin: 0 1em;
 		font-size: 1.5em;
-		width: 6em;
+		//width: 6em;
 		a {
 				color: #aaa;
 				text-shadow: 1px 1px 3px #eee;

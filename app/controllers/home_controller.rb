@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-		@user = User.new
+  		@user = current_user
+		#@user = User.new
   end
 end

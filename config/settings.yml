@@ -2,6 +2,8 @@
 # Possible values: [FIN, OvGU]
 design: OvGU
 
+mode: preregistration #preregistration/registration/closed
+
 menu:
   legals: true
   courses: true

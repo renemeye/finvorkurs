@@ -10,9 +10,11 @@
     </div>
   <% end %>
 	<%= ie { f.label :email, "E-Mail" } %>
+	<%= f.label :email, "E-Mail-Adresse"%>
 	<%= f.email_field :email, :placeholder => "E-Mail" %>
+	<%= f.label :degree_program_ids, "Interessiert an"%>
 	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen", :'data-class' => "input"} %>
-	<% unless @user.preregistered? %>
+	<% unless (@user.preregistered? && Settings.mode == "preregistration") %>
 		<%= f.label :name, "Name"%>
 		<%= f.text_field :name %>
 		<%= f.label :password, "Neues Password" %>
@@ -21,13 +23,18 @@
 		<%= f.password_field :password_confirmation %>
 		<h2> Kursanmeldungen </h2>
 		<ul>
-			<% @user.enrollments.each do |e| %>
-				<li>
-					<%= e.course.title %>
-					<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?" %>
-				</li>
+			<% if @user.enrollments.count > 0 %>
+				<% @user.enrollments.each do |e| %>
+					<li>
+						<%= e.course.title %>
+						<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?" %>
+					</li>
+				<% end %>
+			<% else %>
+				<li>Derzeit für keinen Kurs angemeldet.</li>
 			<% end %>
 		</ul>
+		<%= f.hidden_field :role, :value => [User::ROLES[:registered], @user.role].max %>
 	<% end %>
 	</br>
 	<%= f.submit "Änderungen Speichern", :class => "btn btn-primary" %>

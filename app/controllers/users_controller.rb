@@ -29,18 +29,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user].delete(:role) unless params[:user][:role].to_i <= @current_user.role
+    params[:user].delete(:role) unless (!@current_user.nil? && params[:user][:role].to_i <= @current_user.role) || params[:user][:role].to_i <= User::ROLES[:registered]
 
     @user = User.find(params[:id])
     check_permission!
     if @user.update_attributes(params[:user])
-      redirect_to edit_user_path, :notice => "Daten geändert"
+      redirect_to root_url, :notice => "Daten geändert"
     else
       render :action => "edit"
     end
   end
 
   def create
+    params[:user].delete(:role) unless (!@current_user.nil? && params[:user][:role].to_i <= @current_user.role) || params[:user][:role].to_i <= User::ROLES[:registered]
+
     @user = User.new(params[:user])
 		@user.generate_token :preregistration_auth_token
     if @user.save
