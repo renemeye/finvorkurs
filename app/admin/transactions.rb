@@ -1,4 +1,6 @@
 ActiveAdmin.register Transaction do
+    menu :parent => "Users"
+
   index do
     h2 "Balance: EUR #{Transaction.all.inject(0) { |a, e| a + e.amount }}"
     selectable_column

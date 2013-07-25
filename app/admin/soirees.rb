@@ -1,3 +1,3 @@
-ActiveAdmin.register Soiree do
+#ActiveAdmin.register Soiree do
   
-end
+#end

@@ -1,4 +1,5 @@
 ActiveAdmin.register Post do
+  menu :parent => "Users"
   index do
     column :title
     column :created_at
