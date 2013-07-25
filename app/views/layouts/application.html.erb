@@ -7,6 +7,15 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+     tex2jax: {
+       inlineMath: [ ['$','$'] ],
+       processEscapes: true
+     }
+    });
+  </script>
+  <%= mathjax_tag %>
 </head>
 <body class="<%=Settings.design.downcase %>-design">
   <div id="user_bar"><%= render "user_bar" %></div>
@@ -20,6 +29,12 @@
 			<% end %>
     <% end %>
     <nav>
+      <script>
+      window.onload = function () {
+        //jsMath.Autoload.Check();
+        jsMath.Process(document);
+      }
+      </script>
     <ul>
     <% if Settings.menu.downloads %>
       <% if current_user %>

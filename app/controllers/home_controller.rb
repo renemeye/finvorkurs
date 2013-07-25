@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   def index
+  	unless Settings.mode == "preregistration"
   		@user = current_user
-		#@user = User.new
+  	else
+		@user = User.new
+	end
   end
 end

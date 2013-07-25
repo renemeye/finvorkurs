@@ -24,6 +24,8 @@
 
 
 
+
+
 <% #Step 2
 if @user.nil? || @user.preregistered?
 	@disabled = "disabled" 
@@ -49,7 +51,7 @@ end
 			%>
 			<a href="<%=test_path(test.id)%>" class="<%=@disabled %> btn btn-block btn-<%=@bootstrap_class%>"> <%=test.name %> &#x21d2; <%=@appell%></a>
 	<% end %>
-	<% if @user.completed_all_tests? %>
+	<% if (!@user.nil?) && @user.completed_all_tests? %>
 		<div class="alert alert-info">
 	  		Nach deinem Testergebniss zu urteilen, empfehlen wir dir den <strong>Grundkurs und den Spezialisierungskurs</strong> zu machen.
 		</div>
@@ -73,24 +75,47 @@ end
 		<label for="" class="checkbox">
 			<input type="checkbox" <%=@disabled%> value="lol">Grundkurs
 		</label>
-		<label for="" class="checkbox">
-			<input type="checkbox" <%=@disabled%> value="lol">Aufbaukurs für:
+		<label  for="" class="checkbox">
+			<input id="spezialkurs" type="checkbox" <%=@disabled%> value="lol">Spezialkurs für:
 		</label>
 		<div class="course1">
-			<label for="" class="radio">
-				<input type="radio" <%=@disabled%> name="level1course">Mathematik Studium
+			<label for=""  class="radio">
+				<input type="radio" disabled name="level1course">Mathematik Studium
 			</label>
 			<label class="radio">
-				<input type="radio" <%=@disabled%> name="level1course">Informatik Fakultät
+				<input type="radio" disabled name="level1course">Informatik Fakultät
 			</label>
 			<label for="" class="radio">
-				<input type="radio" <%=@disabled%> name="level1course">Elektro- und Informationstechnik
+				<input type="radio" disabled name="level1course">Elektro- und Informationstechnik
 			</label>
 			<label for="" class="radio">
-				<input type="radio" <%=@disabled%> name="level1course">Maschienenbau
+				<input type="radio" disabled name="level1course">Maschienenbau
 			</label>
 		</div>
+		<div class="btn btn-block btn-submit <%=@disabled%>">Verbindlich anmelden</div>
 	</form>
 
+	<script>
+		$('#spezialkurs').change(function(a){
+			if (this.checked){
+				$('.course1 input').prop('disabled',false);
+				$('.course1 label').css('color',"black");
+			}else{
+				$('.course1 input').prop('disabled',true);
+				$('.course1 label').css('color',"#ccc");
+			}
+		})
+
+		$(function(){
+			if ($('#spezialkurs').checked){
+				$('.course1 input').prop('disabled',false);
+				$('.course1 label').css('color',"black");
+			}else{
+				$('.course1 input').prop('disabled',true);
+				$('.course1 label').css('color',"#ccc");
+			}
+		})
+
+	</script>
 
 </div>

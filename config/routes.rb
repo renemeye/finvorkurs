@@ -30,6 +30,8 @@ FinVorkurs::Application.routes.draw do
       resources :enrollments
     end
 
+    mathjax 'mathjax'
+
  #   Precious::App.set(:gollum_path, "/home/git/vorkurs_wiki.git")
 #    Precious::App.set(:default_markup, :markdown)
  #   Precious::App.set(:wiki_options, {:universal_toc => false})
