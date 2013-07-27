@@ -17,7 +17,8 @@ FinVorkurs::Application.routes.draw do
               :posts,
               :logs,
               :schedules,
-              :downloads
+              :downloads,
+              :static_text
 
     resources :vorkurs_tests do
         resources :questions do

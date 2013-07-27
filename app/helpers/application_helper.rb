@@ -24,5 +24,9 @@ module ApplicationHelper
   def markdown text
     RDiscount.new(text).to_html.html_safe
   end
+
+  def editable_text key
+    (best_in_place_if @current_user && @current_user.admin?, StaticText.get(key), :value, type: :textarea, sanitize: false).html_safe
+  end
   
 end
