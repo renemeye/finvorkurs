@@ -1,5 +1,5 @@
 ActiveAdmin.register DegreeProgram do
-	menu :parent => "Test"
+	menu :parent => "VorkursTests"
 
  	controller do
     def scoped_collection

@@ -1,4 +1,4 @@
-class Test < ActiveRecord::Base
+class VorkursTest < ActiveRecord::Base
    attr_accessible :name, :description
 
    has_many :answers, through: :questions

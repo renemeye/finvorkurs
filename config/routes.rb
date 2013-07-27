@@ -19,7 +19,7 @@ FinVorkurs::Application.routes.draw do
               :schedules,
               :downloads
 
-    resources :tests do
+    resources :vorkurs_tests do
         resources :questions do
             resources :answers
         end

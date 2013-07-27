@@ -1,4 +1,4 @@
-class TestsController < ApplicationController
+class VorkursTestsController < ApplicationController
 before_filter :authenticate_user!
 
   def show

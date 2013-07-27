@@ -1,5 +1,5 @@
 ActiveAdmin.register Question do
-	menu :parent => "Tests"
+	menu :parent => "VorkursTests"
 
     show do
 

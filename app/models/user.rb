@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   end
 
   def answers_for test
-    self.answers.joins(:question).where questions: {test_id: test}
+    self.answers.joins(:question).where questions: {vorkurs_test_id: test}
   end
 
   def completed_test? test
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def completed_all_tests?
-    Test.all.each do |test|
+    VorkursTest.all.each do |test|
       return false unless self.completed_test? test
     end
     return true

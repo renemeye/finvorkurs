@@ -34,7 +34,7 @@ end
 <div class="<%=@disabled %>-step">
 	<h2>Schritt 2 <%if((!@user.nil?) && (@user.completed_all_tests?))%><span class='check'>&#x2714;</span><% end %> </h2>
 	<p>Mache beide Selbsteinschätzungstests:</p>
-	<% 	Test.all.each do |test| 
+	<% 	VorkursTest.all.each do |test| 
 
 			@status = ((!@current_user.nil?) && (@current_user.started_test? test))?(@current_user.completed_test? test)? :done : :resume : :none
 		    if @status == :done
@@ -49,7 +49,7 @@ end
 		    end
 
 			%>
-			<a href="<%=test_path(test.id)%>" class="<%=@disabled %> btn btn-block btn-<%=@bootstrap_class%>"> <%=test.name %> &#x21d2; <%=@appell%></a>
+			<a href="<%=vorkurs_test_path(test.id)%>" class="<%=@disabled %> btn btn-block btn-<%=@bootstrap_class%>"> <%=test.name %> &#x21d2; <%=@appell%></a>
 	<% end %>
 	<% if (!@user.nil?) && @user.completed_all_tests? %>
 		<div class="alert alert-info">
