@@ -4,7 +4,7 @@
 <h3>Antworten</h3>
 <ol>
   <% @question.answers.each do |answer| %>
-    <li><%= link_to answer.text.html_safe, test_replies_path(answer_id: answer.id), method: :post %></li>
+    <li><%= link_to answer.text.html_safe, vorkurs_test_replies_path(answer_id: answer.id), method: :post %></li>
   <% end %>
 </ol>
 <div class="progress progress-striped">
