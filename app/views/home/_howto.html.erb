@@ -13,7 +13,7 @@
 		<p>Vorregistriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
 		<p><%=link_to "Vervollständige jetzt deinen Account!", edit_user_path(@user.id), class:"btn btn-info" %></p>
 	</div>
-<% elsif @user.registered? %>
+<% elsif @user.registered? || @user.role > User::ROLES[:registered] %>
 	<div>
 		<h2>Schritt 1 <span class="check">&#x2714;</span></h2>
 		<%if @user.name != ""%> Hallo, <b><%=@user.name%></b> <%end%>

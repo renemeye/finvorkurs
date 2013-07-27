@@ -14,40 +14,39 @@
 		width: 28%;
 		padding-right: 56px;
 		height: 300px;
-		&:after{
-			content: "X";
-			text-indent:-9999px;
-		//	background-color: red;
-			display: block;
-			position: absolute;
-			top: 50%;
-			right: 2px;
-			z-index: -1;
+		// &:after{
+		// 	content: "X";
+		// 	text-indent:-9999px;
+		// //	background-color: red;
+		// 	display: block;
+		// 	position: absolute;
+		// 	top: 50%;
+		// 	right: 2px;
+		// 	z-index: -1;
 
-			width:39px;
-			height:56px;
-			*margin-right:.3em;
-			line-height:14px;
-			vertical-align:text-top;
-			background-image:url("arrows.png");
-			background-position:-176px -44px;
-			background-repeat:no-repeat;
-			margin-top:1px;
-			@include rotate(90deg);
-			//@include scale(1,2);
-			//@include transform(1, 90deg, 0, 0, 0deg, 0deg);
+		// 	width:39px;
+		// 	height:56px;
+		// 	*margin-right:.3em;
+		// 	line-height:14px;
+		// 	vertical-align:text-top;
+		// 	background-image:url("arrows.png");
+		// 	background-position:-176px -44px;
+		// 	background-repeat:no-repeat;
+		// 	margin-top:1px;
+		// 	@include rotate(90deg);
+		// 	//@include scale(1,2);
+		// 	//@include transform(1, 90deg, 0, 0, 0deg, 0deg);
 
-		}
+		// }
 
 		&:last-child {
-			//Hide last arrow
 			padding-right: 0;
 		}
 
-		&:last-child:after {
-			//Hide last arrow
-			display: none;
-		}
+	//	&:last-child:after {
+	//		//Hide last arrow
+	//		display: none;
+	//	}
 		
 		h1 {
 			font-size: 15pt;
