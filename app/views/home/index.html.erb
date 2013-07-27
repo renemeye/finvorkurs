@@ -11,7 +11,7 @@
 <% if Settings.mode == "registration" %>
 
 	<section id="howto">
-		<h1>Die Anmeldung läuft:</h1>
+		<h1><%= editable_text "home.registration_started" %></h1>
 		<%=render 'howto'%>
 	</section>
 <% end %>
