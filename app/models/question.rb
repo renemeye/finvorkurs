@@ -1,7 +1,9 @@
 class Question < ActiveRecord::Base
   belongs_to :vorkurs_test
   has_many :answers
-  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation
+  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type
+
+  validates :question_type, :inclusion => %w(singleSelect multiselectAllCorrect multiselectNoWrong )
 
   def previous
     self.class.last :order => 'id', :conditions => ['id < ?', self.id]
@@ -18,16 +20,21 @@ class Question < ActiveRecord::Base
   	return false
   end
 
-  def correct_answer_from? user
-  	correct = true
-  	answered_the_question = false
+  def correct? users_answers_set
+    correct = true
 
-  	user.answers.each do |answer|
-  		if answer.question_id == self.id
-  			answered_the_question = true
-  			correct = false unless answer.correct
-  		end
-  	end
-  	return answered_the_question && correct
+    if self.question_type == "singleSelect"
+      return false
+    elsif self.question_type == "multiselectAllCorrect"
+      self.answers.each do |answer|
+        return false unless answer.correct == users_answers_set.include?(answer)
+      end
+    elsif self.question_type == "multiselectNoWrong"
+      self.answers.each do |answer|
+        return false if ((not answer.correct) && users_answers_set.include?(answer))
+      end
+    end
+
+    return correct
   end
 end

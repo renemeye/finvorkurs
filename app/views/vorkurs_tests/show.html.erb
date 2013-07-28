@@ -26,9 +26,9 @@
 		<% users_test_answers = @user.grouped_answers_for(@test) %>
 		<% users_test_answers.keys.sort.each do |question_id| %>
 		   		<% 
-		   			question = Question.find(question_id) 
-		   			correct = question.correct_answer_from? @user
-		   			users_answers_for_question = users_test_answers[question_id]
+	   			question = Question.find(question_id) 
+	   			users_answers_for_question = users_test_answers[question_id]
+	   			correct = question.correct? users_answers_for_question
 		   		%>
 					<%= render :partial => "question_explanation", :locals => {
 							:question => question, 
