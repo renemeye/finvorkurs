@@ -75,11 +75,16 @@ class User < ActiveRecord::Base
   end
 
   def answers_for test
-    self.answers.joins(:question).where questions: {vorkurs_test_id: test}
+    self.answers.joins(:question).where(questions: {vorkurs_test_id: test})
+  end
+
+  def grouped_answers_for test
+    answers = self.answers_for(test)
+    answers.group_by{ |answer| answer.question_id}
   end
 
   def completed_test? test
-    self.answers_for(test).count >= test.questions.count
+    self.grouped_answers_for(test).count >= test.questions.count
   end
 
   def completed_all_tests?

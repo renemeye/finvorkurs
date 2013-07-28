@@ -1,0 +1,23 @@
+	<div class="row-fluid">
+		<div class="span<%=(correct)? '12':'7'%> well well-large anwser-solution">
+			<% if correct %>
+				<span class="label label-success">Richtig</span>
+			<% else %>	
+				<span class="label label-important">Falsch</span> 
+			<% end %>
+
+			<b><%=question.text%></b>
+			<ul>
+			<% question.answers.each do |answer| %>
+				<% if (users_answers_for_question.include? answer) %>
+					<b><li>Deine Antwort: <%=answer.text%> (<%=answer.correct%>)</li></b>
+				<% else %>
+					<li><%=answer.text%> (<%=answer.correct%>)</li>
+				<% end %>
+			<% end %>
+			</ul>
+		</div>
+		<% unless correct %>
+			<div class="span5 well well-large"><%=question.false_answer_explanation%></div>
+		<% end %>
+	</div>
