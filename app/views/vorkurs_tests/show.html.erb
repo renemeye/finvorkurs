@@ -1,9 +1,11 @@
 <section class="centered">
-<h1><%= @test.name %></h1>
-<h2>Test zur Selbsteinschätzung</h2>
-<p><%= @test.description %></p>
+	<h1>
+		<%= @test.name %></h1>
+	<h2>Test zur Selbsteinschätzung</h2>
+	<p>
+		<%= @test.description %></p>
 
-<%
+	<%
 	@status = (@current_user.started_test? @test)?(@current_user.completed_test? @test)? :done : :resume : :none
     if @status == :done
 		@appell = "Ergebnisse ansehen"
@@ -14,24 +16,43 @@
     end
 %>
 
-<% unless @status == :done %>
-	<%= link_to @appell, (@test.resume_test_path(@user) || test_questions_path(@test)), :class => "btn btn-primary" %> 
-<% else %>
+	<% unless @status == :done %>
+	<%= link_to @appell, (@test.resume_test_path(@user) || test_questions_path(@test)), :class =>
+	"btn btn-primary" %>
+	<% else %>
 
 	<h2>Ergebnisse</h2>
-	<% @test.questions.each do |question| %>
-		<div class="well well-large">
-			<b><%=question.text%> <span class="label label-important">Falsch</span></b>
-			<ul>
-				<% question.answers.each do |answer| %>
-				<li><%=answer.text%></li>
+	<% (@user.answers_for @test).each do |given_answer|
+
+			question = given_answer.question
+			correct = question.correct_answer_from? @user
+		 %>
+		<div class="row-fluid">
+			<div class="span<%=(correct)? '12':'7'%> well well-large anwser-solution">
+				<% if correct %>
+					<span class="label label-success">Richtig</span>
+				<% else %>	
+					<span class="label label-important">Falsch</span> 
 				<% end %>
-			</ul>
+
+				<b><%=question.text%></b>
+				<ul>
+					<% question.answers.each do |answer| %>
+						<% if (answer == given_answer) %>
+							<b><li>Deine Antwort: <%=answer.text%> (<%=answer.correct%>)</li></b>
+						<% else %>
+							<li><%=answer.text%> (<%=answer.correct%>)</li>
+						<% end %>
+					<% end %></ul>
+			</div>
+			<% unless correct %>
+				<div class="span5 well well-large"><%=question.false_answer_explanation%></div>
+			<% end %>
 		</div>
 
 	<% end %>
-<% end %>
+	<% end %>
 
-<%= link_to "Zurück zur Übersicht", root_url, class: "btn btn-info" %>
+	<%= link_to "Zurück zur Übersicht", root_url, class: "btn btn-info" %>
 
-<section>
+	<section>
