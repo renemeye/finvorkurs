@@ -1,3 +1,3 @@
 ActiveAdmin.register Answer do
-	menu :parent => "VorkursTests"  
+	menu :parent => "Vorkurs Tests"  
 end
