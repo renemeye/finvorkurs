@@ -67,6 +67,7 @@ gem "rails_config"
 #A nicer Way to use forms
 gem 'formtastic'
 
+#Restful library for in Place editing
 gem 'best_in_place', git: 'git://github.com/renemeye/best_in_place.git'
 
 #Markdown support from Github
