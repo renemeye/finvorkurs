@@ -68,3 +68,6 @@ gem "rails_config"
 gem 'formtastic'
 
 gem 'best_in_place', git: 'git://github.com/renemeye/best_in_place.git'
+
+#Markdown support from Github
+gem 'redcarpet'

@@ -193,6 +193,7 @@ GEM
     rdiscount (2.1.6)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.0.0)
     redis (3.0.4)
     responders (0.9.2)
       railties (~> 3.1)
@@ -258,6 +259,7 @@ DEPENDENCIES
   rails_config
   rake
   rdiscount
+  redcarpet
   sass-rails
   sqlite3
   thin

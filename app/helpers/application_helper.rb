@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def editable_text key
-    (best_in_place_if @current_user && @current_user.admin?, StaticText.get(key), :value, type: :textarea, sanitize: false).html_safe
+    (best_in_place_if @current_user && @current_user.admin?, StaticText.get(key), :value, type: :textarea, sanitize: false, display_as: :markdown_text).html_safe
   end
   
 end
