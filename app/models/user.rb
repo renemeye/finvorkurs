@@ -98,6 +98,16 @@ class User < ActiveRecord::Base
     self.answers_for(test).count > 0
   end
 
+  def test_result test
+    groups = self.grouped_answers_for(test)
+    correct_count = 0
+    groups.each do |question_id, answer_group|
+      question = Question.find(answer_group[0].question_id)
+      correct_count+=1 if question.correct? answer_group
+    end
+    return correct_count*100/groups.count
+  end
+
   def message
     "#{self.email} has created an Account"
   end

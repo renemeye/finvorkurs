@@ -83,6 +83,17 @@
 			background-position:-6px -44px;
 		}
 	}
+
+	div.vorkurstest {
+		position: relative;
+		padding-top: 6px;
+
+		span.result {
+			position: absolute;
+			top:1px;
+			right:-5px;
+		}
+	}
 }
 
 @media screen and (max-width: 835px) {
