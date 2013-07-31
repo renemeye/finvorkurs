@@ -37,3 +37,7 @@ public/assets/*
 #Ignore my todo list^^
 todo.md
 
+
+/data/
+/finvorkurs.sublime-project
+/finvorkurs.sublime-workspace
