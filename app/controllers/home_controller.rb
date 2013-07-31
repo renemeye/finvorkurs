@@ -7,5 +7,7 @@ class HomeController < ApplicationController
   	else
 		@user = User.new
 	end
+
+	@courses = Course.all.group_by{|course| course.course_level}
   end
 end

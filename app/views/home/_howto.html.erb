@@ -66,56 +66,81 @@ end
 
 
 <% #Step 3
-	@disabled = (!@user.nil?)? "" : "disabled"
+	@disabled = @user.nil?
+	@registered_for_courses = @user.courses.count > 0
+	@registered_course_levels = @user.courses.collect{|course| course.course_level}
+	@unregistered_courses = {}
+	@courses.each do |course_level, course| 
+		unless @registered_course_levels.include? course_level 
+			@unregistered_courses[course_level] = course
+		else 
+			#{"#{course_level}" => course}
+		end 
+	end
+
 %>
-<div class="<%=@disabled%>-step">
-	<h2>Schritt 3</h2>
-	<p>Registriere dich für Kurse:</p>
-	<form class="enrollment" action="">
-		<label for="" class="checkbox">
-			<input type="checkbox" <%=@disabled%> value="lol">Grundkurs
-		</label>
-		<label  for="" class="checkbox">
-			<input id="spezialkurs" type="checkbox" <%=@disabled%> value="lol">Spezialkurs für:
-		</label>
-		<div class="course1">
-			<label for=""  class="radio">
-				<input type="radio" disabled name="level1course">Mathematik Studium
-			</label>
-			<label class="radio">
-				<input type="radio" disabled name="level1course">Informatik Fakultät
-			</label>
-			<label for="" class="radio">
-				<input type="radio" disabled name="level1course">Elektro- und Informationstechnik
-			</label>
-			<label for="" class="radio">
-				<input type="radio" disabled name="level1course">Maschienenbau
-			</label>
-		</div>
-		<div class="btn btn-block btn-submit <%=@disabled%>">Verbindlich anmelden</div>
-	</form>
 
-	<script>
-		$('#spezialkurs').change(function(a){
-			if (this.checked){
-				$('.course1 input').prop('disabled',false);
-				$('.course1 label').css('color',"black");
-			}else{
-				$('.course1 input').prop('disabled',true);
-				$('.course1 label').css('color',"#ccc");
-			}
-		})
+<div class="<%=(@disabled)? "disabled":""%>-step step3">
+	<%= form_tag create_multiple_enrollments_path, method: :post, class: "enrollment" do %>
+		<h2>Schritt 3 <%if(@registered_for_courses)%><span class='check'>&#x2714;</span><% end %></h2>
 
-		$(function(){
-			if ($('#spezialkurs').checked){
-				$('.course1 input').prop('disabled',false);
-				$('.course1 label').css('color',"black");
-			}else{
-				$('.course1 input').prop('disabled',true);
-				$('.course1 label').css('color',"#ccc");
-			}
-		})
+		<% if @registered_for_courses %>
+			<p>Registriert für folgende Kurse:</p>		
+			<ul>
+				<% @user.courses.each do |course|%>
+					<li><%=course.course_name%></li>
+				<% end %>
+			</ul>
 
-	</script>
+			<% if @unregistered_courses.count > 0 %>
+				<p>Du kannst dich noch immer registrieren:</p>
+			<% end %>
+		<% else %>
+			<p>Registriere dich für Kurse:</p>
+		<% end %>
+		
+		<% if @unregistered_courses.count > 0 %>
+			<% @unregistered_courses.each do |course_level,courses_of_this_level| %>
+				<% if courses_of_this_level.count == 1 %>
+					<% this_course = courses_of_this_level[0] %>
+					<% this_id = this_course.id %>
+					<% this_title = courses_of_this_level[0].title %>
+					<%= label_tag "course_ids[#{this_id}]" do %>
+						<%= check_box_tag "course_ids[#{course_level}][]", this_id, false,
+								id: "course_ids_#{this_id}", 
+								disabled: @disabled
+						%>
+						<strong><%= this_title %></strong>
+					<% end %>
+
+				<% else %>
+					<%= label_tag "#{course_level}_level" do %>
+						<%= check_box_tag "#{course_level}_level", course_level, false,
+								disabled: @disabled,
+								class: "level_checkbox"
+						%>
+					<%="<strong>#{course_level}</strong> für:".html_safe %>
+					<% end %>
+
+					<div class="<%=course_level%>_level sublevel">
+						<% courses_of_this_level.each do |course| %>
+							<% this_id = course.id %>
+							<% this_title = course.title %>
+							<%= label_tag "course_ids[#{this_id}]" do %>
+								<%= radio_button_tag "course_ids[#{course_level}][]", this_id, false,
+										id: "course_ids_#{this_id}", 
+										disabled: true
+								%>
+								<%=this_title%>
+							<% end %>
+						<% end %>
+					</div>
+				<% end %>
+				
+			<% end %>
+			<%=submit_tag "Verbindlich anmelden" %>
+		<% end %>
+
+	<% end %>
 
 </div>

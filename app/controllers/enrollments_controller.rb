@@ -29,4 +29,30 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+
+  def create_multiple
+    @course_levels = params[:course_ids];
+    @user = current_user
+    @title = ""    
+
+    unless @course_levels.nil?
+      @course_levels.each do |course_level, course_id|
+        @course = Course.find(course_id[0].to_i);
+        if (not @user.courses.include?(@course)) && @user.courses << @course
+          @title = (@title == "")? "#{@course.course_name}": "#{@title} und #{@course.course_name}"
+
+          @user.send_enrollment_confirmation @course
+          Log.new(message: "#{@user.name} enrolled to #{@course.course_name}").save
+        end
+      end
+    end
+
+    unless @title == ""
+      redirect_to root_url, :notice => "Deine Kursanmeldung zum #{@title} war erfolgreich. Du erhältst eine Bestätigung per E-Mail"
+    else
+      redirect_to root_url, :notice => "Etwas ist schief gegangen. Leider konnten wir dich für keinen Kurs anmelden. Melde dich bitte bei #{Settings.mail.from}."
+    end
+
+  end
+
 end

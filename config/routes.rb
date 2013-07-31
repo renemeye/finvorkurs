@@ -31,6 +31,12 @@ FinVorkurs::Application.routes.draw do
       resources :enrollments
     end
 
+    resources :enrollments, only: :create_multiple do
+        collection do
+            post :create_multiple
+        end
+    end
+
     mathjax 'mathjax'
 
  #   Precious::App.set(:gollum_path, "/home/git/vorkurs_wiki.git")
