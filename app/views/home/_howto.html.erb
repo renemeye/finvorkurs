@@ -40,9 +40,11 @@ end
 		    elsif @status == :resume
 				@bootstrap_class = "warning"
 				@appell = "Weiter machen"
+				@result = nil
 		    else
 				@bootstrap_class = "danger"
 				@appell = "Los geht's"
+				@result = nil
 		    end
 
 			%>
@@ -54,7 +56,7 @@ end
 	<% end %>
 	<% if (!@user.nil?) && @user.completed_all_tests? %>
 		<div class="alert alert-info">
-	  		Nach deinem Testergebniss zu urteilen, empfehlen wir dir den <strong>Grundkurs und den Spezialisierungskurs</strong> zu machen.
+	  		Nach deinem Testergebniss zu urteilen, empfehlen wir dir den <strong>Grundkurs</strong> und einen <strong>Spezialisierungskurs</strong> zu machen.
 		</div>
 	<% end %>
 </div>
