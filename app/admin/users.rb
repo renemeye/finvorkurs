@@ -4,15 +4,15 @@ ActiveAdmin.register User do
   filter :email
   filter :name
   filter :present, as: :select
-  filter :paid, as: :select
+#  filter :paid, as: :select
 
-  member_action :pay, method: :put do
-    user = User.find(params[:id])
-    user.paid = !user.paid
-    user.present = true
-    user.save!
-    redirect_to({action: :index}, notice: (user.paid? ? "#{user.name} set paid and present" : "#{user.name} set not paid"))
-  end
+  # member_action :pay, method: :put do
+  #   user = User.find(params[:id])
+  #   user.paid = !user.paid
+  #   user.present = true
+  #   user.save!
+  #   redirect_to({action: :index}, notice: (user.paid? ? "#{user.name} set paid and present" : "#{user.name} set not paid"))
+  # end
 
   member_action :present, method: :put do
     user = User.find(params[:id])
@@ -23,12 +23,12 @@ ActiveAdmin.register User do
 
 
   index do
-    h2 do
-      money = User.all.inject(0) do |sum, user|
-        sum += if user.paid? then user.enrollments.count * 10 else 0 end
-      end 
-      "#{money} EUR"
-    end
+    # h2 do
+    #   # money = User.all.inject(0) do |sum, user|
+    #   #   sum += if user.paid? then user.enrollments.count * 10 else 0 end
+    #   # end 
+    #   # "#{money} EUR"
+    # end
     selectable_column
     id_column
     column :email
@@ -43,13 +43,13 @@ ActiveAdmin.register User do
       end
     end
 
-    column 'Paid' do |user|
-      if user.paid?
-        link_to 'paid', pay_admin_user_path(user), method: :put
-      else
-        link_to 'not paid', pay_admin_user_path(user), method: :put
-      end
-    end
+    # column 'Paid' do |user|
+    #   if user.paid?
+    #     link_to 'paid', pay_admin_user_path(user), method: :put
+    #   else
+    #     link_to 'not paid', pay_admin_user_path(user), method: :put
+    #   end
+    # end
     default_actions
   end 
 
