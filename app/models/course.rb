@@ -3,6 +3,7 @@
 class Course < ActiveRecord::Base
   has_many :enrollments
   has_many :users, through: :enrollments
+  has_many :lectures
 
   def course_name
   	return (self.course_level == self.title)?
