@@ -95,6 +95,15 @@
 			right:-5px;
 		}
 	}
+
+	.btn[disabled] {
+		border:none;
+	}
+
+	.btn[disabled]:hover {
+		background: none;
+		background-color:#e6e6e6;
+	}
 }
 
 @media screen and (max-width: 835px) {
