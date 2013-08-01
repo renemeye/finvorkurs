@@ -28,7 +28,7 @@ ActiveAdmin.register Group do
   form do |f|
     f.inputs 'Group' do
       if f.object.new_record?
-        f.input :user, collection: User.where('role = ?', User::ROLES[:tutor])
+        f.input :user, collection: Hash[User.where('role >= ?', User::ROLES[:tutor]).map{|user| ["#{user.name} <#{user.email}>",user.id]}], :label => "Tutor"
         f.input :course
       else
         f.input :user
