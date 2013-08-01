@@ -69,8 +69,8 @@ end
 
 <% #Step 3
 	@disabled = @user.nil?
-	@registered_for_courses = @user.courses.count > 0
-	@registered_course_levels = @user.courses.collect{|course| course.course_level}
+	@registered_for_courses = (!@user.nil?) && @user.courses.count > 0
+	@registered_course_levels = (@user.nil?)?[]:@user.courses.collect{|course| course.course_level}
 	@unregistered_courses = {}
 	@courses.each do |course_level, course| 
 		unless @registered_course_levels.include? course_level 
