@@ -9,6 +9,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    respond_to { |format|
+      format.html {}
+      format.single {}
+    }
   end
 
   def edit
