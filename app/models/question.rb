@@ -38,4 +38,11 @@ class Question < ActiveRecord::Base
 
     return correct
   end
+
+  def as_json(options={})
+    super(
+      :include => [:answers]
+    )
+  end
+
 end

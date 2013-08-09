@@ -1,0 +1,11 @@
+= form_for :dump, :url=>{:action=>"import_json"}, :html => { :multipart => true } do |f|
+  %table
+    %tr
+      %td
+        %label{:for => "dump_file"}
+          Select a JSON File :
+      %td
+        = f.file_field :file
+    %tr
+      %td
+        = submit_tag 'Submit'
