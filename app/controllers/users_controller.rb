@@ -11,7 +11,9 @@ class UsersController < ApplicationController
     @user = User.new
     respond_to { |format|
       format.html {}
-      format.single {}
+      format.single {
+        @format = "single"
+      }
     }
   end
 
@@ -52,7 +54,8 @@ class UsersController < ApplicationController
     if @user.save
 			@user.send_email_confirmation_mail
       send_notification_to_admins @user if Settings.administration.send_new_user_registered_notification
-      redirect_to root_url, :notice => "Vielen Dank für dein Interesse. Bitte sieh in dein Postfach und bestätige noch deine E-Mail-Adresse."
+      url = (params[:redirect_to].nil?)? root_url : params[:redirect_to]["url"]
+      redirect_to url, :notice => "Vielen Dank für dein Interesse. Bitte sieh in dein Postfach und bestätige noch deine E-Mail-Adresse."
     else
       render "new"
     end

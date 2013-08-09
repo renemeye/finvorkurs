@@ -18,5 +18,6 @@
 	<%= ie { f.label :degree_programs, "Interessiert an Studiengängen (mehrere möglich)" } %>
 	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name_and_degree, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen (mehrere möglich)"} %>
 	<%= ie { raw '<br />' } %>
+	<%= hidden_field :redirect_to, "url", :value=>new_user_path(:format=>:single) if @format=="single" %>
 	<%= f.submit "Registrieren" %>
 <% end %>
