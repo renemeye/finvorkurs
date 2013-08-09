@@ -1,7 +1,8 @@
 class Question < ActiveRecord::Base
   belongs_to :vorkurs_test
   has_many :answers
-  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type
+  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type, :answers_attributes
+  accepts_nested_attributes_for :answers, allow_destroy: true
 
   validates :question_type, :inclusion => %w(singleSelect multiselectAllCorrect multiselectNoWrong )
 
