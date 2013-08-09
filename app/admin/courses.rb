@@ -30,4 +30,23 @@ ActiveAdmin.register Course do
     end
 
   end
+
+  form :html => { :enctype => "multipart/form-data" } do |f|  
+    f.inputs "Kurs" do
+      f.input :title
+      f.input :course_level
+    end
+
+    f.inputs "Details" do
+      f.input :description
+      f.input :fee
+    end
+
+    f.inputs "Zeitraum" do
+      f.input :from, :as => :datepicker
+      f.input :to, :as => :datepicker
+    end
+    f.actions
+  end
+
 end

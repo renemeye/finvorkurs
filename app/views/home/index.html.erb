@@ -3,6 +3,13 @@
 <% if Settings.mode == "preregistration" %>
 	<% unless @user.nil? %>
 		<section id="signup">
+			<% if Settings.mode == "preregistration" %>
+				<h1>Interesse?</h1>
+				<p>Erstelle einen Account und wir halten dich auf dem Laufenden.</p>
+			<% else %>
+				<h1>Neu Registrieren</h1>
+				<p>Bitte gib hier deine E-Mail-Adresse an und für welche Studiengänge du dich an der OvGU interessierst. Danach bekommst du eine E-Mail mit weiteren Informationen.</p>
+			<% end %>
 			<%=render 'users/newform', :locals => {:user => @user} %>
 		</section>
 	<% end %>
