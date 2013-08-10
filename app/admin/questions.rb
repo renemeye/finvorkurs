@@ -18,6 +18,10 @@ ActiveAdmin.register Question do
       end
     end
 
+    action_item :only => :show do
+      link_to 'Create Question', :action => 'new'
+    end
+
     action_item :only => :index do
       link_to 'Import Questions', :action => 'upload_json'
     end
