@@ -101,6 +101,8 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
+    flot-rails (0.0.4)
+      jquery-rails
     fnordmetric (1.2.9)
       activesupport
       em-hiredis (>= 0.1.1)
@@ -247,6 +249,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails
   compass-rails
+  flot-rails
   fnordmetric
   foreman
   formtastic

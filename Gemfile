@@ -72,3 +72,6 @@ gem 'best_in_place', git: 'git://github.com/renemeye/best_in_place.git'
 
 #Markdown support from Github
 gem 'redcarpet'
+
+#Plotting in Javascrript
+gem 'flot-rails'

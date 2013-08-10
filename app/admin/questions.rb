@@ -15,7 +15,7 @@ ActiveAdmin.register Question do
 
       panel pluralize question.answers.count, "Answers" do
         table_for question.answers do |answer|
-          column :text
+          column (:text){|question| raw(question.text)}
           column :correct
           column (:false_answer_explanation){|question| raw(question.false_answer_explanation)}
         end

@@ -15,6 +15,8 @@
 //= require best_in_place
 //= require best_in_place.purr
 //= require chosen-jquery
+//= require jquery.flot
+//= require jquery.flot.resize
 //= require_tree .
 
 $(document).ready(function() {
