@@ -4,7 +4,31 @@ class Question < ActiveRecord::Base
   attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type, :answers_attributes
   accepts_nested_attributes_for :answers, allow_destroy: true
 
-  validates :question_type, :inclusion => %w(singleSelect multiselectAllCorrect multiselectNoWrong )
+  #validates :question_type, :inclusion => TYPES
+
+  TYPES = {
+    :mapping => 3,
+    :multiselectNoWrong => 2,
+    :multiselectAllCorrect => 1,
+    :singleSelect => 0
+  }
+
+  TYPE_NAMES = {
+    3 => "Mapping",
+    2 => "Multiselect & Select no wrong",
+    1 => "Multiselect & Select all Correct",
+    0 => "Single Select"
+  }
+
+    #Define user? admin? tutor? method
+  TYPES.each do |meth, code|
+    define_method("#{meth}?") { self.question_type == code }
+  end
+
+  #Define user! admin! tutor! method
+  TYPES.each do |meth, code|
+    define_method("#{meth}!") { self.question_type = code }
+  end
 
   def previous
     self.class.last :order => 'id', :conditions => ['id < ?', self.id]
@@ -43,6 +67,10 @@ class Question < ActiveRecord::Base
     super(
       :include => [:answers]
     )
+  end
+
+  def readable_type
+    TYPE_NAMES[self.question_type]
   end
 
 end

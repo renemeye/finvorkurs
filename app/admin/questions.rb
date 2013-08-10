@@ -8,6 +8,7 @@ ActiveAdmin.register Question do
         row :vorkurs_test
         row :text
         row :false_answer_explanation
+        row (:question_type){|question| question.readable_type }
       end
 
       panel pluralize question.answers.count, "Answers" do
@@ -83,6 +84,7 @@ ActiveAdmin.register Question do
     form do |f|
       f.inputs 'question' do
         f.input :vorkurs_test
+        f.input :question_type, as: :select, collection: Hash[Question::TYPES.map{|k,v| [Question::TYPE_NAMES[v],v]}], :include_blank => false
         f.input :text, :input_html => { :rows => 4}
         f.input :false_answer_explanation, :input_html => { :rows => 4}
       end
