@@ -86,6 +86,7 @@ ActiveAdmin.register Question do
       f.has_many :answers do |answer|
        # answer.inputs do
           answer.input :text
+          answer.input :false_answer_explanation, :input_html => { :rows => 4}
           answer.input :correct, label: 'korrekte Antwort'
           if !answer.object.nil?
             answer.input :_destroy, :as => :boolean, label: 'mehrere löschen'
