@@ -79,8 +79,8 @@ ActiveAdmin.register Question do
     form do |f|
       f.inputs 'question' do
         f.input :vorkurs_test
-        f.input :text
-        f.input :false_answer_explanation
+        f.input :text, :input_html => { :rows => 4}
+        f.input :false_answer_explanation, :input_html => { :rows => 4}
       end
 
       f.has_many :answers do |answer|
