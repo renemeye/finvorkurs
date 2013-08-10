@@ -3,18 +3,21 @@
 ActiveAdmin.register Question do
 	menu :parent => "Vorkurs Tests"
 
+
+
     show do |question|
       attributes_table do
         row :vorkurs_test
-        row :text
-        row :false_answer_explanation
         row (:question_type){|question| question.readable_type }
+        row  (:text){|question| raw(question.markdown_text)}
+        row (:false_answer_explanation){|question| raw(question.markdown_false_answer_explanation)}
       end
 
       panel pluralize question.answers.count, "Answers" do
         table_for question.answers do |answer|
           column :text
           column :correct
+          column (:false_answer_explanation){|question| raw(question.false_answer_explanation)}
         end
       end
     end

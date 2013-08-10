@@ -6,6 +6,18 @@ class Question < ActiveRecord::Base
 
   #validates :question_type, :inclusion => TYPES
 
+
+  @@options = [
+    :autolink=>true, 
+    :disable_indented_code_blocks=>true, 
+    :strikethrough=>true,
+    :underline=>true,
+    :lax_spacing => true,
+    :hard_wrap=>true
+  ]
+  @@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(*@@options), *@@options)
+
+
   TYPES = {
     :mapping => 3,
     :multiselectNoWrong => 2,
@@ -67,6 +79,14 @@ class Question < ActiveRecord::Base
     super(
       :include => [:answers]
     )
+  end
+
+  def markdown_text
+   @@markdown.render(self.text)
+  end
+
+  def markdown_false_answer_explanation
+   @@markdown.render(self.false_answer_explanation)
   end
 
   def readable_type
