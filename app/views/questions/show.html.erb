@@ -1,6 +1,6 @@
 <section class="question">
-<p class="text"><%= markdown @question.text %></p>
 <h2>Frage <% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(@question), target: "_blank" %><%end%></h2>
+<p class="text"><%=raw @question.markdown_text %></p>
 
 Todo: im Show sollte dieses Ding zwischen den div. Question_type unterscheiden. Bei Multiselect sollte er ein Formular anzeigen und direkt auf question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(question.vorkurs_test_id) verweisen, wass dann wiederum im Controller die Replies erzeugt. Oder ich sende sie per REST und Javascript hin... weiß noch nich
 
