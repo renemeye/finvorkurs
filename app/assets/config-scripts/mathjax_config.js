@@ -3,6 +3,11 @@ MathJax.Hub.Config({
    inlineMath: [ ['$','$'] ],
    processEscapes: true
  },
+ showMathMenu: true,
+ menuSettings: {
+ 	zoom: "Hover",
+ 	zscale: "175%"
+ },
  TeX: {
 	Macros: {
 		diff: '{\\rm d}',
