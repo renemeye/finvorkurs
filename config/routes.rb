@@ -24,7 +24,11 @@ FinVorkurs::Application.routes.draw do
         resources :questions do
             resources :answers
         end
-        resources :replies
+        resources :replies do
+            collection do
+                post :create_multiple
+            end
+        end
     end
 
     resources :courses do
