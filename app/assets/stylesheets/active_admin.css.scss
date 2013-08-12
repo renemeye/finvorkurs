@@ -11,6 +11,19 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 
+body.active_admin #header #utility_nav {
+    color: #aaa;
+    float: right;
+    display: inline-block;
+    margin: 0;
+    padding: 0; }
+    body.active_admin #header #utility_nav span, body.active_admin #header #utility_nav a {
+      margin-left: 10px; }
+    body.active_admin #header #utility_nav a {
+      text-decoration: none; }
+    body.active_admin #header #utility_nav a:hover {
+      color: #fff; }
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //

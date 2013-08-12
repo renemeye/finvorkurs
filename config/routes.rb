@@ -4,8 +4,6 @@ FinVorkurs::Application.routes.draw do
 
   scope ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
 
-    ActiveAdmin.routes(self)
-
     get "logout" => "sessions#destroy", :as => "logout"
     get "login" => "sessions#new", :as => "login"
     get "signup" => "users#new", :as => "signup"
@@ -99,7 +97,9 @@ FinVorkurs::Application.routes.draw do
     # just remember to delete public/index.html.
     #root :to => 'users#new'
     #root :to => 'ducks#index'
-		root :to => 'home#index'
+	root :to => 'home#index'
+
+    ActiveAdmin.routes(self)
 
     # See how all your routes lay out with "rake routes"
 

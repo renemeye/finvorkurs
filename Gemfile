@@ -23,7 +23,7 @@ end
 
 gem 'thin'
 gem 'rdiscount'
-gem 'activeadmin', git: 'git://github.com/maknoll/active_admin.git'
+gem 'activeadmin'#, git: 'git://github.com/maknoll/active_admin.git'
 gem 'rails-i18n'
 gem 'fnordmetric'
 #gem 'gollum'
@@ -40,6 +40,7 @@ group :assets do
   gem 'mathjax-rails'
   gem 'uglifier'
   gem 'bootstrap-sass'
+  gem 'jquery-popover'
 end
 
 gem 'chosen-rails'
