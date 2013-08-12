@@ -28,6 +28,13 @@ form.new_question {
 	input[type="submit"] {
 		margin-bottom: 0;
 	}
+
+	input[type="radio"], input[type="checkbox"]{
+		margin-top: 0;
+		margin-bottom: 5px;
+		margin-right: 6px;
+	}
+
 	.single_select {
 		a.btn{
 			margin: 1px 0;
