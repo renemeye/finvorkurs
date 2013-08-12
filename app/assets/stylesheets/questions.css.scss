@@ -19,3 +19,17 @@ form.new_question {
 .progress {
   margin-top: 3em;
 }
+	.question_type_text {
+		margin-left: 15px;
+		color: #aaa;
+		font-style: italic;
+	}
+
+	input[type="submit"] {
+		margin-bottom: 0;
+	}
+	.single_select {
+		a.btn{
+			margin: 1px 0;
+		}
+	}
