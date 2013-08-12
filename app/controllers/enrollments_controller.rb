@@ -23,7 +23,8 @@ class EnrollmentsController < ApplicationController
 
   def destroy
     @enrollment = Enrollment.find params[:id]
-    if @enrollment.destroy
+    @enrollment.status = Enrollment::STATES[:unregistered]
+    if @enrollment.save
       Log.new(message: "#{current_user.name} cancelled #{@enrollment.course.title}").save
       redirect_to edit_user_path(current_user), :notice => "Abmeldung erfolgreich"
     end

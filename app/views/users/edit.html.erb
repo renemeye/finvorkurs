@@ -21,19 +21,31 @@
 		<%= f.password_field :password %>
 		<%= f.label :password_confirmation, "Neues Password wiederholen" %>
 		<%= f.password_field :password_confirmation %>
-		<h2> Kursanmeldungen </h2>
+		<h2> Aktuell gültige Kursanmeldungen </h2>
 		<ul>
 			<% if @user.enrollments.count > 0 %>
 				<% @user.enrollments.each do |e| %>
 					<li>
-						<%= e.course.title %>
-						<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?" %>
+						<%= e.course.title %> (angemeldet <%=e.updated_at().strftime("am %d.%m.%Y um %H:%M Uhr") %>)
+						<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?", class: "btn" %>
 					</li>
 				<% end %>
 			<% else %>
 				<li>Derzeit für keinen Kurs angemeldet.</li>
 			<% end %>
 		</ul>
+
+		
+		<% if @user.enrollments.unregistered.count > 0 %>
+			<h2> Vergangene abmeldungen </h2>
+			<ul>
+			<% @user.enrollments.unregistered.each do |e| %>
+				<li>
+					<%= e.course.title %> abgemeldet <%=e.updated_at().strftime("am %d.%m.%Y um %H:%M Uhr") %> 
+				</li>
+			<% end %>
+			</ul>
+		<% end %>
 		<%= f.hidden_field :role, :value => [User::ROLES[:registered], @user.role].max %>
 	<% end %>
 	</br>

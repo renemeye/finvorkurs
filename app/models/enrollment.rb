@@ -4,6 +4,16 @@ class Enrollment < ActiveRecord::Base
   belongs_to :course
   belongs_to :group
 
+  STATES = {
+    :enrolled => 0,
+    :unregistered => 1
+  }
+
+  default_scope where(:status => STATES[:enrolled])
+  scope :unregistered, where(:status => STATES[:unregistered])
+  #scope :for_user, (user) -> where(:user_id => user.id)
+
+
   def message
     "#{self.user.name} has enrolled to #{self.course.title}"
   end
