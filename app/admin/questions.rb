@@ -2,8 +2,20 @@
 
 ActiveAdmin.register Question do
 	menu :parent => "Vorkurs Tests"
+    index do 
 
 
+      selectable_column
+      column :id
+      column :text
+      column :question_type do |question|
+        question.readable_type
+      end
+      column :test do |question|
+        question.vorkurs_test.name
+      end
+      default_actions
+    end
 
     show do |question|
       attributes_table do
