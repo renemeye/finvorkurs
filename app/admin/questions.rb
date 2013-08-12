@@ -2,8 +2,9 @@
 
 ActiveAdmin.register Question do
 	menu :parent => "Vorkurs Tests"
-    index do 
 
+    index do 
+      html raw "<script>$(function(){MathJax=null;})</script>"
 
       selectable_column
       column :id
