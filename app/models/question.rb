@@ -52,7 +52,7 @@ class Question < ActiveRecord::Base
 
   def answered_by? user
   	user.answers.each do |answer|
-  		return true if answer.question_id == self.question_id
+  		return true if answer.question_id == self.id
   	end
   	return false
   end
