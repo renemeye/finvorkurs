@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
   @@options = [
     :autolink=>true, 
     :disable_indented_code_blocks=>true, 
+    :no_intra_emphasis=>true,
     :strikethrough=>true,
     :underline=>true,
     :lax_spacing => true,
