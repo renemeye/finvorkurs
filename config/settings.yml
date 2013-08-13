@@ -26,6 +26,8 @@ vorkurs_test:
   categorized_question: true
   max_questions_per_test: 10
   randomized_questioning: true
+  max_answers_per_question: 4
+
   #All Mails are getting bypassed to this adress while in devolpment Mode
   development_bypass_target: "nobody@example.com"
 

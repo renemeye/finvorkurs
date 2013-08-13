@@ -5,7 +5,7 @@
 
 
 	<ol>
-	  <% @question.answers.each do |answer| %>
+	  <% @answers.each do |answer| %>
 	  	<%=label_tag "answer_ids_#{answer.id}" do %>
 	  		<%= check_box_tag "answer_ids[]", answer.id, false, id: "answer_ids_#{answer.id}" %>
 	  		<%=answer.text.html_safe %>
