@@ -2,8 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.anwser-solution span.label {
-	position: relative; 
-	top: -7px; 
-	left: -22px
+.anwser-solution {
+	span.label {
+		position: relative; 
+		top: -7px; 
+		left: -22px;
+	}
+	.debug{
+		margin-top: 0px;
+	}
+	.check {
+		color: $green;
+		font-size: 16pt;
+		margin-left: 5px;
+	}
+	.wrong {
+		color: $red;
+		font-size: 16pt;
+		margin-left: 5px;
+	}
 }

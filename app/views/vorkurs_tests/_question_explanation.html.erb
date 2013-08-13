@@ -1,24 +1,50 @@
 	<div class="row-fluid">
-		<div class="span<%=(correct)? '12':'7'%> well well-large anwser-solution">
+		<% 
+			show_rightside_column = not(correct || question.false_answer_explanation.nil? || question.false_answer_explanation=="")
+
+		%>
+		<div class="span<%=(show_rightside_column)? '7': '12' %> well well-large anwser-solution">
+
+			<% # Correct/False label %>
 			<% if correct %>
 				<span class="label label-success">Richtig</span>
 			<% else %>	
 				<span class="label label-important">Falsch</span> 
 			<% end %>
 
-			<b><%=question.text%></b>
+			<% #Debug stuff %>
+			<% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(question), target: "_blank", class: "bearbeiten" %><%end%>
 			<% if Settings.debug.show_question_ids %><h3 class="debug">Frage <%=question.id%>:</h3><% end %>
+			
+			<% #Text %>
+			<b><%=raw question.text%></b>
+
+			
+			<h3>Deine <%=(users_answers_for_question.count>1)? 'Antworten' : 'Antwort' %>:</h3>
 			<ul>
-			<% question.answers.each do |answer| %>
-				<% if (users_answers_for_question.include? answer) %>
-					<b><li>Deine Antwort: <%=answer.text%> (<%=answer.correct%>)</li></b>
-				<% else %>
-					<li><%=answer.text%> (<%=answer.correct%>)</li>
-				<% end %>
+			<% users_answers_for_question.each do |answer| 
+				show_answer_comment = not(answer.false_answer_explanation.nil? || answer.false_answer_explanation == "")
+				%>
+				<li><%=answer.text%> <span class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </span>
+					<% if show_answer_comment %><div class="well well-large"><%=answer.false_answer_explanation%></div><%end%>
+				</li>
 			<% end %>
 			</ul>
+
+
+			<% unless correct %>
+				<h3>Richtig gewesen wäre:</h3>
+				<ul>
+					<% question.answers.each do |answer| %>
+						<% if answer.correct %>
+							<li><%=answer.text%></li>
+						<% end %>
+					<% end %>
+				</ul>
+			<% end %>
+
 		</div>
-		<% unless correct %>
+		<% if show_rightside_column %>
 			<div class="span5 well well-large"><%=question.false_answer_explanation%></div>
 		<% end %>
 	</div>

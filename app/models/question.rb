@@ -61,16 +61,24 @@ class Question < ActiveRecord::Base
   def correct? users_answers_set
     correct = true
 
-    if self.question_type == "singleSelect"
-      return false
-    elsif self.question_type == "multiselectAllCorrect"
-      self.answers.each do |answer|
-        return false unless answer.correct == users_answers_set.include?(answer)
+    if self.singleSelect?
+      users_answers_set.each do |answer|
+        return false if not answer.correct
       end
-    elsif self.question_type == "multiselectNoWrong"
+    elsif self.multiselectAllCorrect?
       self.answers.each do |answer|
         return false if ((not answer.correct) && users_answers_set.include?(answer))
       end
+    elsif self.multiselectNoWrong?
+      self.answers.each do |answer|
+        return false if ((not answer.correct) && users_answers_set.include?(answer))
+      end
+    elsif self.mapping?
+      self.answers.each do |answer|
+        return false unless answer.correct == users_answers_set.include?(answer)
+      end
+    else
+      return false
     end
 
     return correct
