@@ -96,11 +96,11 @@ class Question < ActiveRecord::Base
   def self.categories vorkurs_test = nil
     categorized = {}
     if vorkurs_test
-      Question.where(:vorkurs_test_id => vorkurs_test.id).uniq.pluck(:category).each do |category|
-        categorized[category] = Question.where(:vorkurs_test_id => vorkurs_test.id).where(:category => category)
+      Question.where(:vorkurs_test_id => vorkurs_test.id).order("id ASC").uniq.pluck(:category).each do |category|
+        categorized[category] = Question.where(:vorkurs_test_id => vorkurs_test.id).order("id ASC").where(:category => category)
       end
     else
-      Question.uniq.pluck(:category)
+      return Question.uniq.order("id ASC").pluck(:category)
     end
 
     return categorized
