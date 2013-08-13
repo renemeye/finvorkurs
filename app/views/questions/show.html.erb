@@ -1,5 +1,5 @@
 <section class="question">
-<h2>Frage <% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(@question), target: "_blank" %><%end%></h2>
+<h2>Frage (Nr. <%=@question.id %>) <% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(@question), target: "_blank" %><%end%></h2>
 <p class="text"><%=raw @question.markdown_text %></p>
 
 	<% #This renders a partial with same name as the question_type but with underscores like class to filename %>
