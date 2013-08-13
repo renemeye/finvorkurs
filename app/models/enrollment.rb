@@ -15,7 +15,12 @@ class Enrollment < ActiveRecord::Base
 
 
   def message
-    "#{self.user.name} has enrolled to #{self.course.title}"
+    unregistered = ""
+    if self.status == STATES[:unregistered]
+      unregistered = "and unregistered #{self.updated_at.strftime("on %d.%m.%Y at %H:%M Uhr")}"
+    end
+
+    "#{self.user.name} has enrolled to #{self.course.title} #{unregistered}"
   end
 
   def to_s
