@@ -17,7 +17,7 @@ class VorkursTest < ActiveRecord::Base
 		return false if answered_questions.count >= max_needed
 
 		# Find the first unanswerd question
-		static_random_order = user.static_randoms(self.id, test_questions_count*test_questions_count, min = 0, test_questions_count-1, 0).uniq
+		static_random_order = user.static_randoms(self.id, test_questions_count*test_questions_count, min = 0, test_questions_count-1, 0).uniq | Array(0..test_questions_count-1) #After pipe: Fill with missing Elements
 		counter=0
 		next_question = test_questions[static_random_order[counter]]
 		while next_question.answered_by?(user)

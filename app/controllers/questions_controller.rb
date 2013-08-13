@@ -9,7 +9,7 @@ before_filter :authenticate_admin!, except: :show
     if Settings.vorkurs_test.randomized_questioning
       answer_count = @question.answers.count
       answers_to_show_count = [answer_count, Settings.vorkurs_test.max_answers_per_question].min
-      answers_order = current_user.static_randoms(@question.id, answer_count*answer_count, 0, answer_count-1, 0).uniq
+      answers_order = current_user.static_randoms(@question.id, answer_count*answer_count, 0, answer_count-1, 0).uniq | Array(0..answer_count-1) #After pipe: Fill with missing Elements
       had_correct = false
       had_wrong = false
 
