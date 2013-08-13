@@ -22,6 +22,8 @@ mail:
     user_name: "user"
     password: "myOwnSecret"
 
+vorkurs_test:
+  categorized_question: true
   #All Mails are getting bypassed to this adress while in devolpment Mode
   development_bypass_target: "nobody@example.com"
 

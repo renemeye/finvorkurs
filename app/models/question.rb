@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   belongs_to :vorkurs_test
   has_many :answers
-  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type, :answers_attributes
+  attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type, :answers_attributes, :category
   accepts_nested_attributes_for :answers, allow_destroy: true
 
   #validates :question_type, :inclusion => TYPES
@@ -91,6 +91,19 @@ class Question < ActiveRecord::Base
 
   def readable_type
     TYPE_NAMES[self.question_type]
+  end
+
+  def self.categories vorkurs_test = nil
+    categorized = {}
+    if vorkurs_test
+      Question.where(:vorkurs_test_id => vorkurs_test.id).uniq.pluck(:category).each do |category|
+        categorized[category] = Question.where(:vorkurs_test_id => vorkurs_test.id).where(:category => category)
+      end
+    else
+      Question.uniq.pluck(:category)
+    end
+
+    return categorized
   end
 
 end

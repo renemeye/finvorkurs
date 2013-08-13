@@ -8,6 +8,7 @@ ActiveAdmin.register Question do
 
       selectable_column
       column :id
+      column :category if Settings.vorkurs_test.categorized_question
       column :text
       column :question_type do |question|
         question.readable_type
@@ -22,6 +23,7 @@ ActiveAdmin.register Question do
       attributes_table do
         row :vorkurs_test
         row (:question_type){|question| question.readable_type }
+        row :category if Settings.vorkurs_test.categorized_question
         row  (:text){|question| raw(question.markdown_text)}
         row (:false_answer_explanation){|question| raw(question.markdown_false_answer_explanation)}
       end
@@ -101,6 +103,7 @@ ActiveAdmin.register Question do
       f.inputs 'question' do
         f.input :vorkurs_test
         f.input :question_type, as: :select, collection: Hash[Question::TYPES.map{|k,v| [Question::TYPE_NAMES[v],v]}], :include_blank => false
+        f.input :category if Settings.vorkurs_test.categorized_question
         f.input :text, :input_html => { :rows => 4}
         f.input :false_answer_explanation, :input_html => { :rows => 4}
       end
