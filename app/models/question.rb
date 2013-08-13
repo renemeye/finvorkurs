@@ -42,13 +42,13 @@ class Question < ActiveRecord::Base
     define_method("#{meth}!") { self.question_type = code }
   end
 
-  def previous
-    self.class.last :order => 'id', :conditions => ['id < ?', self.id]
-  end
+ # def previous
+ #   self.class.last :order => 'id', :conditions => ['id < ?', self.id]
+ # end
 
-  def next
-    self.class.first :order => 'id', :conditions => ['id > ?', self.id]
-  end
+ # def next
+ #   self.class.first :order => 'id', :conditions => ['id > ?', self.id]
+ # end
 
   def answered_by? user
   	user.answers.each do |answer|
