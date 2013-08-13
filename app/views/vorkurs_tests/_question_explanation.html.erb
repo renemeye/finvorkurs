@@ -7,6 +7,7 @@
 			<% end %>
 
 			<b><%=question.text%></b>
+			<% if Settings.debug.show_question_ids %><h3 class="debug">Frage <%=question.id%>:</h3><% end %>
 			<ul>
 			<% question.answers.each do |answer| %>
 				<% if (users_answers_for_question.include? answer) %>

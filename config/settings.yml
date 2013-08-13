@@ -31,3 +31,5 @@ vorkurs_test:
   #All Mails are getting bypassed to this adress while in devolpment Mode
   development_bypass_target: "nobody@example.com"
 
+debug:
+  show_question_ids: true
