@@ -1,4 +1,5 @@
 <section class="question">
+<% if Settings.vorkurs_test.categorized_question %><h3><%=@question.category%></h3><% end %>
 <h2>Frage (Nr. <%=@question.id %>) <% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(@question), target: "_blank" %><%end%></h2>
 <p class="text"><%=raw @question.markdown_text %></p>
 
