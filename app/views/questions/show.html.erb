@@ -8,7 +8,7 @@
 	</div>
 
 <div class="progress progress-striped">
-  <div class="bar" style="width: <%= @user.grouped_answers_for(@test).count * 100 / @test.questions.count %>%;"></div>
+  <div class="bar" style="width: <%= @user.grouped_answers_for(@test).count * 100 / [@test.questions.count, Settings.vorkurs_test.max_questions_per_test].min %>%;"></div>
 </div>
 
 </section>

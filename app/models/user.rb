@@ -84,7 +84,11 @@ class User < ActiveRecord::Base
   end
 
   def completed_test? test
-    self.grouped_answers_for(test).count >= test.questions.count
+    test_questions = test.questions
+    answered_questions = test_questions & self.questions
+    max_needed = [test_questions.count, Settings.vorkurs_test.max_questions_per_test].min
+
+    return answered_questions.count >= max_needed
   end
 
   def completed_all_tests?

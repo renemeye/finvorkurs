@@ -2,7 +2,7 @@ class VorkursTest < ActiveRecord::Base
    attr_accessible :name, :description
 
    has_many :answers, through: :questions
-   has_many :questions
+   has_many :questions, order: :id
    has_many :test_results
 
    def resume_test_path user
