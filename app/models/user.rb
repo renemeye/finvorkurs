@@ -122,6 +122,24 @@ class User < ActiveRecord::Base
 		define_method("#{meth}!") { self.role = code }
 	end
 
-
+  # Returns a list of numbers wich seems to be random, but are static for a user
+  # These nr's arent stored, the are Created from the created_at atribute of each user
+  # as the seed for a pseudo_random_nr generator
+  # listNr -> Per user are different Random lists allowed. Each has the Nr listNr
+  # count -> Nr of returned Randoms
+  # min -> smallest nr returned
+  # max -> Highest nr returned
+  # round -> Nr of Digets round to. (false if no rounding is needed)
+  def static_randoms listNr = 0, count = 100, min = 0, max = 1, round = false
+    srand(self.created_at.to_i + listNr)
+    values = []
+    count.times do |counter|
+      values[counter] = (rand()*(max-min))+min
+      if round || round == 0
+        values[counter] = values[counter].round(round)
+      end
+    end
+    return values
+  end
 
 end
