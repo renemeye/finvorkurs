@@ -12,8 +12,14 @@ group :development do
 	gem 'rack-mini-profiler'
 end
 
+gem 'guard-rspec', :group => [:test, :development]
+gem 'guard-zeus', :group => [:test, :development]
+gem 'rspec-rails', :group => [:test, :development]
+gem 'factory_girl_rails', :group => [:test, :development]
 group :test do
   gem 'rake'
+  gem 'capybara'
+  gem "capybara-webkit"
 end
 
 group :production do
