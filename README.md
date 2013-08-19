@@ -47,6 +47,15 @@ Getting started - **The recomended way**
 	* Website now running on: http://localhost:3000
 	* Visit-Counter now running on: http://localhost:4242
 
+Working with test driven development
+------------------------------------
+
+1. Have a look at this [blog](http://www.ksylvest.com/posts/2012-03-09/faster-testing-in-rails-with-guard-for-zeus-rspec-and-cucumber)
+2. ```zeus start```
+3. In new Terminal:
+	- ```bundle exec guard```
+
+
 Run on Server
 -------------
 * If all is Downloaded, Setup and Cofigured:

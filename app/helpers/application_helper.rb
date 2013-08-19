@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def ie
-    if request.env['HTTP_USER_AGENT'].match /MSIE/
+    if (not(request.env['HTTP_USER_AGENT'].nil?) && request.env['HTTP_USER_AGENT'].match(/MSIE/))
       yield
     end
   end
