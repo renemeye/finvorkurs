@@ -19,7 +19,8 @@ gem 'factory_girl_rails', :group => [:test, :development]
 group :test do
   gem 'rake'
   gem 'capybara'
-  gem "capybara-webkit"
+  gem 'capybara-webkit'
+  gem 'rack_session_access'
 end
 
 group :production do

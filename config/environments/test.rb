@@ -34,4 +34,7 @@ FinVorkurs::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  #For using sessions in test environment
+  config.middleware.use RackSessionAccess::Middleware
 end
