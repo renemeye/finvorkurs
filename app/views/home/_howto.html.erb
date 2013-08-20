@@ -11,12 +11,12 @@
 		<h2>Schritt 1</h2>
 
 		<p>Vorregistriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
-		<p><%=link_to "Vervollständige jetzt deinen Account!", edit_user_path(@user.id), class:"btn btn-info" %></p>
+		<p><%=link_to "Vervollständigen Sie jetzt ihren Account!", edit_user_path(@user.id), class:"btn btn-info" %></p>
 	<% elsif @user.registered? || @user.role > User::ROLES[:registered] %>
 		<h2>Schritt 1 <span class="check">&#x2714;</span></h2>
 		Hallo<%=(@user && @user.name)? raw(" <b>#{@user.name}</b>"): ''%>,
 		<p>Registriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
-		<p><%=link_to "Hier kannst du deine Angaben ändern", edit_user_path(@user.id), class:"btn btn-info" %></p>
+		<p><%=link_to "Hier können Sie ihre Angaben ändern", edit_user_path(@user.id), class:"btn btn-info" %></p>
 	<% end %>
 </div>
 
@@ -28,7 +28,7 @@ end
 %>
 <div class="<%=@disabled %>-step step2">
 	<h2>Schritt 2 <%if((!@user.nil?) && (@user.completed_all_tests?))%><span class='check'>&#x2714;</span><% end %> </h2>
-	<p>Mache beide Selbsteinschätzungstests:</p>
+	<p>Machen Sie beide Selbsteinschätzungstests:</p>
 	<% 	VorkursTest.all.each do |test| 
 
 			@status = ((!@current_user.nil?) && (@current_user.started_test? test))?(@current_user.completed_test? test)? :done : :resume : :none
@@ -55,7 +55,7 @@ end
 	<% end %>
 	<% if (!@user.nil?) && @user.completed_all_tests? %>
 		<div class="alert alert-info">
-	  		Nach deinem Testergebniss zu urteilen, empfehlen wir dir den <strong>Grundkurs</strong> und einen <strong>Spezialisierungskurs</strong> zu machen.
+	  		Nach ihrem Testergebniss zu urteilen, empfehlen wir ihnen, den <strong>Grundkurs</strong> und einen <strong>Spezialisierungskurs</strong> zu machen.
 		</div>
 	<% end %>
 </div>
@@ -86,7 +86,7 @@ end
 		<h2>Schritt 3 <%if(@registered_for_courses)%><span class='check'>&#x2714;</span><% end %></h2>
 
 		<% if @registered_for_courses %>
-			<p>Registriert für folgende Kurse:</p>		
+			<p>Registrieren Sie sich für folgende Kurse:</p>		
 			<ul>
 				<% @user.courses.each do |course|%>
 					<li><%=course.course_name%></li>
@@ -94,10 +94,10 @@ end
 			</ul>
 
 			<% if @unregistered_courses.count > 0 %>
-				<p>Du kannst dich noch immer registrieren:</p>
+				<p>Sie können sich noch immer registrieren:</p>
 			<% end %>
 		<% else %>
-			<p>Registriere dich für Kurse:</p>
+			<p>Registrieren Sie sich für Kurse:</p>
 		<% end %>
 		
 		<% if @unregistered_courses.count > 0 %>

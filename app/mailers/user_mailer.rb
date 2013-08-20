@@ -26,6 +26,6 @@ class UserMailer < ActionMailer::Base
 
 	def new_email_confirmation_mail user
 		@user = user
-		mail to: user.email, subject: "[OvGU Vorkurse] Bestätige deine E-Mail-Adresse"
+		mail to: user.email, subject: "[OvGU Vorkurse] Bestätigung der E-Mail-Adresse"
 	end
 end

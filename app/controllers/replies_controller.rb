@@ -1,3 +1,4 @@
+#encoding: utf-8
 class RepliesController < ApplicationController
 
   def create
@@ -13,7 +14,7 @@ class RepliesController < ApplicationController
   	question = Question.find params[:question_id]
 
   	if params[:answer_ids].nil?
-  		redirect_to (question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(question.vorkurs_test_id)), notice: "Du musst mindestens eine der Antworten abgeben. Die Frage wird nach hinten geschoben."
+  		redirect_to (question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(question.vorkurs_test_id)), notice: "Sie müssen mindestens eine der Antworten abgeben."
   		return
   	else
     	answers = Answer.find params[:answer_ids]

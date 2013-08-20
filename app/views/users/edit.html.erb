@@ -27,7 +27,7 @@
 				<% @user.enrollments.each do |e| %>
 					<li>
 						<%= e.course.title %> (angemeldet <%=e.updated_at().strftime("am %d.%m.%Y um %H:%M Uhr") %>)
-						<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Willst du dich wirklich vom Kurs #{e.course.title} abmelden?", class: "btn" %>
+						<%= link_to "abmelden", [e.course, e], method: :delete, confirm: "Wollen Sie sich wirklich vom Kurs #{e.course.title} abmelden?", class: "btn" %>
 					</li>
 				<% end %>
 			<% else %>

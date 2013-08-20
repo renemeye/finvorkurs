@@ -10,9 +10,8 @@
     </div>
   <% end %>
   <%= fields_for @user do |u| %>
-    <%= u.label :name, "Bitte ergänze deinen Vor- und Nachnamen" %>
+    <%= u.label :name, "Bitte ergänzen Sie ihren Vor- und Nachnamen" %>
     <%= u.text_field :name, :placeholder => "Name" %>
   <% end %>
   <%= f.submit "verbindlich anmelden" %>
-  <p><b>Hinweis:</b> für den Kurs ist eine Teilnahmegebühr von 10€ fällig, die du dann am ersten Tag einfach mitbringst.</p>
 <% end %>

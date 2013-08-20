@@ -13,7 +13,7 @@ class EnrollmentsController < ApplicationController
     if @user.courses << @course && @user.update_attributes(params[:user])
       @user.send_enrollment_confirmation @course
       Log.new(message: "#{@user.name} enrolled to #{@course.title}").save
-      redirect_to courses_path, :notice => "Deine Kursanmeldung war erfolgreich. Du erhältst eine Bestätigung per E-Mail"
+      redirect_to courses_path, :notice => "Ihre Kursanmeldung war erfolgreich. Sie erhalten eine Bestätigung per E-Mail"
     else
       @user.courses.delete @course
       @enrollment = Enrollment.new
@@ -49,9 +49,9 @@ class EnrollmentsController < ApplicationController
     end
 
     unless @title == ""
-      redirect_to root_url, :notice => "Deine Kursanmeldung zum #{@title} war erfolgreich. Du erhältst eine Bestätigung per E-Mail"
+      redirect_to root_url, :notice => "Ihre Kursanmeldung zum #{@title} war erfolgreich. Sie erhalten eine Bestätigung per E-Mail."
     else
-      redirect_to root_url, :notice => "Etwas ist schief gegangen. Leider konnten wir dich für keinen Kurs anmelden. Melde dich bitte bei #{Settings.mail.from}."
+      redirect_to root_url, :notice => "Etwas ist schief gegangen. Leider konnten wir Sie für keinen Kurs anmelden. Melden sie sich bitte bei #{Settings.mail.from}."
     end
 
   end
