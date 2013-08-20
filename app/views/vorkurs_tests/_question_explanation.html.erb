@@ -17,7 +17,7 @@
 			<% if Settings.debug.show_question_ids %><h3 class="debug">Frage <%=question.id%>:</h3><% end %>
 			
 			<% #Text %>
-			<b><%=raw question.text%></b>
+			<b><%=raw question.markdown_text%></b>
 
 			
 			<h3>Deine <%=(users_answers_for_question.count>1)? 'Antworten' : 'Antwort' %>:</h3>
@@ -25,7 +25,7 @@
 			<% users_answers_for_question.each do |answer| 
 				show_answer_comment = not(answer.false_answer_explanation.nil? || answer.false_answer_explanation == "")
 				%>
-				<li><%=answer.text%> <span class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </span>
+				<li><%=raw answer.text%> <span class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </span>
 					<% if show_answer_comment %><div class="well well-large"><%=answer.false_answer_explanation%></div><%end%>
 				</li>
 			<% end %>
@@ -37,7 +37,7 @@
 				<ul>
 					<% question.answers.each do |answer| %>
 						<% if answer.correct %>
-							<li><%=answer.text%></li>
+							<li><%=raw answer.text%></li>
 						<% end %>
 					<% end %>
 				</ul>
