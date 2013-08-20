@@ -1,8 +1,9 @@
 <div class="question_type_text"><%=editable_text "question.type.help.single_select"%></div>
 
 <ol>
-  <% @answers.each do |answer| %>
-    <li><%= link_to answer.text.html_safe, vorkurs_test_replies_path(answer_id: answer.id), method: :post, class: "btn" %></li>
-  <% end %>
+	<% @answers ||= [] %>
+	<% @answers.each do |answer| %>
+		<li><%= link_to answer.text.html_safe, vorkurs_test_replies_path(answer_id: answer.id, :vorkurs_test_id => @question.vorkurs_test_id), method: :post, class: "btn" %></li>
+	<% end %>
 </ol>
 <%= link_to "Später fortsetzen", root_url, class: "btn btn-info" %>

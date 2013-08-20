@@ -1,16 +1,17 @@
 
 <div class="question_type_text"><%=editable_text "question.type.help.multiselect_no_wrong"%></div>
 
-<%=form_tag create_multiple_vorkurs_test_replies_path, method: :post do %>
+<%=form_tag create_multiple_vorkurs_test_replies_path(:vorkurs_test_id => @question.vorkurs_test_id), method: :post do %>
 
 
 	<ol class="answers">
-	  <% @answers.each do |answer| %>
-	  	<%=label_tag "answer_ids_#{answer.id}" do %>
-	  		<%= check_box_tag "answer_ids[]", answer.id, false, id: "answer_ids_#{answer.id}" %>
-	  		<%=answer.text.html_safe %>
-	  	<%end%>
-	  <% end %>
+		<% @answers ||= [] %>
+		<% @answers.each do |answer| %>
+		  	<%=label_tag "answer_ids_#{answer.id}" do %>
+		  		<%= check_box_tag "answer_ids[]", answer.id, false, id: "answer_ids_#{answer.id}" %>
+		  		<%=answer.text.html_safe %>
+		  	<%end%>
+		<% end %>
 	</ol>
 
 	<%= link_to "Später fortsetzen", root_url, class: "btn btn-info" %>

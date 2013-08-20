@@ -1,0 +1,17 @@
+<% @questions.each do |question| %>
+	<% 
+		@question = question
+		@answers = question.answers
+	%>
+	<section class="question">
+		<% if Settings.vorkurs_test.categorized_question %><h3><%=@question.category%></h3><% end %>
+		<h2>Frage <% if Settings.debug.show_question_ids %>(Nr. <%=@question.id %>)<% end %> <% if current_user.admin?%><%=link_to "[Bearbeiten]", edit_admin_question_path(@question), target: "_blank" %><%end%></h2>
+		<p class="text"><%=raw @question.markdown_text %></p>
+
+			<% #This renders a partial with same name as the question_type but with underscores like class to filename %>
+			<div class="<%=Question::TYPES.invert[@question.question_type].to_s.underscore %>">
+				<%=render Question::TYPES.invert[@question.question_type].to_s.underscore %>
+			</div>
+
+	</section>
+<% end %>

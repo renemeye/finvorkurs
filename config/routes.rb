@@ -29,6 +29,12 @@ FinVorkurs::Application.routes.draw do
         end
     end
 
+    resources :questions do
+        collection do
+            get :overview
+        end
+    end
+
     resources :courses do
       resources :enrollments
     end

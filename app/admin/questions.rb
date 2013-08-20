@@ -42,6 +42,10 @@ ActiveAdmin.register Question do
     end
 
     action_item :only => :index do
+      link_to 'Preview Questions', overview_questions_path
+    end
+
+    action_item :only => :index do
       link_to 'Import Questions', :action => 'upload_json'
     end
 
