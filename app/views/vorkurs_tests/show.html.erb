@@ -24,7 +24,7 @@
 		<h2>Ergebnisse</h2>
 
 		<% users_test_answers = @user.grouped_answers_for(@test) %>
-		<% users_test_answers.keys.sort.each do |question_id| %>
+		<% users_test_answers.keys.each do |question_id| %>
 		   		<% 
 	   			question = Question.find(question_id) 
 	   			users_answers_for_question = users_test_answers[question_id]

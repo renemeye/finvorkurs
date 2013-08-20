@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def grouped_answers_for test
-    answers = self.answers_for(test)
+    answers = self.answers_for(test).order("replies.created_at")
     answers.group_by{ |answer| answer.question_id}
   end
 
