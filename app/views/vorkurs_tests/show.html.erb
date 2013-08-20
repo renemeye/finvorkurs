@@ -19,7 +19,7 @@
 	<% unless @status == :done %>
 		<%= link_to @appell, (@test.resume_test_path(@user) || test_questions_path(@test)), :class =>
 		"btn btn-primary" %>
-		<% else %>
+	<% else %>
 
 		<h2>Ergebnisse</h2>
 

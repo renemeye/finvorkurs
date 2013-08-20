@@ -55,4 +55,12 @@ before_filter :authenticate_admin!, except: :show
     redirect_to [@test, @random_question]
   end
 
+  def overview
+    @questions = Question.all
+  end
+
+  def solutions
+    @questions = Question.all
+  end
+
 end

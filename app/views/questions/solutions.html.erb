@@ -1,0 +1,13 @@
+<h2>Ergebnisse</h2>
+<% @questions.each do |question| %>
+	<% 
+	users_answers_for_question = question.answers
+	correct = false
+	%>
+	<%=render :partial => "vorkurs_tests/question_explanation", :locals => {
+		:question => question, 
+		:correct => correct, 
+		:users_answers_for_question => users_answers_for_question
+	}
+	%>
+<% end %>

@@ -32,6 +32,7 @@ FinVorkurs::Application.routes.draw do
     resources :questions do
         collection do
             get :overview
+            get :solutions
         end
     end
 
