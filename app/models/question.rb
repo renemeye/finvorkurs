@@ -1,3 +1,5 @@
+require 'mathjax_compatible_markdown'
+
 class Question < ActiveRecord::Base
   belongs_to :vorkurs_test
   has_many :answers
@@ -7,7 +9,7 @@ class Question < ActiveRecord::Base
   #validates :question_type, :inclusion => TYPES
 
 
-  @@options = [
+  @@markdown_options = [
     :autolink=>true, 
     :disable_indented_code_blocks=>true, 
     :no_intra_emphasis=>true,
@@ -16,7 +18,7 @@ class Question < ActiveRecord::Base
     :lax_spacing => true,
     :hard_wrap=>true
   ]
-  @@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(*@@options), *@@options)
+  @@markdown = Redcarpet::Markdown.new(MathjaxCompatibleMarkdown.new(*@@markdown_options), *@@markdown_options)
 
 
   TYPES = {
