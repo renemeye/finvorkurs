@@ -117,4 +117,37 @@ class Question < ActiveRecord::Base
     return categorized
   end
 
+  #WARNING: THIS IS NOT LONG TIME STABLE. SO DON'T USE IT TO REFERENCE WETHER A USER GOT THESE ANSWERS OR NOT
+  #LONG TIME MEANS HERE created or deleted answers or changed Settings like maximum answers per question
+  def answers_presented_to_user user
+    answers = []
+
+    if Settings.vorkurs_test.randomized_questioning
+      answer_count = self.answers.count
+      answers_to_show_count = [answer_count, Settings.vorkurs_test.max_answers_per_question].min
+      answers_order = user.static_randoms(self.id, answer_count*answer_count, 0, answer_count-1, 0).uniq | Array(0..answer_count-1) #After pipe: Fill with missing Elements
+      had_correct = false
+      had_wrong = false
+
+      answers_to_show_count.times do |counter|
+        next_answer = self.answers[answers_order[counter]]
+        had_correct = true if next_answer.correct?
+        had_wrong = true unless next_answer.correct?
+
+        #If there is a wrong or a right missing
+        if counter >= answers_to_show_count - 1
+          if not had_wrong 
+            next_answer = self.answers.find_by_correct(false)
+          elsif not had_correct
+            next_answer = self.answers.find_by_correct(true)
+          end
+        end
+        answers << next_answer
+      end
+    else
+      answers = @question.answers
+    end
+    return answers
+  end
+
 end
