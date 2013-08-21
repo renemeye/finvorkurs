@@ -7,7 +7,8 @@
 	<%=render :partial => "vorkurs_tests/question_explanation", :locals => {
 		:question => question, 
 		:correct => correct, 
-		:users_answers_for_question => users_answers_for_question
+		:users_answers_for_question => users_answers_for_question,
+		:bypass_user_votes => true
 	}
 	%>
 <% end %>

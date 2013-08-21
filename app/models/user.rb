@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
   has_many :replies, dependent: :destroy
-  has_many :answers, through: :replies
+  has_many :answers, through: :replies, :select => :"answers.*, replies.voted_as_correct"
   has_many :questions, through: :answers
   has_many :test_results, dependent: :destroy
   has_many :groups, through: :enrollments

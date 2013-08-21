@@ -33,7 +33,8 @@
 					<%= render :partial => "question_explanation", :locals => {
 							:question => question, 
 							:correct => correct, 
-							:users_answers_for_question => users_answers_for_question
+							:users_answers_for_question => users_answers_for_question,
+							:bypass_user_votes => false
 						}
 					%>
 		<% end %>	
