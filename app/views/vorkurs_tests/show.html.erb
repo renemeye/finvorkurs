@@ -3,7 +3,7 @@
 		<%= @test.name %></h1>
 	<h2>Test zur Selbsteinschätzung</h2>
 	<p>
-		<%= @test.description %></p>
+		<%=raw @test.markdown_description %></p>
 
 	<%
 	@status = (@current_user.started_test? @test)?(@current_user.completed_test? @test)? :done : :resume : :none

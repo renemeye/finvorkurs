@@ -1,9 +1,23 @@
+require 'mathjax_compatible_markdown'
+
 class VorkursTest < ActiveRecord::Base
    attr_accessible :name, :description
 
    has_many :answers, through: :questions
    has_many :questions, order: :id
    has_many :test_results
+
+   @@markdown_options = [
+    :autolink=>true, 
+    :disable_indented_code_blocks=>true, 
+    :no_intra_emphasis=>true,
+    :strikethrough=>true,
+    :underline=>true,
+    :lax_spacing => true,
+    :hard_wrap=>true
+  ]
+  @@markdown = Redcarpet::Markdown.new(MathjaxCompatibleMarkdown.new(*@@markdown_options), *@@markdown_options)
+
 
    def resume_test_path user
 
@@ -30,4 +44,10 @@ class VorkursTest < ActiveRecord::Base
 
 	next_question && [self, next_question]
   end
+
+	
+	def markdown_description
+   		@@markdown.render(self.description)
+  	end
+
 end
