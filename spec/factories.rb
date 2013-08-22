@@ -30,6 +30,15 @@ FactoryGirl.define do
 
 	factory :vorkurs_test do
 		name "Simple Test"
+
+		factory :vorkurs_test_with_questions do
+			ignore do
+				question_count 4
+			end
+			after(:create) do |vorkurs_test, evaluator|
+				FactoryGirl.create_list(:question_with_odd_correct_answers, evaluator.question_count, vorkurs_test: vorkurs_test)
+			end
+		end
 	end
 
 	factory :answer do
@@ -40,4 +49,9 @@ FactoryGirl.define do
       	end
 	end
 
+	factory :course do
+		title "Ein Kurs"
+	    description "Eine Beschreibung"
+	    course_level "First Course Level"
+	end
 end

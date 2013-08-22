@@ -55,7 +55,22 @@ end
 	<% end %>
 	<% if (!@user.nil?) && @user.completed_all_tests? %>
 		<div class="alert alert-info">
-	  		Nach ihrem Testergebniss zu urteilen, empfehlen wir ihnen, den <strong>Grundkurs</strong> und einen <strong>Spezialisierungskurs</strong> zu machen.
+			Nach ihrem Testergebniss zu urteilen, empfehlen wir ihnen,
+			<% if @recomended_courses.count == 0 %>
+				keine Kurse zu besuchen.
+			<% else %>
+				<% first = true %>
+				<% @recomended_courses.each do |level, courses| %>
+					<% unless first %> und <% end %><% first = false %>
+					<% if courses[0].title == courses[0].course_level %>
+						den
+					<% else %>
+						einen
+					<% end %>
+					<b><%=level%></b>
+				<% end %>
+				zu besuchen.
+			<% end %>
 		</div>
 	<% end %>
 </div>

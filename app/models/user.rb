@@ -104,6 +104,7 @@ class User < ActiveRecord::Base
 
   def test_result test
     groups = self.grouped_answers_for(test)
+    return 0 if groups.count == 0
     correct_count = 0
     groups.each do |question_id, answer_group|
       question = Question.find(answer_group[0].question_id)
