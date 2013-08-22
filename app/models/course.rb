@@ -11,4 +11,8 @@ class Course < ActiveRecord::Base
   		"#{self.course_level} für #{self.title}"
   end
 
+  def self.course_levels
+  	return Course.select(:course_level).uniq.collect{|c|c.course_level}
+  end
+
 end
