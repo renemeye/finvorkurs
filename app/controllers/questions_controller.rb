@@ -10,6 +10,9 @@ before_filter :authenticate_admin!, except: :show
     if(@answers.include? nil)
       redirect_to vorkurs_test_path(@test.id), :notice => "Diese Frage ist nicht darstellbar. Bitte wenden Sie sich an #{Settings.mail.from}."
     end
+    if(@question.answered_by? @user)
+      redirect_to vorkurs_test_path(@test.id), :notice => "Sie haben diese Frage bereits beantwortet."
+    end
   end
 
   def new
@@ -25,7 +28,6 @@ before_filter :authenticate_admin!, except: :show
   end
 
   def index
-    #TODO: Make the starting-point random here
     @test = VorkursTest.find params[:vorkurs_test_id]
     @random_question = @test.questions.first
     redirect_to [@test, @random_question]
