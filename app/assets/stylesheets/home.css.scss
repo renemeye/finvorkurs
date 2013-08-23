@@ -2,51 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.howto-steps {
+	display: table;
+	&>div {
+		display: table-cell;
+		width: 28%;
+		padding-right: 56px;
+		text-align: center;
+	}
+}
+
 #howto {
 	text-align: center;
 	padding: 0;
 	margin: 0;
-	&>div{
-		text-align: center;
-		position: relative;
-		display: inline-block;
-		vertical-align: top;
-		width: 28%;
-		padding-right: 56px;
-		height: 320px;
-		// &:after{
-		// 	content: "X";
-		// 	text-indent:-9999px;
-		// //	background-color: red;
-		// 	display: block;
-		// 	position: absolute;
-		// 	top: 50%;
-		// 	right: 2px;
-		// 	z-index: -1;
-
-		// 	width:39px;
-		// 	height:56px;
-		// 	*margin-right:.3em;
-		// 	line-height:14px;
-		// 	vertical-align:text-top;
-		// 	background-image:url("arrows.png");
-		// 	background-position:-176px -44px;
-		// 	background-repeat:no-repeat;
-		// 	margin-top:1px;
-		// 	@include rotate(90deg);
-		// 	//@include scale(1,2);
-		// 	//@include transform(1, 90deg, 0, 0, 0deg, 0deg);
-
-		// }
-
+	div{
 		&:last-child {
 			padding-right: 0;
 		}
-
-	//	&:last-child:after {
-	//		//Hide last arrow
-	//		display: none;
-	//	}
 		
 		h1 {
 			font-size: 15pt;
@@ -65,6 +38,12 @@
 		.check {
 			color: $green;
 		}
+	}
+
+	button {
+		width: 80%;
+		//left: 10%;
+		margin-top: 10px;
 	}
 
 	form.enrollment {
@@ -94,15 +73,6 @@
 			top:1px;
 			right:-5px;
 		}
-	}
-
-	.btn[disabled] {
-		border:none;
-	}
-
-	.btn[disabled]:hover {
-		background: none;
-		background-color:#e6e6e6;
 	}
 }
 

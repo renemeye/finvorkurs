@@ -1,0 +1,81 @@
+<%
+	@disabled = @user.nil?
+	@registered_for_courses = (!@user.nil?) && @user.courses.count > 0
+	@registered_course_levels = (@user.nil?)?[]:@user.courses.collect{|course| course.course_level}
+	@unregistered_courses = {}
+	@courses.each do |course_level, course| 
+		unless @registered_course_levels.include? course_level 
+			@unregistered_courses[course_level] = course
+		else 
+			#{"#{course_level}" => course}
+		end 
+	end
+
+%>
+
+<div class="<%=(@disabled)? "disabled":""%>-step step3">
+	<%= form_tag create_multiple_enrollments_path, method: :post, class: "enrollment" do %>
+		<h2>Schritt 3 <%if(@registered_for_courses)%><span class='check'>&#x2714;</span><% end %></h2>
+
+		<% if @registered_for_courses %>
+			<p>Angemeldet zu den Kursen:</p>		
+			<ul>
+				<% @user.courses.each do |course|%>
+					<li><%=course.course_name%></li>
+				<% end %>
+			</ul>
+
+			<% if @unregistered_courses.count > 0 %>
+				<p>Sie können sich noch immer anmelden für:</p>
+			<% end %>
+		<% else %>
+			<p>Anmeldung zu den Kursen:</p>
+		<% end %>
+		
+		<% if @unregistered_courses.count > 0 %>
+			<% @unregistered_courses.each do |course_level,courses_of_this_level| %>
+				<% if courses_of_this_level.count == 1 %>
+					<% this_course = courses_of_this_level[0] %>
+					<% this_id = this_course.id %>
+					<% this_title = courses_of_this_level[0].title %>
+					<%= label_tag "course_ids[#{this_id}]" do %>
+						<%= check_box_tag "course_ids[#{course_level}][]", this_id, false,
+								id: "course_ids_#{this_id}", 
+								disabled: @disabled
+						%>
+						<strong><%= this_title %></strong>
+					<% end %>
+
+				<% else %>
+					<%= label_tag "#{course_level}_level" do %>
+						<%= check_box_tag "#{course_level}_level", course_level, false,
+								disabled: @disabled,
+								class: "level_checkbox"
+						%>
+					<%="<strong>#{course_level}</strong> für:".html_safe %>
+					<% end %>
+
+					<div class="<%=course_level%>_level sublevel">
+						<% courses_of_this_level.each do |course| %>
+							<% this_id = course.id %>
+							<% this_title = course.title %>
+							<%= label_tag "course_ids[#{this_id}]" do %>
+								<%= radio_button_tag "course_ids[#{course_level}][]", this_id, false,
+										id: "course_ids_#{this_id}", 
+										disabled: true
+								%>
+								<%=this_title%>
+							<% end %>
+						<% end %>
+					</div>
+				<% end %>
+				
+			<% end %>
+			<button <%=(@disabled) ?"disabled=\"disabled\" " :""%> type="submit" class="btn btn-primary">
+			  Verbindlich anmelden
+			</button>
+		<% end %>
+
+	<% end %>
+
+</div>
