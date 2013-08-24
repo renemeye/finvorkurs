@@ -1,6 +1,9 @@
 ActiveAdmin.register Course do
   config.filters = false 
-  index do |course|
+  index do
+    data = Course.all.collect{|course| [course.course_name, course.users.count]}
+    para raw "<div  style=\"height: 300px; width:100%\" class=\"category_vizualisation\" data-bars='#{data.to_json}' data-yaxis_label='#Users'></div>"
+
     column :title
     column :fee
     column :from
