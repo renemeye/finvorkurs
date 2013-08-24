@@ -12,6 +12,11 @@ ActiveAdmin.register Faculty do
   end
 
 	show do |faculty|
+
+      data = faculty.degree_programs.collect{|d| [d.name, d.users.count]}
+      para raw "<div  style=\"height: 300px; width:100%\" class=\"category_vizualisation\" data-bars='#{data.to_json}' data-yaxis_label='#Users'></div>"
+
+
       attributes_table do
         row :name
         row :short_name
