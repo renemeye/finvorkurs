@@ -6,6 +6,10 @@ section.question {
   	max-width: 40em;
   	margin: 3em auto;
 
+  	form label {
+  		margin-bottom: 7px;
+  	}
+
 	p.text {
 	  font-weight: bold;
 	}
