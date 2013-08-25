@@ -11,6 +11,10 @@ FactoryGirl.define do
 		factory :admin do
 			role User::ROLES[:admin]
 		end
+
+		factory :preregistered do
+			role User::ROLES[:preregistered]
+		end
 	end
 
 	factory :question do
