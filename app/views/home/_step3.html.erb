@@ -24,6 +24,8 @@
 					<li><%=course.course_name%></li>
 				<% end %>
 			</ul>
+			<p>Ist ihnen ein Fehler unterlaufen?<br/>
+			<%=link_to "Abmeldungen", edit_user_path(@user), class:"btn"%></p>
 
 			<% if @unregistered_courses.count > 0 %>
 				<p>Sie können sich noch immer anmelden für:</p>
