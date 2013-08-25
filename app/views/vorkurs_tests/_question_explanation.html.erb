@@ -26,9 +26,19 @@
 				if(bypass_user_votes || answer.voted_as_correct)
 					show_answer_comment = not(answer.false_answer_explanation.nil? || answer.false_answer_explanation == "")
 					%>
-					<li><%=raw answer.text%> <span class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </span>
-						<% if show_answer_comment %><div class="well well-large"><%=answer.false_answer_explanation%></div><%end%>
-					</li>
+					<% if question.mapping? %>
+						<% parts = answer.text.partition("-") %>
+							<div style="display:table">
+								<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[2]%>"></div>
+								<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[0]%>"></div>
+								<div style="display:table-cell; vertical-align:middle; padding-left: 1pt;" class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </div>
+							</div>
+							<% if show_answer_comment %><div class="well well-large"><%=answer.false_answer_explanation%></div><%end%>
+					<% else %>
+						<li><%=raw answer.text%> <span class=<%=raw (answer.correct)? '"check">✔' : '"wrong">✘'%> </span>
+							<% if show_answer_comment %><div class="well well-large"><%=answer.false_answer_explanation%></div><%end%>
+						</li>
+					<% end %>
 				<% end %>
 			<% end %>
 			</ul>
@@ -39,7 +49,16 @@
 				<ul>
 					<% question.answers.each do |answer| %>
 						<% if answer.correct %>
-							<li><%=raw answer.text%></li>
+							<% if question.mapping? %>
+								<% parts = answer.text.partition("-") %>
+								<li><div style="display:table">
+										<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[2]%>"></div>
+										<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[0]%>"></div>
+									</div>
+								</li>
+							<% else %>
+								<li><%=raw answer.text%></li>
+							<% end %>
 						<% end %>
 					<% end %>
 				</ul>

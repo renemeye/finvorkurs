@@ -1,3 +1,58 @@
+redraw_plot = function(index, component) {
+
+        var series = $(component).data('series');
+        if(typeof(series) != "object"){
+            series = [];
+        }
+
+        var ranges = $(component).data('ranges');
+        if(typeof(ranges) != "object"){
+            ranges = [];
+        }
+
+        var functions = $(component).data('functions');
+        if(typeof(functions)== "object"){
+            functions.forEach(function(entry, plotNr){
+                var data = [];
+                if(typeof(ranges[plotNr])!="object"){
+                    ranges[plotNr] = [];
+                }
+                var min = (typeof(ranges[plotNr][0])!="number")? -1 :ranges[plotNr][0];
+                var max = (typeof(ranges[plotNr][1])!="number")?  1 :ranges[plotNr][1];
+                
+                for (var i = min; i <= max; i += 0.1) {
+                    var func = new Function("x", "return "+entry);
+                    data.push([i, func(i)]);
+                }
+                series.push(data);
+            });
+        }
+        
+        var axis_labels = $(component).data('axis');
+        var xaxis_label = (typeof(axis_labels) == "object" && typeof(axis_labels[0]) == "string")?axis_labels[0]:"x";
+        var yaxis_label = (typeof(axis_labels) == "object" && typeof(axis_labels[1]) == "string")?axis_labels[1]:"f(x)";
+        
+
+
+        $.plot(component, series, {
+            xaxis: {
+                axisLabel: xaxis_label,
+                axisLabelUseCanvas: true,
+                axisLabelFontFamily: 'Helvetica'
+            },
+            yaxis: {
+                axisLabel: yaxis_label,
+                axisLabelUseCanvas: true,
+                axisLabelFontFamily: 'Helvetica'
+            },
+            series: {
+                lines: { show: true },
+                points: { show: false }
+            }
+        });
+        //alert("Test:"+$(component).data('series')["data"][1]);
+    }
+
 $(function(){
 
     $('.category_vizualisation').each(function(index, component) {
@@ -23,60 +78,7 @@ $(function(){
         });
     });
 
-	$('.plot').each(function(index, component) {
-
-		var series = $(component).data('series');
-		if(typeof(series) != "object"){
-			series = [];
-		}
-
-		var ranges = $(component).data('ranges');
-		if(typeof(ranges) != "object"){
-			ranges = [];
-		}
-
-		var functions = $(component).data('functions');
-		if(typeof(functions)== "object"){
-			functions.forEach(function(entry, plotNr){
-				var data = [];
-				if(typeof(ranges[plotNr])!="object"){
-					ranges[plotNr] = [];
-				}
-				var min = (typeof(ranges[plotNr][0])!="number")? -1 :ranges[plotNr][0];
-				var max = (typeof(ranges[plotNr][1])!="number")?  1 :ranges[plotNr][1];
-				
-				for (var i = min; i <= max; i += 0.1) {
-					var func = new Function("x", "return "+entry);
-					data.push([i, func(i)]);
-				}
-				series.push(data);
-			});
-		}
-		
-		var axis_labels = $(component).data('axis');
-		var xaxis_label = (typeof(axis_labels) == "object" && typeof(axis_labels[0]) == "string")?axis_labels[0]:"x";
-		var yaxis_label = (typeof(axis_labels) == "object" && typeof(axis_labels[1]) == "string")?axis_labels[1]:"f(x)";
-		
-
-
-	    $.plot(component, series, {
-		    xaxis: {
-	            axisLabel: xaxis_label,
-	            axisLabelUseCanvas: true,
-	            axisLabelFontFamily: 'Helvetica'
-	        },
-	        yaxis: {
-	            axisLabel: yaxis_label,
-	            axisLabelUseCanvas: true,
-	            axisLabelFontFamily: 'Helvetica'
-	        },
-	    	series: {
-		        lines: { show: true },
-		        points: { show: false }
-    		}
-	    });
-	    //alert("Test:"+$(component).data('series')["data"][1]);
-	});
+	$('.plot').each(redraw_plot);
 });
 
 (function ($) {
