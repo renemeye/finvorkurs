@@ -57,7 +57,7 @@ describe Recomendation do
 
 		visit "/"
 		#puts page.body
-		page.should have_content("Nach ihrem Testergebniss zu urteilen, empfehlen wir ihnen, einen level_2 und den c_level_5 zu besuchen.")
+		page.should have_content("Nach ihrem Testergebnis zu urteilen, empfehlen wir ihnen, einen level_2 und den c_level_5 zu besuchen.")
 
 		#Recomendation.for_user(user).group_by{ |c| c.course_level}.each do |k,v|
 		#	puts "Test: #{k} ||| Foo: #{v[0].title}"

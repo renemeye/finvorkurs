@@ -7,7 +7,7 @@ describe "howto" do
       user = create(:user)
 
       visit root_url
-      page.should have_content("Neu Registrieren")
+      page.should have_content("Account erstellen/umwandeln")
 
       login_as user
       visit root_url
@@ -24,7 +24,7 @@ describe "howto" do
     login_as user
 
     visit root_url
-    page.should_not have_content("Neu Registrieren")
+    page.should_not have_content("Account erstellen/umwandeln")
     page.should have_content("Hallo,")
 
     a_name = "Paul Riegel"

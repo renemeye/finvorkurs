@@ -62,5 +62,8 @@ describe User do
 			last_email.body.should include(user.password_reset_token)
 		end
 	end
+
+	pending "Test for users send mail"
+	
 	
 end

@@ -146,7 +146,7 @@ describe Reply do
 	end
 
 	it "should have tests for mapping" do
-		"a".should eq("b")
+		pending "Tests for mapping"
 	end
 
 end
