@@ -29,6 +29,7 @@ ActiveAdmin.register User do
       end 
       "#{money} EUR"
     end
+
     selectable_column
     id_column
     column :email
