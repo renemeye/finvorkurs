@@ -6,7 +6,7 @@ class RepliesController < ApplicationController
     answer = Answer.find params[:answer_id]
     #user.answers << answer
     Reply.create!(user: user, answer: answer, voted_as_correct: true)
-    redirect_to (question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(question.vorkurs_test_id))
+    redirect_to (answer.question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(answer.question.vorkurs_test_id))
   end
 
   def create_multiple
