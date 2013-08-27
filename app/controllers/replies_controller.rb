@@ -17,9 +17,15 @@ class RepliesController < ApplicationController
   		redirect_to (question.vorkurs_test.resume_test_path(user) || vorkurs_test_path(question.vorkurs_test_id)), notice: "Sie müssen mindestens eine der Antworten abgeben."
   		return
   	else
+      if question.mapping?
+        question.answers.each do |answer|
+          Reply.create!(user: user, answer: answer, voted_as_correct:(params[:answer_ids].include?(answer.id.to_s)))
+        end
+      else 
         #WARNING: this should be used only here, because we expect, that the system don't change (now/deleted answers or Settings like maximum answers) to much in between
         question.answers_presented_to_user(user).each do |answer|
           Reply.create!(user: user, answer: answer, voted_as_correct:(params[:answer_ids].include?(answer.id.to_s)))
+        end
       end
     end
     
