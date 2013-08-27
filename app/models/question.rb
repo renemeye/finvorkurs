@@ -79,10 +79,11 @@ class Question < ActiveRecord::Base
         return false if (not answer.correct) && (answer.voted_as_correct == 't')
       end
 
-   # elsif self.mapping?
-   #   users_answers_set.each do |answer|
-   #     return false unless answer.correct == users_answers_set.include?(answer)
-   #   end
+    elsif self.mapping?
+      users_answers_set.each do |answer|
+        return false if (not answer.correct) && (answer.voted_as_correct == 't')
+        return false if answer.correct && (answer.voted_as_correct != 't')
+      end
 
     else
       puts "WARNING"
