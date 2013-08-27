@@ -22,8 +22,8 @@
 			
 			<h3>Ihre <%=(users_answers_for_question.count>1)? 'Antworten' : 'Antwort' %>:</h3>
 			<ul>
-			<% users_answers_for_question.each do |answer|
-				if(bypass_user_votes || answer.voted_as_correct)
+			<% users_answers_for_question.each do |answer| %>
+				<% if(bypass_user_votes || answer.voted_as_correct=='t')
 					show_answer_comment = not(answer.false_answer_explanation.nil? || answer.false_answer_explanation == "")
 					%>
 					<% if question.mapping? %>
@@ -47,15 +47,17 @@
 			<% unless correct %>
 				<h3>Richtig gewesen wäre:</h3>
 				<ul>
-					<% question.answers.each do |answer| %>
+					<% possible_answers = (question.singleSelect?) ? question.answers : users_answers_for_question %>
+
+					<% possible_answers.each do |answer| %>
 						<% if answer.correct %>
 							<% if question.mapping? %>
 								<% parts = answer.text.partition("-") %>
-								<li><div style="display:table">
-										<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[2]%>"></div>
-										<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[0]%>"></div>
-									</div>
-								</li>
+								<div style="display:table">
+									<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[2]%>"></div>
+									<div style="display:table-cell; vertical-align:middle;">:&nbsp;</div>
+									<div style="display:table-cell; vertical-align:middle;" class="mirror" data-mirror="<%=parts[0]%>"></div>
+								</div>
 							<% else %>
 								<li><%=raw answer.text%></li>
 							<% end %>
