@@ -84,3 +84,5 @@ gem 'redcarpet'
 gem 'flot-rails'
 
 gem 'mathjax-rails'
+
+gem 'habtm_generator', :group => :development

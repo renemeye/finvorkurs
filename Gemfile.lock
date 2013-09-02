@@ -148,6 +148,8 @@ GEM
     guard-zeus (0.0.1)
       guard
       zeus
+    habtm_generator (0.1)
+      activerecord (> 3.1)
     haml (4.0.3)
       tilt
     has_scope (0.6.0.rc)
@@ -328,6 +330,7 @@ DEPENDENCIES
   formtastic
   guard-rspec
   guard-zeus
+  habtm_generator
   jquery-popover
   jquery-rails (= 2.3.0)
   mathjax-rails
