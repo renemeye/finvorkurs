@@ -44,7 +44,6 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
-  gem 'mathjax-rails'
   gem 'uglifier'
   gem 'bootstrap-sass'
   gem 'jquery-popover'
@@ -83,3 +82,5 @@ gem 'redcarpet'
 
 #Plotting in Javascrript
 gem 'flot-rails'
+
+gem 'mathjax-rails'
