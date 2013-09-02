@@ -16,8 +16,7 @@ ActiveAdmin.register Newsletter do
 
     member_action :send_newsletter, method: :put do
 	    newsletter = Newsletter.find(params[:id])
-	    newsletter.state = "sent"
-	    newsletter.save!
+	    newsletter.delay.deliver
 	    redirect_to action: :index, notice: "Sent \"#{newsletter.subject}\""
    	end
 end

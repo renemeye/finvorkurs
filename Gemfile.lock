@@ -90,6 +90,11 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.0.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -323,6 +328,7 @@ DEPENDENCIES
   chosen-rails
   coffee-rails
   compass-rails
+  delayed_job_active_record
   factory_girl_rails
   flot-rails
   fnordmetric

@@ -4,7 +4,13 @@ class Newsletter < ActiveRecord::Base
   attr_accessible :content, :state, :subject, :author_id
 
   def sent?
-  	:state == "sent"
+  	state == "sent"
+  end
+
+  def deliver
+  	self.state = "sent"
+  	self.save!
+	sleep 10
   end
 
 
