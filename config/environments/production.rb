@@ -1,6 +1,6 @@
 FinVorkurs::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  config.assets.precompile += ['active_admin.css', 'active_admin.js', 'active_admin/print.css']
+  config.assets.precompile += ['active_admin.css', 'active_admin.js', 'active_admin/print.css', 'mathjax_config.js', 'external_flot.js', 'jquery.js', 'jquery.flot.js','jquery.flot.resize.js', 'jquery-popover.js', 'jquery-ui.js']
 
   # Code is not reloaded between requests
   config.cache_classes = true
