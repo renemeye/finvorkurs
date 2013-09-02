@@ -29,6 +29,11 @@
       }
       </script>
     <ul>
+    <% unless Settings.menu.additional_links.nil? %>
+      <% Settings.menu.additional_links.each do |name, link| %> 
+          <li><%= link_to name, link %></li>
+      <% end %>
+    <% end %>
     <% if Settings.menu.downloads %>
       <% if current_user %>
         <li><%= link_to "Downloads", downloads_path %></li>
