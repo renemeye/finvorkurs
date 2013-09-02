@@ -1,3 +1,3 @@
-ActiveAdmin.register Download do
-	menu :parent => "Courses"  
-end
+# ActiveAdmin.register Download do
+# 	menu :parent => "Courses"  
+# end
