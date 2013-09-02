@@ -5,7 +5,8 @@ ActiveAdmin.register Faculty do
 
     data = Faculty.all.collect{|f| [f.short_name, f.users.count]}
     para raw "<div  style=\"height: 300px; width:100%\" class=\"category_vizualisation\" data-bars='#{data.to_json}' data-yaxis_label='#Users'></div>"
-
+    
+    selectable_column
     column :name
     column :short_name
     default_actions

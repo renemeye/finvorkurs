@@ -8,8 +8,10 @@ ActiveAdmin.register DegreeProgram do
   end
 
 	index do
+		selectable_column
 		column :name
 		column :degree
+		column :users do |program| program.users.count  end
 
 		default_actions
 	end
