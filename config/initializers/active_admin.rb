@@ -142,13 +142,8 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript "..#{root_url}mathjax/MathJax.js?config=TeX-AMS_HTML-full.js"
-  config.register_javascript "mathjax_config.js"
-  config.register_javascript "jquery"
-  config.register_javascript "jquery-ui"
-  config.register_javascript "jquery-popover.js"
-  config.register_javascript "jquery.flot"
-  config.register_javascript "jquery.flot.resize"
-  config.register_javascript "external_flot.js"
+  config.register_javascript "mathjax_config"
+  config.register_javascript "application"
 
   # == CSV options
   #
