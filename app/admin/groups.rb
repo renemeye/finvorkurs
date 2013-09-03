@@ -1,4 +1,5 @@
 ActiveAdmin.register Group do
+  menu :parent => "Courses"
   filter :course
   index do
     selectable_column
