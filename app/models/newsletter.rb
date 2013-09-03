@@ -16,7 +16,7 @@ class Newsletter < ActiveRecord::Base
 
   def all_receivers
     if self.all_users.nil? || self.all_users == 0 
-      all_users = self.users.order("id")
+      all_users = self.users.order("users.id")
       all_users = User.from("(#{User.without_degree_programs.to_sql} UNION #{all_users.to_sql}) AS users") if self.no_degree_programs == 1
       return all_users
     else
@@ -26,7 +26,7 @@ class Newsletter < ActiveRecord::Base
 
   def missing_receivers
     self.last_receiver_id = 0 if last_receiver_id.nil?
-    self.all_receivers.where("id > #{self.last_receiver_id}").order("id")
+    self.all_receivers.where("users.id > #{self.last_receiver_id}").order("users.id")
   end
 
   def done_percentage
