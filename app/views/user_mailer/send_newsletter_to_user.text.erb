@@ -1,23 +1,11 @@
 <% # Coding: UTF-8 %>
-Hallo <%= @user.name || "Interessent" %>,
-
-es gibt Neuigkeiten zum Vorkurs.
-
-<%= @post.title %>
-<%= @post.content %>
-
-<%= @post.created_at %>
-
-
-Freundliche Grüße
-
-ihr Vorkurs Orga-Team
+<%= @newsletter.content %>
 
 --- 
 Sie erhalten diese Nachricht, weil Sie einen Account auf der Seite des Vorkurses
 der Universität Magdeburg haben.
 
 Wenn Sie keine weiteren Informationen zum Vorkurs erhalten möchten, dann können
-Sie ihren Account unter folgender Adresse löschen.
+Sie ihren Account unter folgender Adresse löschen:
 
 <%= root_url %>

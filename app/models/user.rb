@@ -61,9 +61,7 @@ class User < ActiveRecord::Base
 	end
 
   def send_newsletter post
-    if self.present?
-      UserMailer.send_newsletter_to_user(self, post).deliver
-    end
+    UserMailer.send_newsletter_to_user(self, post).deliver
   end
 
   def send_enrollment_confirmation course

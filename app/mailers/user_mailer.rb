@@ -12,10 +12,10 @@ class UserMailer < ActionMailer::Base
     mail to: admin.email, subject: "Neuer Account angelegt: #{user.email}"
   end
 
-  def send_newsletter_to_user user, post
+  def send_newsletter_to_user user, newsletter
     @user = user
-    @post = post
-    mail to: user.email, subject: post.title
+    @newsletter = newsletter
+    mail to: user.email, subject: "[OvGU Vorkurse] #{newsletter.subject}"
   end
 
   def send_enrollment_confirmation_to_user user, course
