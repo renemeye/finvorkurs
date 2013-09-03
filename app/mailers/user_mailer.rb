@@ -1,4 +1,5 @@
 # Coding: UTF-8
+
 class UserMailer < ActionMailer::Base
   default from: Settings.mail.from
 
@@ -13,9 +14,11 @@ class UserMailer < ActionMailer::Base
   end
 
   def send_newsletter_to_user user, newsletter
-    @user = user
-    @newsletter = newsletter
-    mail to: user.email, subject: "[OvGU Vorkurse] #{newsletter.subject}"
+    real_user = User.find(user.id)
+    @user = real_user
+    @content = newsletter.content
+
+    mail to: @user.email, subject: "[OvGU Vorkurse] #{newsletter.subject}"
   end
 
   def send_enrollment_confirmation_to_user user, course

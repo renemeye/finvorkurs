@@ -68,8 +68,8 @@ class User < ActiveRecord::Base
 		UserMailer.new_email_confirmation_mail(self).deliver
 	end
 
-  def send_newsletter post
-    UserMailer.send_newsletter_to_user(self, post).deliver
+  def send_newsletter newsletter
+    UserMailer.send_newsletter_to_user(self, newsletter).deliver
   end
 
   def send_enrollment_confirmation course

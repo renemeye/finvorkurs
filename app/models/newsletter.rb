@@ -34,7 +34,6 @@ class Newsletter < ActiveRecord::Base
   end
 
   def deliver
-
     send_to_users = self.missing_receivers
 
     send_to_users.each do |user|

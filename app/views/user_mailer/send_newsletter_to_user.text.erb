@@ -1,5 +1,30 @@
 <% # Coding: UTF-8 %>
-<%= @newsletter.content %>
+
+<%
+
+  def self.parse_tags(content, user)
+    new_content = content
+
+    if new_content.include? "[user.name]"
+      user_name = (user.name.nil? || user.name == "") ? "" : " #{user.name}"
+      new_content=new_content.gsub("[user.name]", user_name)
+    end
+
+    if new_content.include? "[user.login_link]"
+    	if user.preregistration_auth_token.nil?
+    		login_link = "Für Ihren Account deaktiviert!"
+    	else
+      		login_link = edit_user_url user.preregistration_auth_token
+      	end
+      new_content=new_content.gsub("[user.login_link]", login_link)
+    end
+
+    return new_content
+  end
+
+%>
+
+<%= parse_tags(@content,@user) %>
 
 --- 
 Sie erhalten diese Nachricht, weil Sie einen Account auf der Seite des Vorkurses
