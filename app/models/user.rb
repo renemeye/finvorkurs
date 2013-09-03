@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
   validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
 
+  scope :without_degree_programs, where("users.id not in (SELECT user_id FROM degree_programs_users)")
+
 
 	#self defined version of has_secure_password in order to have an :unless at the validations
 	require 'bcrypt'
@@ -164,5 +166,4 @@ class User < ActiveRecord::Base
     end
     return val
   end
-
 end
