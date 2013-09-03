@@ -28,4 +28,10 @@ class UserMailer < ActionMailer::Base
 		@user = user
 		mail to: user.email, subject: "[OvGU Vorkurse] Bestätigung der E-Mail-Adresse"
 	end
+
+  def send_preregistration_login_mail user
+    @user = user
+    mail to: user.email, subject: "[OvGU Vorkurse] Link zum Login"
+  end
+
 end

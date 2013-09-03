@@ -9,9 +9,10 @@ FinVorkurs::Application.routes.draw do
     get "signup" => "users#new", :as => "signup"
     get "legal" => "legal#index", :as => "legal"
 
-    resources :users, 
+    resources :users,
               :sessions, 
-              :password_resets, 
+              :password_resets,
+              :preregister_logins,  
               :posts,
               :logs,
               :schedules,

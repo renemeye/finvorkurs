@@ -1,0 +1,15 @@
+<% # Coding: UTF-8 %>
+Hallo,
+<% if Settings.mode == "preregistration" %>
+mit dem folgenden Link, können Sie Ihre Angaben ändern oder Ihren Account löschen:
+<% else %>
+mit dem folgenden Link können Sie ihren Account vervollständigen, die Selbsteinschätzungstests durchführen und sich für die Kurse Anmelden:
+<% end %>
+
+<%=edit_user_url @user.preregistration_auth_token %> 
+
+viele Grüße
+
+
+Ihr Vorkurs Team
+

@@ -54,6 +54,12 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  def send_preregistration_login_mail
+    generate_token :preregistration_auth_token
+    self.save!
+    UserMailer.send_preregistration_login_mail(self).deliver
+  end
+
   def send_new_user_notification user
     UserMailer.new_user_notification(self, user).deliver
   end
