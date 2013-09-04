@@ -3,7 +3,7 @@ Hallo,
 vielen Dank, dass Sie sich für die Vorkurse an der Otto-von-Guericke-Universität Magdeburg interessieren.
 
 <% if @user.degree_programs.count > 0 %>
-Wir haben ihr Interesse an den folgenden Studiengängen aufgenommen:
+Wir haben Ihr Interesse an den folgenden Studiengängen aufgenommen:
 	<% @user.degree_programs.each do |program| %>
 	* <%=program.name%> (<%=program.faculty.name%>)
 	<% end %>
@@ -13,9 +13,9 @@ Derzeit haben Sie noch kein Interesse an bestimmten Studiengängen angemeldet.
 
 <% if Settings.mode == "preregistration" %>
 Dieses Interesse können Sie natürlich jederzeit ändern oder wiederrufen. Wir würden Sie im folgenden allerdings gerne über weitere Neuigkeiten und Ankündigungen zu den Vorkursen auf dem laufenden halten. 
-Wenn Sie dies möchten, dann bestätigen Sie bitte die Gültigkeit ihrer E-Mail-Adresse mit dem folgenden Link:
+Wenn Sie dies möchten, dann bestätigen Sie bitte die Gültigkeit Ihrer E-Mail-Adresse mit dem folgenden Link:
 <% else %>
-Bitte vervollständigen Sie ihre Anmeldung unter folgendem Link:
+Bitte vervollständigen Sie Ihre Anmeldung unter folgendem Link:
 <% end %>
 
 <%=edit_user_url @user.preregistration_auth_token %> 
