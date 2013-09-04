@@ -1,6 +1,6 @@
 <section id="password_reset">
 <h1>Noch kein Passwort?</h1>
-<p>Nennen Sie ihre E-Mail-Adresse und wir senden ihnen eine E-Mail mit weiteren Instruktionen:</p>
+<p>Nennen Sie Ihre E-Mail-Adresse und wir senden Ihnen eine E-Mail mit weiteren Instruktionen:</p>
 <%= form_tag preregister_logins_path, :method => :post do %>
   <%= email_field_tag :email, params[:email], :placeholder => "E-Mail" %>
   <%= submit_tag "Sende E-Mail" %>

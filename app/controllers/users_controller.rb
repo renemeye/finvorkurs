@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 			@user.send_email_confirmation_mail
       send_notification_to_admins @user if Settings.administration.send_new_user_registered_notification
       url = (params[:redirect_to].nil?)? root_url : params[:redirect_to]["url"]
-      redirect_to url, :notice => "Vielen Dank für ihr Interesse. Bitte sehen Sie in ihr Postfach und bestätigen Sie ihre E-Mail-Adresse."
+      redirect_to url, :notice => "Vielen Dank für Ihr Interesse. Bitte sehen Sie in Ihr Postfach und bestätigen Sie Ihre E-Mail-Adresse."
     else
       render "new"
     end
