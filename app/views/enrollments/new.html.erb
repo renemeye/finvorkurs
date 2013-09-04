@@ -10,7 +10,7 @@
     </div>
   <% end %>
   <%= fields_for @user do |u| %>
-    <%= u.label :name, "Bitte ergänzen Sie ihren Vor- und Nachnamen" %>
+    <%= u.label :name, "Bitte ergänzen Sie Ihren Vor- und Nachnamen" %>
     <%= u.text_field :name, :placeholder => "Name" %>
   <% end %>
   <%= f.submit "verbindlich anmelden" %>
