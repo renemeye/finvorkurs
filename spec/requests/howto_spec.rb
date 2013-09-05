@@ -7,7 +7,8 @@ describe "howto" do
       user = create(:user)
 
       visit root_url
-      page.should have_content("Account erstellen/umwandeln")
+      page.should have_content("Neuen Account erstellen")
+      page.should have_content("Vorregistriert, aber noch kein Passwort?")
 
       login_as user
       visit root_url
@@ -24,7 +25,8 @@ describe "howto" do
     login_as user
 
     visit root_url
-    page.should_not have_content("Account erstellen/umwandeln")
+    page.should_not have_content("Neuen Account erstellen")
+    page.should_not have_content("Vorregistriert, aber noch kein Passwort?")
     page.should have_content("Hallo,")
 
     a_name = "Paul Riegel"
