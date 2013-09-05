@@ -75,6 +75,21 @@
 			right:-5px;
 		}
 	}
+
+	.step3 {
+		p {
+			margin-bottom: 5px;
+		}
+
+		p.fail {
+			margin-bottom: inherit;
+		}
+
+		ul {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
 }
 
 @media screen and (max-width: 835px) {

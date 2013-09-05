@@ -18,20 +18,21 @@
 		<h2>Schritt 3 <%if(@registered_for_courses)%><span class='check'>&#x2714;</span><% end %></h2>
 
 		<% if @registered_for_courses %>
-			<p>Angemeldet zu den Kursen:</p>		
-			<ul>
-				<% @user.courses.each do |course|%>
-					<li><%=course.course_name%></li>
-				<% end %>
-			</ul>
-			<p>Ist ihnen ein Fehler unterlaufen?<br/>
-			<%=link_to "Abmeldungen", edit_user_path(@user), class:"btn"%></p>
+			<p class="registered">Angemeldet zu den Kursen:
+				<ul>
+					<% @user.courses.each do |course|%>
+						<li><strong><%=course.course_name%></strong></li>
+					<% end %>
+				</ul>
+			</p>
+			<p class="fail">
+			 <%=link_to "Abmeldungen auf der Profilseite", edit_user_path(@user)%></p>
 
 			<% if @unregistered_courses.count > 0 %>
-				<p>Sie können sich noch immer anmelden für:</p>
+				<p class="stillregister">Zusätzlich anmelden für:</p>
 			<% end %>
 		<% else %>
-			<p>Anmeldung zu den Kursen:</p>
+			<p class="register">Anmeldung zu den Kursen:</p>
 		<% end %>
 		
 		<% if @unregistered_courses.count > 0 %>
@@ -73,11 +74,11 @@
 				<% end %>
 				
 			<% end %>
-			<label class="Spezialisierungskurs_level"><strong>Kurse der Fakultät für Informatik</strong>: <a href="http://vorkurs.farafin.de">vorkurs.farafin.de</a></label>
 			<button <%=(@disabled) ?"disabled=\"disabled\" " :""%> type="submit" class="btn btn-primary">
 			  Verbindlich anmelden
 			</button>
 		<% end %>
+		<label class="Spezialisierungskurs_level" style="margin-top:5px"><strong>Kurse der Fakultät für Informatik</strong>: <a href="http://vorkurs.farafin.de">vorkurs.farafin.de</a></label>
 
 	<% end %>
 
