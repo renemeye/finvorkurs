@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true, :unless => Proc.new { |user| user.preregistered? }
   validates :email, :uniqueness => true
   validates :email, format: {with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: 'Ungültige E-Mail-Adresse'}
-  validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
+ # validates :name, presence: true, :unless => proc { |u| u.courses.empty? }
 
   scope :without_degree_programs, where("users.id not in (SELECT user_id FROM degree_programs_users)")
 
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def send_preregistration_login_mail
-    generate_token :preregistration_auth_token
+    self.generate_token :preregistration_auth_token
     self.save!
     UserMailer.send_preregistration_login_mail(self).deliver
   end
