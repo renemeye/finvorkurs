@@ -3,10 +3,14 @@
     <h1><%=editable_text("courses.title")%></h1>
     <%=editable_text("courses.description")%>
   </div>
-<% @courses.each do |course| %>
-  <div class="course">
-    <h2><%= course.course_name %></h2>
-    <%=course.description %>
+<% @course_levels.each do |course_level, courses| %>
+  <div class="course_level">
+  	<% courses.each do |course| %>
+	  	<div class="course">
+	    	<h2><%= course.course_name %></h2>
+			<p><%=course.description %></p>
+		</div>
+	<% end %>
   </div>
   <% end %>
 </section>

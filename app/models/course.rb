@@ -15,4 +15,8 @@ class Course < ActiveRecord::Base
   	return Course.select(:course_level).uniq.collect{|c|c.course_level}
   end
 
+  def self.by_level
+    return Course.all.group_by{|c|c.course_level}
+  end
+
 end

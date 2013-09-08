@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_filter :authenticate_admin!, only: [:show]
   def index
     @user = current_user
-    @courses = Course.all
+    @course_levels = Course.by_level
   end
 
   def show
