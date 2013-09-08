@@ -47,6 +47,10 @@ class VorkursTest < ActiveRecord::Base
 		next_question && [self, next_question]
   	end
 
+  	def result user
+  		user.test_result self
+  	end
+
 	
 	def markdown_description
    		@@markdown.render(self.description)

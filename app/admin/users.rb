@@ -44,6 +44,27 @@ ActiveAdmin.register User do
       end
     end
 
+    VorkursTest.all.each do |test|
+      column "#{test.name}" do |user|
+        if user.completed_test? test
+          number_to_percentage(user.test_result(test), precision: 1) 
+        elsif user.started_test? test
+          "not finished"
+        else
+          "-"
+        end
+
+      end
+
+      column "#{test.name}" do |user|
+        if user.started_test? test
+          (user.test_duration test)
+        else
+          "-"
+        end
+      end
+    end
+
     column 'Paid' do |user|
       if user.paid?
         link_to 'paid', pay_admin_user_path(user), method: :put

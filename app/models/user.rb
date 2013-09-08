@@ -1,10 +1,11 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
 
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
   has_many :replies, dependent: :destroy
-  has_many :answers, through: :replies, :select => :"answers.*, replies.voted_as_correct"
+  has_many :answers, through: :replies, :select => :"answers.*, replies.voted_as_correct, replies.created_at AS answered_at"
   has_many :questions, through: :answers
   has_many :test_results, dependent: :destroy
   has_many :groups, through: :enrollments
@@ -121,6 +122,11 @@ class User < ActiveRecord::Base
 
   def message
     "#{self.email} has created an Account"
+  end
+
+  def test_duration test
+    answers=self.answers_for(test).order(:answered_at)
+    return distance_of_time_in_words(Time.parse(answers.last.answered_at),Time.parse(answers.first.answered_at))
   end
 
 	#Define user? admin? tutor? method
