@@ -42,6 +42,17 @@ class User < ActiveRecord::Base
 		:preregistered => 0
 	}	
 
+  def name
+    if self[:name].nil? || self[:name] == ""
+      return email
+    end
+    return self[:name]
+  end
+
+  def display_name
+    "#{name} <#{email}>"
+  end
+
   def generate_token column
     begin
       self[column] = SecureRandom.urlsafe_base64

@@ -12,7 +12,7 @@ class EnrollmentsController < ApplicationController
     @user = current_user
     if @user.courses << @course && @user.update_attributes(params[:user])
       @user.send_enrollment_confirmation @course
-      Log.new(message: "#{@user.name} enrolled to #{@course.title}").save
+      Log.new(message: "#{@user.display_name} enrolled to #{@course.title}").save
       redirect_to courses_path, :notice => "Ihre Kursanmeldung war erfolgreich. Sie erhalten eine Bestätigung per E-Mail"
     else
       @user.courses.delete @course
@@ -25,7 +25,7 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.find params[:id]
     @enrollment.status = Enrollment::STATES[:unregistered]
     if @enrollment.save
-      Log.new(message: "#{current_user.name} cancelled #{@enrollment.course.title}").save
+      Log.new(message: "#{current_user.display_name} cancelled #{@enrollment.course.title}").save
       redirect_to edit_user_path(current_user), :notice => "Abmeldung erfolgreich"
     end
   end
@@ -43,7 +43,7 @@ class EnrollmentsController < ApplicationController
           @title = (@title == "")? "#{@course.course_name}": "#{@title} und #{@course.course_name}"
 
           @user.send_enrollment_confirmation @course
-          Log.new(message: "#{@user.name} enrolled to #{@course.course_name}").save
+          Log.new(message: "#{@user.display_name} enrolled to #{@course.course_name}").save
         end
       end
     end
