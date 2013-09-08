@@ -9,6 +9,17 @@
 	  	<div class="course">
 	    	<h2><%= course.course_name %></h2>
 			<p><%=course.description %></p>
+			<% if course.from || course.to || course.fee %>
+				<div class="dates">
+					<div class="dates-slide">
+						<dl class="dl-horizontal">
+							<% if course.from %><dt>Start:</dt> <dd><%=time_tag course.from %></dd><% end %>
+							<% if course.to %><dt>Ende:</dt> <dd><%=time_tag course.to %></dd><% end %>
+							<% if course.fee && course.fee > 0 %><dt>Gebühr:</dt> <dd><%=number_to_currency course.fee %></dd><% end %>
+						</dl>
+					</div>
+				</div>
+			<%end%>
 		</div>
 	<% end %>
   </div>

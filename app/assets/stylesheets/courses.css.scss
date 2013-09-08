@@ -25,11 +25,42 @@ section#courses {
       display: table-cell;
       margin: 2.5em;
       padding: 2.5em;
+      padding-bottom: 0.5em;
+      padding-top: 1.5em;
       -webkit-border-radius: 1em;
       border-radius: 1em;
       border-radius: 1em;
       -webkit-box-shadow: inset 0 0 0.5em #ccc;
       box-shadow: inset 0 0 0.5em #ccc;
+
+      .dates {
+        text-align: right;
+        max-width: 400px;
+
+        .dates-slide{
+          width: 100%;
+          max-width: 230px;
+          display: inline-block;
+        }
+
+
+      $width_dt:65px;
+      dl {
+         //width: 60%;
+         max-width: 230px;
+         margin-bottom: 0;
+       }
+       dt {
+         width: $width_dt;
+       }
+       dd {
+         margin-left: $width_dt+1px;
+       }
+      }
+
+      p {
+        margin-bottom: 0;
+      }
     }
   }
 
