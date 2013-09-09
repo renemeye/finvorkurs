@@ -1,6 +1,7 @@
 class PreregisterLoginsController < ApplicationController
 
 	def new
+		@prefilled_email = params[:email]
 	end
 
 	def create
