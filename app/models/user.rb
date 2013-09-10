@@ -137,6 +137,8 @@ class User < ActiveRecord::Base
 
   def test_duration test
     answers=self.answers_for(test).order(:answered_at)
+    if(answers.first.answered_at.is_a? Time)
+      return distance_of_time_in_words(answers.last.answered_at,answers.first.answered_at)
     return distance_of_time_in_words(Time.parse(answers.last.answered_at),Time.parse(answers.first.answered_at))
   end
 
