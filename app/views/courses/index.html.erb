@@ -8,7 +8,7 @@
   	<% courses.each do |course| %>
 	  	<div class="course">
 	    	<h2><%= course.course_name %></h2>
-			<p><%=course.description %></p>
+			<p><%=raw course.markdown_description %></p>
 			<% if course.from || course.to || course.fee %>
 				<div class="dates">
 					<div class="dates-slide">
