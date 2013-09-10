@@ -15,7 +15,7 @@
 		<p><%=link_to "Vervollständigen Sie jetzt Ihren Account!", edit_user_path(@user.id), class:"btn btn-info" %></p>
 	<% elsif @user.registered? || @user.role > User::ROLES[:registered] %>
 		<h2>Schritt 1 <span class="check">&#x2714;</span></h2>
-		Hallo<%=(@user && @user.name)? raw(" <b>#{@user.name}</b>"): ''%>,
+		Hallo<%=(@user && @user[:name])? raw(" <b>#{@user.name}</b>"): ''%>,
 		<p>Registriert mit der E-Mail-Adresse: <b><%=@user.email%></b></p>
 		<p><%=link_to "Hier können Sie Ihre Angaben ändern", edit_user_path(@user.id), class:"btn btn-info" %></p>
 	<% end %>
