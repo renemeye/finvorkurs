@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'mathjax_compatible_markdown'
 
 class Course < ActiveRecord::Base
   has_many :enrollments
