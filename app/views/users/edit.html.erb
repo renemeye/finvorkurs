@@ -15,8 +15,12 @@
 	<%= f.label :degree_program_ids, "Interessiert an"%>
 	<%= f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name, {}, {multiple: true, :'data-placeholder' => "Interessiert an Studiengängen", :'data-class' => "input"} %>
 	<% unless (@user.preregistered? && Settings.mode == "preregistration") %>
+		<br><br>
 		<%= f.label :name, "Name"%>
 		<%= f.text_field :name %>
+
+		<%= f.label :password, "Altes Password" %>
+		<%= f.password_field :old_password %>
 		<%= f.label :password, "Neues Password" %>
 		<%= f.password_field :password %>
 		<%= f.label :password_confirmation, "Neues Password wiederholen" %>
