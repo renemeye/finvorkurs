@@ -39,13 +39,14 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     check_permission!
-    if @user.id == @current_user.id && not(params[:user][:password].nil? || params[:user][:password]=="")
-      unless @user.try(:authenticate, params[:user][:old_password])
+    if @user.id == @current_user.id && not(params[:user][:password].nil? || params[:user][:password]=="") &&(not @user.preregistered?)
+      unless params[:user][:old_password] && @user.try(:authenticate, params[:user][:old_password])
         flash[:alert] = "Das aktuelle Passwort ist falsch."
         render :action => "edit"
         return
       end
     end
+    params[:user].delete(:old_password)
     if @user.update_attributes(params[:user])
       redirect_to root_url, :notice => "Daten geändert."
     else

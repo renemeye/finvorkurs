@@ -19,8 +19,10 @@
 		<%= f.label :name, "Name"%>
 		<%= f.text_field :name %>
 
-		<%= f.label :password, "Altes Password" %>
-		<%= f.password_field :old_password %>
+		<% unless @user.preregistered? %>
+			<%= f.label :password, "Altes Password" %>
+			<%= f.password_field :old_password %>
+		<% end %>
 		<%= f.label :password, "Neues Password" %>
 		<%= f.password_field :password %>
 		<%= f.label :password_confirmation, "Neues Password wiederholen" %>

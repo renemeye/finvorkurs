@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
 	def create
 	  user = User.find_by_email(params[:email])
-	  if user.preregistered?
+	  if user && user.preregistered?
 		  redirect_to new_preregister_login_url(:email => user.email), :alert => "Ihr Account ist vorregistriert. Ihr login ist hier möglich."
 		  return
 	  end
