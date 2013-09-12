@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :test_results, dependent: :destroy
   has_many :groups, through: :enrollments
   has_and_belongs_to_many :degree_programs
+  has_many :faculties, :through => :degree_programs, :uniq => true
 
   attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids, :degree_program_ids, :old_password
   #validates :password, :presence => true, :on => :create, 
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
 
   scope :without_degree_programs, where("users.id not in (SELECT user_id FROM degree_programs_users)")
 
+  # User interested in multiple faculties
+  #Course.first.users.collect{|user| user.faculties.count}.inject(Hash.new(0)) {|h,i| h[i] += 1; h }
 
 	#self defined version of has_secure_password in order to have an :unless at the validations
 	require 'bcrypt'

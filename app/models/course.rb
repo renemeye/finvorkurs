@@ -5,6 +5,7 @@ class Course < ActiveRecord::Base
   has_many :enrollments
   has_many :users, through: :enrollments
   has_many :lectures
+  has_many :groups
 
   @@markdown_options = [
       :autolink=>true, 
