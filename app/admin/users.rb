@@ -147,6 +147,14 @@ ActiveAdmin.register User do
           end
         end
       end
+
+      row "Groups" do
+        ul do
+          user.groups.each do |group|
+            li link_to "#{group.user.name}", :action=>"show", :controller=>"groups", :id=>group.id
+          end
+        end
+      end
     end
   end
 
