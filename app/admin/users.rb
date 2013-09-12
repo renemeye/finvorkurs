@@ -119,7 +119,11 @@ ActiveAdmin.register User do
       row 'Test Results' do
         ul do
           user.test_results.each do |t|
-            li "#{t.course.title} #{t.score}%"
+            if t.course.nil?
+              li "???? #{t.score}%"
+            else
+              li "#{t.course.title} #{t.score}%"
+            end
           end
         end
       end

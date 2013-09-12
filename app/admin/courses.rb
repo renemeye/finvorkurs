@@ -52,4 +52,14 @@ ActiveAdmin.register Course do
     f.actions
   end
 
+  action_item :only => :show do #, :if => proc{ Course.find(params[:id]).groups.each{|g| if g.users.count > 0; return false;  end };  return true } do
+    link_to('Initialize Groups', :action => :initalize_groups)
+  end
+
+  member_action :initalize_groups do
+    course = Course.find(params[:id])
+    Group.initialize_groups_for_course(course)
+    redirect_to({action: :show, id: params[:id]})
+  end
+
 end

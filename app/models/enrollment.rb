@@ -19,8 +19,11 @@ class Enrollment < ActiveRecord::Base
     if self.status == STATES[:unregistered]
       unregistered = "and unregistered #{self.updated_at.strftime("on %d.%m.%Y at %H:%M Uhr")}"
     end
-
-    "#{self.user.display_name} has enrolled to #{self.course.title} #{unregistered}"
+    if self.course.nil?
+      "#{self.user.display_name} has enrolled to ???????????????????? #{unregistered}"
+    else
+      "#{self.user.display_name} has enrolled to #{self.course.title} #{unregistered}"
+    end
   end
 
   def to_s

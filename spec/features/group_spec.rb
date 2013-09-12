@@ -33,6 +33,9 @@ describe Group do
 	    group1.users.should eq([user1Fak1,user2Fak1,user3Fak1])
 	    group2.users.should eq([user4Fak1,user1Fak2,user2Fak2])
 
+		#It should not chreate a new enrollemnt
+	    user1Fak1.enrollments.last.course.should_not eq(nil)
+
   	end
 
 
@@ -68,6 +71,9 @@ describe Group do
 
 	    group1.users.should eq([user1Fak1,user2Fak1,user3Fak1, user4Fak1])
 	    group2.users.should eq([user1Fak2,user2Fak2,user3Fak2])
+
+	    #It should not chreate a new enrollemnt
+	    user1Fak1.enrollments.last.course.should_not eq(nil)
 
   	end
 end
