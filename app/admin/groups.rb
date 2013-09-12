@@ -22,6 +22,14 @@ ActiveAdmin.register Group do
     panel pluralize group.users.count, "User" do
       table_for group.users do |user|
         column :name
+        column :email
+        column "Interessiert an" do |user|
+          ul do
+            user.degree_programs.each do |prog|
+              li "#{prog.degree} #{prog.name} (#{prog.faculty.short_name})"
+            end
+          end
+        end
       end
     end
   end
