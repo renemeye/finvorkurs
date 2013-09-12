@@ -59,7 +59,8 @@ ActiveAdmin.register User do
 
       column "#{test.name}" do |user|
         if user.started_test? test
-          (user.test_duration test)
+          start_end = user.test_duration test;
+          distance_of_time_in_words(start_end[0],start_end[1]);
         else
           "-"
         end

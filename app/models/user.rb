@@ -1,6 +1,5 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  include ActionView::Helpers::DateHelper
 
   has_many :enrollments, dependent: :destroy
   has_many :courses, through: :enrollments
@@ -138,9 +137,9 @@ class User < ActiveRecord::Base
   def test_duration test
     answers=self.answers_for(test).order(:answered_at)
     if(answers.first.answered_at.is_a? Time)
-      return distance_of_time_in_words(answers.last.answered_at,answers.first.answered_at)
+      return [answers.last.answered_at,answers.first.answered_at]
     end
-    return distance_of_time_in_words(Time.parse(answers.last.answered_at),Time.parse(answers.first.answered_at))
+    return [Time.parse(answers.first.answered_at),Time.parse(answers.last.answered_at)]
   end
 
 	#Define user? admin? tutor? method
