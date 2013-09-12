@@ -21,6 +21,39 @@ ActiveAdmin.register User do
     redirect_to({action: :index}, notice: (user.present? ? "#{user.name} is present" : "#{user.name} is not present"))
   end
 
+  csv do
+    column :name
+    column :email
+    column "Courses" do |user|
+      user.courses.count
+    end
+    column 'Present' do |user|
+      user.present?
+    end
+
+    VorkursTest.all.each do |test|
+      column "#{test.name} result in prz" do |user|
+        if user.completed_test? test
+          user.test_result(test)
+        elsif user.started_test? test
+          "not finished"
+        else
+          "-"
+        end
+
+      end
+
+      column "#{test.name} duration (first to last answer)" do |user|
+        if user.started_test? test
+          start_end = user.test_duration test;
+          ((start_end[1]-start_end[0])/1.minute).round
+        else
+          "-"
+        end
+      end
+    end
+  end
+
 
   index do
     h2 do
