@@ -28,13 +28,10 @@ ActiveAdmin.register Group do
 
   form do |f|
     f.inputs 'Group' do
-      if f.object.new_record?
-        f.input :user, collection: Hash[User.where('role >= ?', User::ROLES[:tutor]).map{|user| ["#{user.name} <#{user.email}>",user.id]}], :label => "Tutor"
-        f.input :course
-      else
-        f.input :user
-        f.input :course
-        sorted = Enrollment.all(joins: {user: :test_results}, conditions: {course_id: f.object.course.id, 'test_results.course_id' => f.object.course.id}, order: 'test_results.score ASC')
+      f.input :user, collection: Hash[User.where('role >= ?', User::ROLES[:tutor]).map{|user| ["#{user.name} <#{user.email}>",user.id]}], :label => "Tutor"
+      f.input :course
+      unless f.object.new_record?
+        sorted = Enrollment.all( conditions: {course_id: f.object.course.id}) #Enrollment.all(joins: {user: :test_results}, conditions: {course_id: f.object.course.id, 'test_results.course_id' => f.object.course.id}, order: 'test_results.score ASC')
         f.input :enrollments, as: :check_boxes, collection: sorted + (Enrollment.where('course_id = ?', f.object.course.id) - sorted)
       end
     end
