@@ -9,4 +9,26 @@ class Group < ActiveRecord::Base
   def to_s
     "#{self.course.title}: #{self.user.name}"
   end
+
+  def self.initialize_groups_for_course course
+  	user_per_group = (course.users.count*1.0/course.groups.count).ceil
+
+  	faculty_programs_users = course.get_users_grouped_by_faculty_and_programs
+  	groups = course.groups
+
+  	groups_nr = 0
+
+  	faculty_programs_users.each do |faculty, degreePrograms_users|
+  		degreePrograms_users.each do |degreeProgram, users|
+  			users.each do |user|
+  				if groups[groups_nr].nil?
+  					raise "Too many users for these groups: #{groups.count} users_per_group: #{user_per_group}"
+  				end
+  				groups[groups_nr].users << user
+  				groups_nr = groups_nr + 1 if groups[groups_nr].users.count >= user_per_group
+  			end
+  		end
+  	end
+
+  end
 end

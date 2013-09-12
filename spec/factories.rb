@@ -12,6 +12,10 @@ FactoryGirl.define do
 			role User::ROLES[:admin]
 		end
 
+		factory :tutor do
+			role User::ROLES[:tutor]
+		end
+
 		factory :preregistered do
 			role User::ROLES[:preregistered]
 		end
@@ -58,4 +62,28 @@ FactoryGirl.define do
 	    description "Eine Beschreibung"
 	    course_level "First Course Level"
 	end
+
+	factory :degree_program do
+		name "Program 1"
+		degree "Degree 1"
+		his_id 1
+	end
+
+	factory :group do
+	end
+
+	factory :faculty do
+		name "Faculty 1"
+		short_name "F1"
+
+		factory :faculty_with_programs do
+			ignore do
+				programs_count 4
+			end
+			after(:create) do |faculty, evaluator|
+        		FactoryGirl.create_list(:degree_program, evaluator.programs_count, faculty: faculty)
+      		end
+		end
+	end
+
 end
