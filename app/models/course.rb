@@ -36,4 +36,21 @@ class Course < ActiveRecord::Base
     @@markdown.render(self.description)
   end
 
+  def get_users_grouped_by_faculty_and_programs
+    degreeProgram_users = self.users.group_by{|u| (u.degree_programs.count==0) ? 0 : u.degree_programs.first}
+
+    faculty_degree_programs = Hash.new();
+    degreeProgram_users.each do |program_id, users|
+      faculty = (program_id == 0) ? 0 : DegreeProgram.find(program_id).faculty
+
+      if faculty_degree_programs[faculty].nil?
+        faculty_degree_programs[faculty] = {program_id => users }
+      else
+        faculty_degree_programs[faculty].merge!({program_id => users })
+      end
+    end
+
+    return faculty_degree_programs
+  end
+
 end
