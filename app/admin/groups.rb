@@ -9,6 +9,7 @@ ActiveAdmin.register Group do
     column 'Users' do |group|
       group.users.count
     end
+    column 'Teilnehmer', :readable_group_scope
     column :room
     default_actions
   end
@@ -18,10 +19,13 @@ ActiveAdmin.register Group do
       row :id
       row :user
       row :course
+      row :readable_group_scope
       row "Group Information" do |group|
         raw group.markdown_group_information
       end
     end
+
+
 
     panel pluralize group.users.count, "User" do
       table_for group.users do |user|
