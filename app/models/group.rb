@@ -21,12 +21,12 @@ class Group < ActiveRecord::Base
   	faculty_programs_users.each do |faculty, degreePrograms_users|
   		degreePrograms_users.each do |degreeProgram, users|
   			users.each do |user|
-  				if groups[groups_nr].nil?
-  					raise "Too many users for these groups: #{groups.count} users_per_group: #{user_per_group}"
-  				end
+          #This shouldn't happen
+  				raise "Too many users for these groups!" if groups[groups_nr].nil?
+          
           enrollement = user.enrollments.where(:course_id => course.id).first
           enrollement.update_attribute(:group_id, groups[groups_nr].id)
-  				#groups[groups_nr].users << user
+          #Next group
   				groups_nr = groups_nr + 1 if groups[groups_nr].users.count >= user_per_group
   			end
   		end
