@@ -51,6 +51,7 @@ class Group < ActiveRecord::Base
   end
 
   def markdown_group_information
+    return "" if self.group_information.nil?
     @@markdown.render(self.group_information)
   end
 
