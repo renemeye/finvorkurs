@@ -5,6 +5,19 @@ class Group < ActiveRecord::Base
   has_many :users, through: :enrollments
   accepts_nested_attributes_for :users
   # attr_accessible :title, :body
+  attr_accessible :group_information, :room, :user_id, :course_id, :enrollment_ids
+
+  @@markdown_options = [
+    :autolink=>true, 
+    :disable_indented_code_blocks=>true, 
+    :no_intra_emphasis=>true,
+    :strikethrough=>true,
+    :underline=>true,
+    :lax_spacing => true,
+    :hard_wrap=>true
+  ]
+  @@markdown = Redcarpet::Markdown.new(MathjaxCompatibleMarkdown.new(*@@markdown_options), *@@markdown_options)
+
   
   def to_s
     "#{self.course.title}: #{self.user.name}"
@@ -31,6 +44,9 @@ class Group < ActiveRecord::Base
   			end
   		end
   	end
+  def markdown_group_information
+    @@markdown.render(self.group_information)
+  end
 
   end
 end

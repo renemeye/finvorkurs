@@ -76,4 +76,19 @@ describe Group do
 	    user1Fak1.enrollments.last.course.should_not eq(nil)
 
   	end
+
+  	it "should have markdown group information" do
+  		course1 = Course.create(title: "Kurs 1", course_level: "Grundkurs");
+
+	  	tutor1 = create(:tutor)
+	  	tutor2 = create(:tutor)
+
+	  	group1 = create(:group, :user => tutor1, :course => course1)
+
+	  	group1.group_information = "Hallo **Welt** end";
+
+	  	group1.markdown_group_information.should eq("Hallo <strong>Welt</strong> end");
+
+
+  	end
 end
