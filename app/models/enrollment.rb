@@ -4,6 +4,8 @@ class Enrollment < ActiveRecord::Base
   belongs_to :course
   belongs_to :group
 
+  attr_accessible :user, :course, :group
+
   STATES = {
     :enrolled => 0,
     :unregistered => 1
@@ -19,16 +21,14 @@ class Enrollment < ActiveRecord::Base
     if self.status == STATES[:unregistered]
       unregistered = "and unregistered #{self.updated_at.strftime("on %d.%m.%Y at %H:%M Uhr")}"
     end
-    if self.course.nil?
-      "#{self.user.display_name} has enrolled to ???????????????????? #{unregistered}"
-    else
-      "#{self.user.display_name} has enrolled to #{self.course.title} #{unregistered}"
-    end
+
+    "#{(self.user.nil?) ? "Deleted user" : self.user.display_name} has enrolled to #{(self.course.nil?) ? "Deleted Course" : self.course.title}"
+
   end
 
   def to_s
     #if self.user.test_results.where('course_id = ?', self.course.id).empty?
-      "#{self.user.name} #{self.group}"
+      "#{(self.user.nil?) ? "Deleted User" : self.user.name} #{self.group}"
     #else
     #  "#{self.user.name} (#{self.user.test_results.where('course_id = ?', self.course.id).first.score}% #{self.group})"
     #end
