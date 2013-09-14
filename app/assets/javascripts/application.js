@@ -17,6 +17,7 @@
 //= require chosen-jquery
 //= require jquery.flot
 //= require jquery.flot.resize
+//= require bootstrap
 //= require_tree .
 
 $(document).ready(function() {
