@@ -88,3 +88,5 @@ gem 'mathjax-rails'
 gem 'habtm_generator', :group => :development
 
 gem 'delayed_job_active_record'
+
+gem 'prawn'

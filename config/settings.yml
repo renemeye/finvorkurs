@@ -10,6 +10,7 @@ menu:
   news: true
   programs: true
   downloads: true
+  my_group: true
 
 administration:
   send_new_user_registered_notification: true
