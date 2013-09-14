@@ -51,7 +51,7 @@
                 <span class="caret"></span>
               </a>
             <ul class="dropdown-menu" data-container="body">
-              <% (current_user.groups + current_user.tutor_of).each do |group|%>
+              <% (current_user.groups | current_user.tutor_of).each do |group|%>
                 <li><%= link_to "#{group.user.name} #{(group.room.nil? || group.room=="") ? "" : "(#{group.room})"}", group_path(group) %></li>
                 <% end %>
             </ul>

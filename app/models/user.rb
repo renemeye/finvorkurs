@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def tutor_of
+    return Group.all if self.admin?
     return Group.where(:user_id => self)
   end
 
