@@ -21,7 +21,7 @@ class Course < ActiveRecord::Base
   def course_name
   	return (self.course_level == self.title)?
   		self.title :
-  		"#{self.course_level} für #{self.title}"
+  		"#{self.course_level} \"#{self.title}\""
   end
 
   def self.course_levels
