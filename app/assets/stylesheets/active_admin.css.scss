@@ -24,6 +24,15 @@ body.active_admin #header #utility_nav {
     body.active_admin #header #utility_nav a:hover {
       color: #fff; }
 
+fieldset.newsletterselect {
+  width: 32%;
+  float: left;
+  margin-right: 10px !important;
+  ol {
+    margin-left: 20px !important;
+  }
+}
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //

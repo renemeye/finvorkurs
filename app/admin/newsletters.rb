@@ -12,12 +12,22 @@ ActiveAdmin.register Newsletter do
    		f.input :no_degree_programs, as: :boolean, label: "User die sich für keinen Studiengang interessieren"
     end
 
-    f.inputs "Receivers from specific Degreeprograms" do
+    f.inputs "Degreeprograms", class: "newsletterselect inputs" do
     	size = Faculty.count+DegreeProgram.count
    		f.grouped_collection_select :degree_program_ids, Faculty.order(:name), :degree_programs, :name, :id, :name_and_degree, {}, {multiple: true, :size => size}
 
 	end
-    f.actions
+	f.inputs "Courses", class: "newsletterselect inputs" do
+    	size = Course.count
+   		f.collection_select :course_ids, Course.order(:title), :id, :course_name, {},{multiple: true, :size => size}
+	end
+	f.inputs "Groups", class: "newsletterselect inputs" do
+    	size = Course.count+Group.count
+   		f.grouped_collection_select :group_ids, Course.order(:title), :groups, :course_name, :id, :to_s, {}, {multiple: true, :size => size}
+	end
+	f.inputs "Speichern", class: "newsletterselect inputs" do
+    	f.actions
+    end
   end
 
 	index do
@@ -53,8 +63,22 @@ ActiveAdmin.register Newsletter do
       				column do
 		        		ul do
 		        			div "Total amount of receivers: #{newsletter.all_receivers.count}"
+		        			br
+		        			h4 "DegreePrograms"
 			      			newsletter.degree_programs.each do |program|
 			        			li "#{program.name} (#{program.faculty.short_name}) | #{program.users.count} Users"
+			          		end
+
+			          		br
+			          		h4 "Courses"
+			          		newsletter.courses.each do |course|
+			        			li "#{course.course_name}) | #{course.users.count} Users"
+			          		end
+
+			          		br
+			          		h4 "Groups"
+			          		newsletter.groups.each do |group|
+			        			li "#{group.to_s}) | #{group.users.count} Users"
 			          		end
 		        		end
 		        	end
