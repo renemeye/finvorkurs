@@ -11,7 +11,7 @@
 		<dd><%=(@group.room.blank?) ? "Nicht festgelegt" : @group.room %> <a href="#karte">(Karte)</a></dd>
 
 		<dt>Aktuelle Informationen</dt>
-		<dd><%=(@group.group_information.blank?) ? "Keine Aktuellen Informationen" : raw(@group.markdown_group_information) %></dd>
+		<dd><%=(@group.group_information.blank?) ? "Keine aktuellen Informationen" : raw(@group.markdown_group_information) %></dd>
 
 		<% if @is_tutor %>
 			<dt>Teilnehmer</dt>
