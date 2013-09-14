@@ -1,0 +1,33 @@
+article#my_group {
+  	max-width: 60em;
+  	margin: 0 auto;
+
+	table {
+		ul {
+			margin:0;
+			margin-left: 1em;
+			padding:0;
+		}
+		input {
+			margin: 0;
+		}
+
+		tr.not-present {
+			color: #ccc;
+			a {
+				color: #ccc;
+			}
+		}
+	}
+}
+
+#karte {
+	padding: 1.5em 1em;
+	margin: 0 -1em;
+	width: 100%;
+	img {
+		box-shadow: 0 5px 10px #eee;
+	}
+	margin-left: -14px;
+	margin-right: -14px;
+}

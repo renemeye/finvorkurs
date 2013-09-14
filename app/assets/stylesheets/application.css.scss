@@ -11,6 +11,7 @@ $green: #46a546;
 @import "formtastic";
 @import "chosen";
 @import "home";
+@import "groups";
 @import "bootstrap-arrows";
 
 select#user_degree_program_ids{
@@ -25,17 +26,17 @@ div#user_bar a, div#user_bar a:hover {
   color: #fff;
 }
 
-section#signup, section#login, section#password_reset {
+section#signup, section#login, section#password_reset{
   text-align: center;
   margin-bottom: 6em;
 }
 
 body.ovgu-design{ 
-	header{
+	.header{
 		padding: 1.5em 1em;
 		margin: 0 -1em;
 		box-shadow: 0 5px 10px #eee;
-		overflow: auto;
+		height: 60px;
 
 		a{
 			float: left;
@@ -62,8 +63,25 @@ body.ovgu-design{
 					top: 50%; 
 					height: 1em; 
 					margin-top: -0.5em;
+
+					span.caret {
+						margin-top: 13px;
+						opacity: 0.4;
+					}
 				}
 			}
+
+			ul.dropdown-menu {
+				li {
+					height: inherit;
+					font-size: 0.9em;
+				}
+				text-align: center;
+				margin-top: 12px;
+				padding-top: 15px;
+				margin-left: 30px;
+			}
+
 			line-height: 63px;
 			float: right;
 			width: auto;

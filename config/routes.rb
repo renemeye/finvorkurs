@@ -15,6 +15,7 @@ FinVorkurs::Application.routes.draw do
               :preregister_logins,  
               :posts,
               :logs,
+              :groups,
               :schedules,
               :downloads,
               :static_text

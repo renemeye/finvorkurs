@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     end while User.exists? column => self[column]
   end
 
+  def tutor_of
+    return Group.where(:user_id => self)
+  end
+
   def send_password_reset
     generate_token :password_reset_token
     self.password_reset_sent_at = Time.zone.now
