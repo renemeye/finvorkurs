@@ -2,7 +2,7 @@
 class GroupPdf < Prawn::Document
 	def initialize(current_user, group, tutor, view)
 		super(top_margin: 70, page_size: "A4", info: {
-			:Title => "BLUBBER "
+			:Title => "Unterschriftenliste "
 		})
 
 		@current_user = current_user
