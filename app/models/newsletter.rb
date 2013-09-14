@@ -1,10 +1,13 @@
 class Newsletter < ActiveRecord::Base
-  has_and_belongs_to_many :degree_programs
+  #has_and_belongs_to_many :degree_programs
+  has_many :newsletter_maps
+  #has_many :receiver_groups, :through => :newsletter_maps, :source => :receiver_group
+  has_many :degree_programs, :through => :newsletter_maps, :source => :receiver_group, :source_type => 'DegreeProgram'
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id', :validate => true
   belongs_to :last_receiver, :class_name => 'User', :foreign_key => 'last_receiver_id', :validate => true
-  has_many :users, :through => :degree_programs, :uniq => true
 
   attr_accessible :content, :subject, :degree_program_ids, :all_users, :no_degree_programs
+  has_many :degree_program_users, :through => :degree_programs, :source => :users, :uniq => true
 
   def sent?
   	state == "sent"
