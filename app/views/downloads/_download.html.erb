@@ -3,7 +3,7 @@
   	<span class="date">Vor <%= distance_of_time_in_words_gebeugt(download.created_at, Time.now) %></span>
     <div class="icon"><%= image_tag Icon.for_filename(download.file_url.to_s) %></div>
     <div><h2><%= download.name %></h2></div>
-    <%=link_to "X", download_path(download), :method => :delete, confirm: "#{download.name} wirklich löschen?", class: "btn btn-danger btn-small" %>
+    <%=(@is_allowed_to_upload) ? link_to("X", download_path(download), :method => :delete, confirm: "#{download.name} wirklich löschen?", class: "btn btn-danger btn-small") : "" %>
     
   </article>
 <% end %>

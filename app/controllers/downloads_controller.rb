@@ -16,6 +16,7 @@ class DownloadsController < ApplicationController
 
   def destroy
     authenticate_tutor!
+    
     download=Download.find(params[:id])
     if download && download.destroy
       flash[:notice] = "#{download.name} gelöscht."
