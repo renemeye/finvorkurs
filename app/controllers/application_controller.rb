@@ -23,19 +23,27 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    !!current_user or redirect_to login_url, :notice => "Erst einloggen!"
+    unless !!current_user
+      redirect_to login_url, :notice => "Erst einloggen!"
+      return false
+    end
+    return true
   end
 
   def authenticate_tutor!
-    user = current_user and 
-      user.role >= User::ROLES[:tutor] or 
-        redirect_to login_url, :notice => "Nur für Dozenten!"
+    unless user = current_user and user.role >= User::ROLES[:tutor]
+      redirect_to login_url, :notice => "Nur für Dozenten!"
+      return false
+    end
+    return true
   end
 
   def authenticate_admin!
-    user = current_user and 
-      user.admin? or 
-        redirect_to login_url, :notice => "Nur für Admins!"
+    unless user = current_user and user.admin?
+      redirect_to login_url, :notice => "Nur für Admins!"
+      return false
+    end
+    return true
   end
 
   helper_method :current_user, :authenticate_user!

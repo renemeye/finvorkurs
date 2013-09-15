@@ -1,8 +1,11 @@
+# encoding: utf-8
 class GroupsController < ApplicationController
 	def show
 		@current_user = current_user
 		@group = Group.find(params[:id])
 		@tutor = @group.user
+		return unless members_only!
+
 		@is_tutor = (@current_user == @tutor || @current_user.admin?)
 		respond_to do |format|
 			format.html
@@ -19,24 +22,30 @@ class GroupsController < ApplicationController
 		@group = Group.find(params[:id])
 		@tutor = @group.user
 
-		if not(@current_user == @tutor) && not(@current_user.admin?)
-	    	redirect_to({controller: "home", action: :index})
-	    	return
-	    end
+		return unless authenticate_tutor!
+		return unless members_only!
+
 		@is_tutor = (@current_user == @tutor || @current_user.admin?)
 	end
 
 	def update
 		@group = Group.find(params[:id])
-	    if not(current_user == @group.user) && not(current_user.admin?)
-	    	redirect({action: :show, id: @group.id})
-	    	return
-	    end
+		return unless authenticate_tutor!
+		return unless members_only!
 
     	if @group.update_attributes(params[:group])
     		redirect_to group_path(@group), :notice => "Gespeichert"
     	else
     		render :action => "edit"
     	end
+	end
+
+	private
+	def members_only!
+		if current_user.nil? || not(current_user.admin? || current_user == @group.user || @group.users.include?( current_user))
+			redirect_to login_url, :notice => "Nur für Mitglieder der Gruppe!"
+			return false
+		end
+		return true
 	end
 end
