@@ -27,11 +27,11 @@ class Enrollment < ActiveRecord::Base
   end
 
   def to_s
-    #if self.user.test_results.where('course_id = ?', self.course.id).empty?
+    if self.group
       "#{(self.user.nil?) ? "Deleted User" : self.user.name} #{self.group}"
-    #else
-    #  "#{self.user.name} (#{self.user.test_results.where('course_id = ?', self.course.id).first.score}% #{self.group})"
-    #end
+    else
+      "#{(self.user.nil?) ? "Deleted User" : self.user.name} - #{self.user.degree_programs.collect{|prog| "#{prog.degree} #{prog.name} (#{prog.faculty.short_name})"}.join(", ")}"
+    end
   end
 
 end
