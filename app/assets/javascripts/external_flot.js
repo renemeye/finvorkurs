@@ -55,6 +55,29 @@ redraw_plot = function(index, component) {
 
 $(function(){
 
+    $('.multiple_category_vizualisation').each(function(index, component) {
+        var data = $(component).data('bars');
+        var yaxis_label = $(component).data('yaxis_label');
+        $.plot(component ,data , {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.4,
+                    align: "center"
+                }
+            },
+            xaxis: {
+                mode: "categories",
+                tickLength: 0
+            },
+            yaxis: {
+                axisLabel: yaxis_label,
+                axisLabelUseCanvas: true,
+                axisLabelFontFamily: 'Helvetica'
+            }
+        });
+    });
+
     $('.category_vizualisation').each(function(index, component) {
         var data = $(component).data('bars');
         var yaxis_label = $(component).data('yaxis_label');

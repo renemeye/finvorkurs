@@ -31,6 +31,28 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
         end
+
+        panel "Test results" do
+          h5 "Test result Histogram:"
+          test_result_histogram = VorkursTest.all.collect do |vorkurs_test|
+            counter = [[100,0],[90,0],[80,0],[70,0],[60,0],[50,0],[40,0],[30,0],[20,0],[10,0]]
+            User.all.each do |user|
+              result = vorkurs_test.result user
+              if result > 0
+                counter.each do |c|
+                  if result >= c[0]
+                    c[1] = c[1]+1
+                    break
+                  end
+                end
+              end
+            end
+            counter
+          end
+
+
+          para raw "<div  style=\"height: 300px; width:100%\" class=\"multiple_category_vizualisation\" data-bars='#{test_result_histogram.to_json}'></div>"
+        end
       end
       column do
         panel "Events" do
