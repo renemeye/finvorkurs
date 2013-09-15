@@ -61,6 +61,14 @@ FactoryGirl.define do
 		title "Ein Kurs"
 	    description "Eine Beschreibung"
 	    course_level "First Course Level"
+	    factory :course_with_groups do
+    		ignore do
+				group_count 4
+			end
+			after(:create) do |course, evaluator|
+        		FactoryGirl.create_list(:group, evaluator.group_count, course: course)
+      		end
+		end
 	end
 
 	factory :degree_program do

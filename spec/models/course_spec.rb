@@ -42,4 +42,31 @@ describe Course do
 
   end
 
+  it "should have a list with users in groups and without groups" do
+    course1 = create(:course_with_groups)
+
+    old_user1 = create(:user)
+    old_user2 = create(:user)
+    old_user3 = create(:user)
+
+    new_user1 = create(:user)
+    new_user2 = create(:user)
+
+    old_user1.courses << course1
+    old_user2.courses << course1
+    old_user3.courses << course1
+
+    Group.initialize_groups_for_course(course1)
+
+    course1.users_with_group.should eq([old_user1, old_user2, old_user3])
+    course1.users_without_group.should eq([])
+
+    new_user1.courses << course1
+    new_user2.courses << course1
+
+    course1.users_with_group.should eq([old_user1, old_user2, old_user3])    
+    course1.users_without_group.should eq([new_user1,new_user2])
+
+  end
+
 end
