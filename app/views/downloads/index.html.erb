@@ -1,7 +1,17 @@
-<section class="centered">
+<section id="downloads" class="centered">
   <h1>Downloads</h1>
+  <%="Es wurden noch keine Dokumente zur Verfügung gestellt." if @downloads.empty?%>
   <% @downloads.each do |download| %>
     <%= render download %>
   <% end %>
 </section>
 
+<section id="uploads" class="centered">
+	<h2>Uploads</h2>
+	<%=form_for @upload do |f| %>
+		<%=f.label :name do %>
+			Name: <%=f.text_field :name %>
+		<%end%>
+		<%=f.submit "Upload"%>
+	<% end %>
+</section>

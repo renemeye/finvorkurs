@@ -26,6 +26,12 @@ class ApplicationController < ActionController::Base
     !!current_user or redirect_to login_url, :notice => "Erst einloggen!"
   end
 
+  def authenticate_tutor!
+    user = current_user and 
+      user.role >= User::ROLES[:tutor] or 
+        redirect_to login_url, :notice => "Nur für Dozenten!"
+  end
+
   def authenticate_admin!
     user = current_user and 
       user.admin? or 
