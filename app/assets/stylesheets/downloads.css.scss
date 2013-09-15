@@ -20,7 +20,12 @@
 		  	padding-bottom: 1px;
 		  	margin-bottom: 4px;
 		  	@include box-shadow(rgba(0,0,0,0.05) -1px 1px 1px);
+		}
 
+		a.btn {
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
 		}
 
 		h2 {
@@ -36,6 +41,7 @@
 				margin-left: -4px;
 				margin-right: 5px;
 			}
+
 		}
 		clear: both;
 	}
