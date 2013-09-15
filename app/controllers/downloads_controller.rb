@@ -1,6 +1,6 @@
 class DownloadsController < ApplicationController
   def index
-    @downloads = Download.all
+    @downloads = Download.order("created_at DESC")
     @upload = Download.new
   end
 

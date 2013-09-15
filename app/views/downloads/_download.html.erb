@@ -1,6 +1,7 @@
 <%= link_to download.file_url.to_s do %>
   <article class="well">
-    <div><%= image_tag Icon.for_filename(download.file_url.to_s) %></div>
+  	<span class="date"><%=download.created_at.strftime("%d.%m.%Y %H:%MUhr")%></span>
+    <div class="icon"><%= image_tag Icon.for_filename(download.file_url.to_s) %></div>
     <div><h2><%= download.name %></h2></div>
   </article>
 <% end %>

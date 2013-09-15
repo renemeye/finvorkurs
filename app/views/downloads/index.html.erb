@@ -6,15 +6,20 @@
   <% end %>
 </section>
 
-<section id="uploads" class="centered">
-	<h2>Uploads</h2>
+<section id="uploads" class="centered well">
+	<h2>Bereitstellen</h2>
 	<%=form_for @upload, :html => {:multipart => true} do |f| %>
+	<dl class="dl-horizontal">
 		<%=f.label :name do %>
-			Name: <%=f.text_field :name %>
+			<dt>Name:</dt> <dd><%=f.text_field :name %></dd>
 		<%end%>
 		<%=f.label :file do %>
-			file: <%=f.file_field :file %>
+			<dt>Datei:</dt> <dd><%=f.file_field :file %></dd>
 		<%end%>
-		<%=f.submit "Upload"%>
+		<%=f.label :remote_file_url do %>
+			<dt>Von URL laden:</dt> <dd><%=f.text_field :remote_file_url %></dd>
+		<%end%>
+		<dd><%=f.submit "Upload"%></dd>
+	</dl>
 	<% end %>
 </section>
