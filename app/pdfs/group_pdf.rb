@@ -2,7 +2,12 @@
 class GroupPdf < Prawn::Document
 	def initialize(current_user, group, tutor, view)
 		super(top_margin: 70, page_size: "A4", info: {
-			:Title => "Unterschriftenliste "
+			:Title => "Unterschriftenliste",
+			:Author => "#{current_user.name}",
+			:Creator => "Vorkursportal der OvGU",
+			:Producer => "finvorkurs | http://github.com/renemeye/finvorkurs",
+			:CreationDate => Time.now
+			
 		})
 
 		@current_user = current_user
@@ -51,6 +56,13 @@ class GroupPdf < Prawn::Document
 
 		formatted_text [{text:"#{(@group.room.blank?) ? "Nicht festgelegt" : @group.room}"}], :indent_paragraphs => 10
 	end
+
+	def group_information
+		formatted_text [{text:"Gruppen Informationen", styles: [:bold]}]
+		move_down 3
+		formatted_text [{text:"#{(@group.group_information.blank?) ? "Keine Aktuellen Informationen" : @group.group_information}"}], :indent_paragraphs => 10
+	end
+
 
 	def users
 		table user_rows do
