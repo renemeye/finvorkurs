@@ -28,7 +28,7 @@ class GroupPdf < Prawn::Document
 		#group_information
 			move_down 20
 		users
-		#footer
+		footer
 	end
 
 	def header
@@ -38,7 +38,12 @@ class GroupPdf < Prawn::Document
 		fill_color "7a003f"
 		fill_rectangle [-36,806], 595, 13
 		fill_color "000000"
+
 		formatted_text_box [{text: "Unterschriftenliste | #{Time.new.strftime("%d.%m.%Y")}", color: "FFFFFF", kerning: true, background_color: "FF0000"}], at: [430,803], width: 200, size: 9
+	end
+
+	def footer
+		image "#{Rails.root}/vendor/assets/images/bmbf.jpg", at: [440,50], :width => 100
 	end
 
 	def heading
