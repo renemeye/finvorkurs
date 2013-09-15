@@ -25,8 +25,6 @@ ActiveAdmin.register Group do
       end
     end
 
-
-
     panel pluralize group.users.count, "User" do
       table_for group.users do |user|
         column :name
@@ -49,8 +47,8 @@ ActiveAdmin.register Group do
       f.input :room
       f.input :group_information, :hint => "Markdown support"
       unless f.object.new_record?
-        sorted = Enrollment.all( conditions: {course_id: f.object.course.id}) #Enrollment.all(joins: {user: :test_results}, conditions: {course_id: f.object.course.id, 'test_results.course_id' => f.object.course.id}, order: 'test_results.score ASC')
-        f.input :enrollments, as: :check_boxes, collection: sorted + (Enrollment.where('course_id = ?', f.object.course.id) - sorted)
+        users_in_this_or_without_group = Enrollment.from("(#{f.object.enrollments.to_sql} UNION #{f.object.course.enrollments.where("enrollments.group_id IS ?",nil).to_sql}) AS enrollments")
+        f.input :enrollments, as: :check_boxes,  collection: users_in_this_or_without_group
       end
     end
     f.actions

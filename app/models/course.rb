@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   has_many :users, through: :enrollments
   has_many :lectures
   has_many :groups
+  has_many :users_with_group, :through => :groups, :source => :users
 
   @@markdown_options = [
       :autolink=>true, 
@@ -51,6 +52,10 @@ class Course < ActiveRecord::Base
     end
 
     return faculty_degree_programs
+  end
+
+  def users_without_group
+    self.users.where("users.id NOT IN (#{self.users_with_group.select("users.id").to_sql})")
   end
 
 end
