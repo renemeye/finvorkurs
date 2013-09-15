@@ -89,4 +89,7 @@ gem 'habtm_generator', :group => :development
 
 gem 'delayed_job_active_record'
 
-gem 'prawn'
+gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'#, :tag => '1.0.0.rc2'
+
+gem "carrierwave"
+gem 'rails-file-icons'

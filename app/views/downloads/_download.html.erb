@@ -1,5 +1,6 @@
-<%= link_to download.url do %>
+<%= link_to download.file_url.to_s do %>
   <article class="well">
-    <h2><%= download.name %></h2>
+    <div><%= image_tag Icon.for_filename(download.file_url.to_s) %></div>
+    <div><h2><%= download.name %></h2></div>
   </article>
 <% end %>

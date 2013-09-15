@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/prawnpdf/prawn.git
+  revision: ffcb42961f9023027f98d992c5c96b71a70e218e
+  specs:
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
   remote: git://github.com/renemeye/best_in_place.git
   revision: 0f907e298dc008d62347993666587634b795138d
   specs:
@@ -70,6 +80,10 @@ GEM
     capybara-webkit (1.0.0)
       capybara (~> 2.0, >= 2.0.2)
       json
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
     choice (0.1.6)
     chosen-rails (0.13.2)
       coffee-rails (>= 3.2)
@@ -211,9 +225,6 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -245,6 +256,7 @@ GEM
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
+    rails-file-icons (0.0.1)
     rails-i18n (0.7.4)
       i18n (~> 0.5)
     rails_config (0.3.3)
@@ -339,6 +351,7 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   capybara-webkit
+  carrierwave
   chosen-rails
   coffee-rails
   compass-rails
@@ -355,11 +368,12 @@ DEPENDENCIES
   jquery-rails (= 2.3.0)
   mathjax-rails
   mysql2
-  prawn
+  prawn!
   rack-mini-profiler
   rack_session_access
   rails
   rails-erd
+  rails-file-icons
   rails-i18n
   rails_config
   rake

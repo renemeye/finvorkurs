@@ -8,9 +8,12 @@
 
 <section id="uploads" class="centered">
 	<h2>Uploads</h2>
-	<%=form_for @upload do |f| %>
+	<%=form_for @upload, :html => {:multipart => true} do |f| %>
 		<%=f.label :name do %>
 			Name: <%=f.text_field :name %>
+		<%end%>
+		<%=f.label :file do %>
+			file: <%=f.file_field :file %>
 		<%end%>
 		<%=f.submit "Upload"%>
 	<% end %>
