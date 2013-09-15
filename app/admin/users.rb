@@ -31,6 +31,21 @@ ActiveAdmin.register User do
       user.present?
     end
 
+    Course.all.each do |course|
+      column "Group #{course.course_name}" do |user|
+        group = user.groups.where("enrollments.course_id = (?)",course.id)
+        group.first || "-" 
+      end
+      column "Room #{course.course_name}" do |user|
+        group = user.groups.where("enrollments.course_id = (?)",course.id)
+        if group.first
+          group.first.room || "-"
+        else
+          "-"
+        end
+      end
+    end
+
     VorkursTest.all.each do |test|
       column "#{test.name} result in prz" do |user|
         if user.completed_test? test
