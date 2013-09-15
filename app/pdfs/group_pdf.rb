@@ -25,7 +25,7 @@ class GroupPdf < Prawn::Document
 		heading
 		information
 			move_down 7
-		group_information
+		#group_information
 			move_down 20
 		users
 		#footer
