@@ -1,6 +1,6 @@
 <%= link_to download.file_url.to_s do %>
   <article class="well">
-  	<span class="date"><%=download.created_at.strftime("%d.%m.%Y %H:%MUhr")%></span>
+  	<span class="date">Vor <%= distance_of_time_in_words_gebeugt(download.created_at, Time.now) %></span>
     <div class="icon"><%= image_tag Icon.for_filename(download.file_url.to_s) %></div>
     <div><h2><%= download.name %></h2></div>
   </article>

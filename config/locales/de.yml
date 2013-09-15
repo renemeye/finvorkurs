@@ -1,0 +1,40 @@
+de:
+  datetime:
+    distance_in_words_gebeugt:
+      # Satzbau: "Vor einer halben Minute"
+      half_a_minute: 'einer halben Minute'
+      less_than_x_seconds:
+        zero: 'weniger als einer Sekunde'
+        one: 'weniger als einer Sekunde'
+        other: 'weniger als %{count} Sekunden'
+      x_seconds:
+        one: 'einer Sekunde'
+        other: '%{count} Sekunden'
+      less_than_x_minutes:
+        zero: 'weniger als einer Minuten'
+        one: 'circa einer Minuten'
+        other: 'weniger als %{count} Minuten'
+      x_minutes:
+        one: 'einer Minute'
+        other: '%{count} Minuten'
+      about_x_hours:
+        one: 'etwa einer Stunde'
+        other: 'etwa %{count} Stunden'
+      x_days:
+        one: 'einem Tag'
+        other: '%{count} Tagen'
+      about_x_months:
+        one: 'etwa einem Monat'
+        other: 'etwa %{count} Monaten'
+      x_months:
+        one: 'einem Monat'
+        other: '%{count} Monaten'
+      about_x_years:
+        one: 'etwa einem Jahr'
+        other: 'etwa %{count} Jahren'
+      over_x_years:
+        one: 'mehr als einem Jahr'
+        other: 'mehr als %{count} Jahren'
+      almost_x_years:
+        one: 'fast einem Jahr'
+        other: 'fast %{count} Jahren'
