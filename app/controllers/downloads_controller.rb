@@ -1,7 +1,9 @@
 class DownloadsController < ApplicationController
   def index
+  	authenticate_user!
     @downloads = Download.order("created_at DESC")
     @upload = Download.new
+    @is_allowed_to_upload = current_user && current_user.role >= User::ROLES[:tutor]
   end
 
   def create
