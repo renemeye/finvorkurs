@@ -1,0 +1,30 @@
+<section id="video" class="centered">
+
+	<h3><%=Time.xmlschema(@manifest[:recording_time]).strftime("%d.%m.%Y")%></h3>
+	<h1><%=@manifest[:presenter]%></h1>
+	<h2><%=@manifest[:title]%></h2>
+	<%=link_to "Zum Universitätsportal", @video[:mediaweb_url]%>
+
+	<%= videojs_rails sources: { mp4: @manifest[:location]}, width:"560", height:"315" %>
+
+	<div id="slidescarousel" class="carousel slide" data-interval="false">
+	  <ol class="carousel-indicators">
+	  	<% @manifest[:slides].each_with_index do |slide, index| %>
+		    <li data-target="#slidescarousel" data-slide-to="0" <%="class='active'" if index == 0 %>></li>
+		<%end%>
+	  </ol>
+	  <!-- Carousel items -->
+	  <div class="carousel-inner">
+	  	<% @manifest[:slides].each_with_index do |slide, index| %>
+		    <div id="slide-<%=index%>" class="<%="active" if index == 0 %> item one-slide" data-start-time="<%=slide[:time]%>"><img src="<%=slide[:url]%>"></div>
+	    <% end %>
+	  </div>
+	  <!-- Carousel nav -->
+	  <a class="carousel-control left" href="#slidescarousel" data-slide="prev">&lsaquo;</a>
+	  <a class="carousel-control right" href="#slidescarousel" data-slide="next">&rsaquo;</a>
+	</div>
+
+	<div id="time">Test</div>
+	<div id="slide-id">Test</div>
+
+</section>
