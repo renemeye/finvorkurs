@@ -1,7 +1,7 @@
 <%= link_to video.mediaweb_url.to_s do %>
   <article class="well">
   	<span class="date">Vor <%= distance_of_time_in_words_gebeugt(video.created_at, Time.now) %></span>
-    <div class="icon"><%= image_tag Icon.for_filename(video.mediaweb_url.to_s) %></div>
+    <div class="icon"><%= image_tag Icon.for_filename(video.manifest[:file_name].to_s) %></div>
     <div><h2><%= video.manifest[:title] %></h2></div>
     <%=(@is_allowed_to_upload_videos) ? link_to("X", video_path(video), :method => :delete, confirm: "\"#{video.manifest[:title]}\" wirklich löschen?", class: "btn btn-danger btn-small") : "" %>
     
