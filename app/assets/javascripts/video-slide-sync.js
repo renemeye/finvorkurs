@@ -32,6 +32,7 @@ $(function() {
 
           //Here the change of slides and timer happens
           player.on("timeupdate", timeupdate);
+          
      }, 4000);
 
 
