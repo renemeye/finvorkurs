@@ -10,8 +10,8 @@ class Video < ActiveRecord::Base
 	def cardPresentationId url = nil
 		url ||= self.mediaweb_url
 		
-		match = /Mediasite\/Play\/(?<id>[^?]+)/.match(mediaweb_url)
-		throw "This is not a correct Mediaweb URL" if match.nil?
+		match = /Mediasite\/Play\/(?<id>[^?]+)/.match(url)
+		throw StandardError, "This is not a correct Mediaweb URL" if match.nil?
 
 		cardPresentationId = match[:id]
 
