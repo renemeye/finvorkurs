@@ -93,3 +93,5 @@ gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'#, :tag => '1.0.0.rc2'
 
 gem "carrierwave"
 gem 'rails-file-icons'
+
+gem 'videojs_rails'
