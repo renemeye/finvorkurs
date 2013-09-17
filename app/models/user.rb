@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :degree_programs
   has_many :faculties, :through => :degree_programs, :uniq => true
 
-  attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids, :degree_program_ids, :old_password, :present
+  attr_accessible :email, :name, :password, :password_confirmation, :role, :group_ids, :degree_program_ids, :old_password, :present, :course_ids
   #validates :password, :presence => true, :on => :create, 
   validates :password_digest, presence: true, :unless => Proc.new { |user| user.preregistered? }
   validates :email, :uniqueness => true

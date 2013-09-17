@@ -180,7 +180,9 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :role, as: :select, collection: User::ROLES, :hint => "Unless preregistered is chosen, the user need to have a password.", :include_blank => false
-    end
+
+      f.input :courses, as: :check_boxes
+   end
     f.actions
   end
 end
