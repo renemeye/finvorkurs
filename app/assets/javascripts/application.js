@@ -19,6 +19,7 @@
 //= require jquery.flot.resize
 //= require bootstrap
 //= require video
+//= require video-slide-sync
 //= require_tree .
 
 $(document).ready(function() {
