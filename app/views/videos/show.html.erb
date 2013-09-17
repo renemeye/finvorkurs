@@ -5,7 +5,7 @@
 	<h2><%=@manifest[:title]%></h2>
 	<%=link_to "Zum Universitätsportal", @video[:mediaweb_url]%>
 
-	<%= videojs_rails sources: { mp4: @manifest[:location]}, width:"560", height:"315" %>
+	<%= videojs_rails sources: { mp4: @manifest[:location], webm: @video[:webm_url]}, width:"560", height:"315" %>
 
 	<div id="slidescarousel" class="carousel slide" data-interval="false">
 	  <ol class="carousel-indicators">
