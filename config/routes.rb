@@ -18,6 +18,7 @@ FinVorkurs::Application.routes.draw do
               :groups,
               :schedules,
               :downloads,
+              :video,
               :static_text
 
     resources :vorkurs_tests do
