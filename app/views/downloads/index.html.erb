@@ -4,11 +4,18 @@
   <% @downloads.each do |download| %>
     <%= render download %>
   <% end %>
+
+
+  <h1>Videos</h1>
+  <%="Es wurden noch keine Videos zur Verfügung gestellt." if @videos.empty?%>
+  <% @videos.each do |video| %>
+    <%= render "downloads/video", video:video%>
+  <% end %>
 </section>
 
 <% if @is_allowed_to_upload %>
 	<section id="uploads" class="centered well">
-		<h2>Bereitstellen</h2>
+		<h2>Dokument Bereitstellen</h2>
 		<%=form_for @upload, :html => {:multipart => true} do |f| %>
 		<dl class="dl-horizontal">
 			<%=f.label :name do %>
@@ -19,6 +26,20 @@
 			<%end%>
 			<%=f.label :remote_file_url do %>
 				<dt>Von URL laden:</dt> <dd><%=f.text_field :remote_file_url %></dd>
+			<%end%>
+			<dd><%=f.submit "Upload"%></dd>
+		</dl>
+		<% end %>
+	</section>
+<%end%>
+
+<% if @is_allowed_to_upload_videos %>
+	<section id="uploads" class="centered well">
+		<h2>Video Bereitstellen</h2>
+		<%=form_for Video.new do |f| %>
+		<dl class="dl-horizontal">
+			<%=f.label :remote_file_url do %>
+				<dt>Mediaweb URL:</dt> <dd><%=f.text_field :mediaweb_url %></dd>
 			<%end%>
 			<dd><%=f.submit "Upload"%></dd>
 		</dl>

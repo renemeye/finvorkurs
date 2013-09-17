@@ -5,6 +5,12 @@ class DownloadsController < ApplicationController
     @downloads = Download.order("created_at DESC")
     @upload = Download.new
     @is_allowed_to_upload = current_user && current_user.role >= User::ROLES[:tutor]
+    @is_allowed_to_upload_videos = current_user && current_user.admin?
+
+    @videos = Video.order("created_at DESC")
+    @videos.each do |video|
+      video[:manifest] = video.catch_manifest_data
+    end
   end
 
   def create
