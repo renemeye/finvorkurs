@@ -37,17 +37,19 @@ ActiveAdmin.register_page "Dashboard" do
           test_result_histogram = VorkursTest.all.collect do |vorkurs_test|
             counter = [[100,0],[90,0],[80,0],[70,0],[60,0],[50,0],[40,0],[30,0],[20,0],[10,0]]
             User.all.each do |user|
-              result = vorkurs_test.result user
-              if result > 0
-                counter.each do |c|
-                  if result >= c[0]
-                    c[1] = c[1]+1
-                    break
+              if user.completed_test? vorkurs_test
+                result = vorkurs_test.result user
+               # if result > 0
+                  counter.each do |c|
+                    if result >= c[0]
+                      c[1] = c[1]+1
+                      break
+                    end
                   end
-                end
+                #end
               end
             end
-            counter
+            counter.reverse!
           end
 
 
