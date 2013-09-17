@@ -95,3 +95,5 @@ gem "carrierwave"
 gem 'rails-file-icons'
 
 gem 'videojs_rails'
+
+gem 'nokogiri'
