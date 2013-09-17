@@ -1,4 +1,4 @@
-class VideoController < ApplicationController
+class VideosController < ApplicationController
 	def show
 		authenticate_admin!
 		@video = Video.find(params[:id])
