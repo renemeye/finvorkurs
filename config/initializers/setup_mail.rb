@@ -4,11 +4,11 @@
 	 ActionMailer::Base.delivery_method = :smtp
 	 ActionMailer::Base.smtp_settings = {
 	   :address              => Settings.mail.smtp.server_address,
-#	   :port                 => Settings.mail.smtp.port,
-#	   :user_name            => Settings.mail.smtp.user_name,
-#	   :password             => Settings.mail.smtp.password,
-	   #:authentication       => :login,
-#	   :enable_starttls_auto => true
+	   :port                 => Settings.mail.smtp.port,
+	   :user_name            => Settings.mail.smtp.user_name,
+	   :password             => Settings.mail.smtp.password,
+   	   :authentication       => :login,
+	   :enable_starttls_auto => true
 	 }
 end
 

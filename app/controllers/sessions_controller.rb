@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
 
 	  if user && user.authenticate(params[:password])
 	    session[:user_id] = user.id
-	    redirect_to root_url, :notice => "Login erfolgreich"
+		#redirect_to root_url
+		flash[:notice] = "Login erfolgreich"
+		redirect_back_or edit_user_path(user)
 	  else
 	    flash.now.alert = "Ungültige E-Mail oder Password"
 	    render "new"
