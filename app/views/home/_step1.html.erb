@@ -2,7 +2,11 @@
 	<% if @user.nil? %>
 		<h2>Schritt 1</h2>
 
-		<a href="/users/new" class="btn btn-block">Neuen Account erstellen</a>
+		<% unless Settings.mode == "closed" %>
+			<a href="/users/new" class="btn btn-block">Neuen Account erstellen</a>
+		<% else %>
+			<%= editable_text "home.text_registration_closed" %>
+		<% end %>
 		<a href="<%=new_preregister_login_path%>" class="btn btn-block">Vorregistriert, aber noch kein Passwort?</a>
 		<div class="or">oder</div>
 		<div class="login">

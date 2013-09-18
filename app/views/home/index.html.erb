@@ -23,5 +23,13 @@
 	</section>
 <% end %>
 
+<% if Settings.mode == "closed" %>
+
+	<section id="howto">
+		<h1><%= editable_text "home.title_registration_closed" %></h1>
+		<%=render 'howto'%>
+	</section>
+<% end %>
+
 <%= render 'features' %>
 

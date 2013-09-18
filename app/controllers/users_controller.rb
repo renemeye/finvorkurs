@@ -55,17 +55,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    params[:user].delete(:role) unless (!@current_user.nil? && params[:user][:role].to_i <= @current_user.role) || params[:user][:role].to_i <= User::ROLES[:registered]
+    if Settings.mode == "registration" || Settings.mode == "preregistration"
+      params[:user].delete(:role) unless (!@current_user.nil? && params[:user][:role].to_i <= @current_user.role) || params[:user][:role].to_i <= User::ROLES[:registered]
 
-    @user = User.new(params[:user])
-		@user.generate_token :preregistration_auth_token
-    if @user.save
-			@user.send_email_confirmation_mail
-      send_notification_to_admins @user if Settings.administration.send_new_user_registered_notification
-      url = (params[:redirect_to].nil?)? root_url : params[:redirect_to]["url"]
-      redirect_to url, :notice => "Vielen Dank für Ihr Interesse. Bitte sehen Sie in Ihr Postfach und bestätigen Sie Ihre E-Mail-Adresse."
+      @user = User.new(params[:user])
+  		@user.generate_token :preregistration_auth_token
+      if @user.save
+  			@user.send_email_confirmation_mail
+        send_notification_to_admins @user if Settings.administration.send_new_user_registered_notification
+        url = (params[:redirect_to].nil?)? root_url : params[:redirect_to]["url"]
+        redirect_to url, :notice => "Vielen Dank für Ihr Interesse. Bitte sehen Sie in Ihr Postfach und bestätigen Sie Ihre E-Mail-Adresse."
+      else
+        render "new"
+      end
     else
-      render "new"
+      redirect_to root_url, :notice => "Leider ist die Anmeldung geschlossen. Bitte wenden Sie sich an #{Settings.mail.from}."
     end
   end
 
