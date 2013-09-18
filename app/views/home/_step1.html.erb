@@ -3,7 +3,7 @@
 		<h2>Schritt 1</h2>
 
 		<% unless Settings.mode == "closed" %>
-			<a href="/users/new" class="btn btn-block">Neuen Account erstellen</a>
+			<a href="<%=new_user_path%>" class="btn btn-block">Neuen Account erstellen</a>
 		<% else %>
 			<%= editable_text "home.text_registration_closed" %>
 		<% end %>
