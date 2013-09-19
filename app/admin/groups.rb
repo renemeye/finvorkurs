@@ -9,6 +9,9 @@ ActiveAdmin.register Group do
     column 'Users' do |group|
       group.users.count
     end
+    column 'Present' do |course|
+      group.users.to_a.count{|u|u.present}
+    end
     column 'Teilnehmer', :readable_group_scope
     column :room
     default_actions
