@@ -11,6 +11,9 @@ ActiveAdmin.register Course do
     column 'Enrollments' do |course|
       course.enrollments.count
     end
+    column 'Present' do |course|
+      course.users.to_a.count{|u|u.present}
+    end
     default_actions
   end
 
