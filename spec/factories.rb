@@ -78,6 +78,7 @@ FactoryGirl.define do
 	end
 
 	factory :group do
+		group_information "Test"
 	end
 
 	factory :faculty do

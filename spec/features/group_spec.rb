@@ -77,18 +77,39 @@ describe Group do
 
   	end
 
-  	it "should have markdown group information" do
-  		course1 = Course.create(title: "Kurs 1", course_level: "Grundkurs");
+  	it "should put all users in a single group" do
+	  	course1 = Course.create(title: "Kurs 1", course_level: "Grundkurs");
 
 	  	tutor1 = create(:tutor)
-	  	tutor2 = create(:tutor)
 
 	  	group1 = create(:group, :user => tutor1, :course => course1)
 
-	  	group1.group_information = "Hallo **Welt** end";
+	    fak1 = create(:faculty_with_programs, name: "Fak1")
+	    fak2 = create(:faculty_with_programs, name: "Fak2")
 
-	  	group1.markdown_group_information.should eq("Hallo <strong>Welt</strong> end");
+	    user1Fak1 = create(:user, :degree_program_ids => [fak1.degree_programs.first.id])
+	    user2Fak1 = create(:user, :degree_program_ids => [fak1.degree_programs.first.id])
+	    user3Fak1 = create(:user, :degree_program_ids => [fak1.degree_programs.first.id])
+	    user4Fak1 = create(:user, :degree_program_ids => [fak1.degree_programs.first.id])
+	    user1Fak2 = create(:user, :degree_program_ids => [fak2.degree_programs.first.id])
+	    user2Fak2 = create(:user, :degree_program_ids => [fak2.degree_programs.first.id])
+	    user3Fak2 = create(:user, :degree_program_ids => [fak2.degree_programs.first.id])
 
+	    user1Fak1.courses << course1
+	    user2Fak1.courses << course1
+	    user3Fak1.courses << course1
+	    user4Fak1.courses << course1
+	    user1Fak2.courses << course1
+	    user2Fak2.courses << course1
+	    user3Fak2.courses << course1
+
+	    Group.initialize_groups_for_course course1
+
+	    group1.users.should eq([user1Fak1,user2Fak1,user3Fak1, user4Fak1, user1Fak2,user2Fak2,user3Fak2])
+
+	    #It should not create a new enrollemnt
+	    user1Fak1.enrollments.last.course.should_not eq(nil)
 
   	end
+
 end
