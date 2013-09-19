@@ -60,6 +60,10 @@ body.ovgu-design{
 		}
 
 		nav {
+			line-height: 63px;
+			float: right;
+			width: auto;
+
 			ul{
 				li {
 					position: relative; 
@@ -75,6 +79,9 @@ body.ovgu-design{
 			}
 
 			ul.dropdown-menu {
+				position: absolute;
+				right: 0%;
+				left: inherit;
 				li {
 					height: inherit;
 					font-size: 0.9em;
@@ -82,12 +89,8 @@ body.ovgu-design{
 				text-align: center;
 				margin-top: 12px;
 				padding-top: 15px;
-				margin-left: 30px;
+				margin-right: 20px;
 			}
-
-			line-height: 63px;
-			float: right;
-			width: auto;
 		}
 	}
 
