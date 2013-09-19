@@ -369,6 +369,7 @@ DEPENDENCIES
   jquery-rails (= 2.3.0)
   mathjax-rails
   mysql2
+  nokogiri
   prawn!
   rack-mini-profiler
   rack_session_access

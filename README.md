@@ -62,6 +62,15 @@ Run on Server
 * Start production (might be in a screen or in an init.d file)
   * ```foreman start -f Procfile -e .env```
 
+* If running on a Apache add the following to public/assets/.htaccess
+	AddType video/ogg .ogv
+	AddType video/mp4 .mp4
+	AddType video/webm .webm
+
+	AddType audio/mpeg .mp3
+	AddType audio/ogg .ogg
+	AddType audio/mp4 .m4a
+	AddType audio/wav /wav
 
 Configuration
 -------------
