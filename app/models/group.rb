@@ -10,7 +10,6 @@ class Group < ActiveRecord::Base
   has_many :faculties, through: :degree_programs, uniq: true
   
   attr_accessible :room, :user_id, :course_id, :enrollment_ids, :users_attributes, :group_information
-  attr_accessor :group_information, :room
 
   @@markdown_options = [
     :autolink=>true, 
