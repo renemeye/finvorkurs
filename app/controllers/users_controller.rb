@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if Settings.mode == "registration" || Settings.mode == "preregistration"
+    if Settings.mode == "registration" || Settings.mode == "preregistration" || Settings.mode == "closed"
       params[:user].delete(:role) unless (!@current_user.nil? && params[:user][:role].to_i <= @current_user.role) || params[:user][:role].to_i <= User::ROLES[:registered]
 
       @user = User.new(params[:user])

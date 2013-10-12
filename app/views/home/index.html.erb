@@ -1,6 +1,5 @@
-<%= render "teaser" %>
-
 <% if Settings.mode == "preregistration" %>
+	<%= render "teaser" %>
 	<% unless @user.nil? %>
 		<section id="signup">
 			<% if Settings.mode == "preregistration" %>
@@ -10,24 +9,22 @@
 				<h1>Neu Registrieren</h1>
 				<p>Bitte geben Sie hier Ihre E-Mail-Adresse die Studiengänge an, für die Sie sich interressieren. Danach bekommen Sie eine E-Mail mit weiteren Informationen.</p>
 			<% end %>
-			<%=render 'users/newform', :locals => {:user => @user} %>
+			<%=render 'users/newform', :locals => {:user => @user}, hide_closed: true %>
 		</section>
 	<% end %>
 <% end %>
 
 <% if Settings.mode == "registration" %>
-
+	<%= render "teaser" %>
 	<section id="howto">
 		<h1><%= editable_text "home.registration_started" %></h1>
-		<%=render 'howto'%>
+		<%=render 'howto', hide_closed: true%>
 	</section>
 <% end %>
 
 <% if Settings.mode == "closed" %>
-
 	<section id="howto">
-		<h1><%= editable_text "home.title_registration_closed" %></h1>
-		<%=editable_text "home.text_registration_closed"%>
+		<%=render 'howto', hide_step2: true, hide_step3: true %>
 	</section>
 <% end %>
 

@@ -1,8 +1,15 @@
-<div class="howto-steps">
-	<%=render "step1"%>
+<div class="howto-steps" style="width: 1000px; margin-left: auto; margin-right: auto;">
+	<%=render "step1" unless (defined? hide_step1) && hide_step1 %>
 
-	<%=render "step2" %>
+	<%=render "step2" unless (defined? hide_step2) && hide_step2 %>
 
-	<%=render "step3" %>
+	<%=render "step3" unless (defined? hide_step3) && hide_step3 %>
+
+	<%unless (defined? hide_closed) && hide_closed%>
+		<div class="step">
+			<h1><%= editable_text "home.title_registration_closed" %></h1>
+			<%=editable_text "home.text_registration_closed" %>
+		</div>
+	<% end %>
 </div>
 

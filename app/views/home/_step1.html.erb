@@ -1,17 +1,15 @@
 <div>	
 	<% if @user.nil? %>
+		<% unless Settings.mode == "closed"%>
 		<h2>Schritt 1</h2>
+		<%end%>
 
-		<% unless Settings.mode == "closed" %>
-			<a href="<%=new_user_path%>" class="btn btn-block">Neuen Account erstellen</a>
-		<% else %>
-			<%= editable_text "home.text_registration_closed" %>
-		<% end %>
-		<a href="<%=new_preregister_login_path%>" class="btn btn-block">Vorregistriert, aber noch kein Passwort?</a>
-		<div class="or">oder</div>
-		<div class="login">
+		<div class="login" >
 			<%=render 'sessions/login'%>
 		</div>
+		<div class="or">oder</div>
+		<a href="<%=new_user_path%>" class="btn btn-block">Neuen Account erstellen</a>
+		<a href="<%=new_preregister_login_path%>" class="btn btn-block">Vorregistriert, aber noch kein Passwort?</a>
 	<% elsif @user.preregistered? %>
 		<h2>Schritt 1</h2>
 
