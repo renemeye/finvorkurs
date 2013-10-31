@@ -57,6 +57,10 @@ ActiveAdmin.register Question do
       link_to 'Export Questions', :action => 'download', :format => :json
     end
 
+    action_item :only => :index do
+      link_to 'Results as TeX', :action => 'download', :format => :tex
+    end
+
     collection_action :upload_json do
       render "admin/json/upload_json"
     end
@@ -66,6 +70,12 @@ ActiveAdmin.register Question do
       respond_to do |format|
         format.json {
           send_data questions.to_json, filename: "#{Time.new.strftime("%Y_%m_%d_%R")}_questions.json"
+        }
+
+        format.tex {
+          tex_file = "#{Question.get_tex_scheme} 
+                      #{questions.collect{|q|q.get_tex_result}.join}"
+          send_data tex_file, filename: "#{Time.new.strftime("%Y_%m_%d_%R")}_questions.tex"
         }
       end
     end
@@ -103,8 +113,6 @@ ActiveAdmin.register Question do
       end
       redirect_to :action => :index, :notice => "JSON imported successfully!"
     end
-
-
 
     #Edit form
     form do |f|
