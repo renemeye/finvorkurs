@@ -10,6 +10,10 @@
       new_content=new_content.gsub("[user.name]", user_name)
     end
 
+    if new_content.include? "[user.evasys_tan]"
+      new_content=new_content.gsub("[user.evasys_tan]", user.evasys_tan)
+    end
+
     if new_content.include? "[user.login_link]"
     	if user.preregistration_auth_token.nil?
     		login_link = "Für Ihren Account deaktiviert!"

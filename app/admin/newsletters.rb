@@ -5,7 +5,7 @@ ActiveAdmin.register Newsletter do
   form do |f|
     f.inputs "Newsletter (Der Newsletter wird nicht direkt gesendet.)" do
       f.input :subject
-      f.input :content, :hint => "Es können Platzhalter eingefügt werden. Derzeit verfügbar: \"[user.name]\" => \" Max Mustermann\" (Leerzeichen am Anfang beachten) und \"[user.login_link]\" => \"http://direkt.einloggen.link\" "
+      f.input :content, :hint => "Es können Platzhalter eingefügt werden. Derzeit verfügbar: \"[user.name]\" => \" Max Mustermann\" (Leerzeichen am Anfang beachten) und \"[user.login_link]\" => \"http://direkt.einloggen.link\", \"[user.evasys_tan]\" => \"ABCDE\" "
     end
     f.inputs "Select Receivers" do
     	f.input :all_users, as: :boolean
