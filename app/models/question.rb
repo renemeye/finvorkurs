@@ -119,33 +119,25 @@ class Question < ActiveRecord::Base
       % #####################
       % Schema ist wie folgt:
       % #####################
-      % \\aufgabe{Level}{Kategorie}{Wie viele die gesehen haben}{Text}
-      % \\falschhinweis{wenns einen zur Aufgabe gibt}
-      %
-      %     \\antwort{true}{korrekte anworten}{falsche antworten}{Text}
-      %     \\falschhinweis{wenns einen zur Antwort gibt}
-      %
-      %     \\antwort{false}{korrekte anworten}{falsche antworten}{Text}
-      %     \\falschhinweis{wenns einen zur Antwort gibt}
+      % \\aufgabe{Level}{Kategorie}{Wie viele die gesehen haben}{Text}{falschhinweis (ggf leer)}
+      % \\begin{antworten}
+      %     \\antwort{true}{korrekte anworten}{falsche antworten}{Text}{falschhinweis (ggf leer)}
+      %     \\antwort{false}{korrekte anworten}{falsche antworten}{Text}{falschhinweis (ggf leer)}
       "
   end
 
   def get_tex_result
-      question_tex = "\\aufgabe{#{self.vorkurs_test.name}}{#{self.category}}{#{self.users.count}}{#{self.text}}"
-      false_hint_tex = "\\falschhinweis{#{self.false_answer_explanation}}" if self.false_answer_explanation && self.false_answer_explanation != ""
+      question_tex = "\\aufgabe{#{self.vorkurs_test.name}}{#{self.category}}{#{self.users.count}}{#{self.text}}{#{self.false_answer_explanation}}"
 
       answers_tex = self.answers.collect do |answer| 
-        answer_tex = "\\antwort{#{answer.correct}}{#{answer.replies.where(voted_as_correct: answer.correct).count}}{#{answer.replies.where(voted_as_correct: (not answer.correct)).count}}{#{answer.text}}"
-        false_hint_tex =  "\\falschhinweis{#{answer.false_answer_explanation}}"  if answer.false_answer_explanation && answer.false_answer_explanation != ""
+        answer_tex = "\\antwort{#{answer.correct}}{#{answer.replies.where(voted_as_correct: answer.correct).count}}{#{answer.replies.where(voted_as_correct: (not answer.correct)).count}}{#{answer.text}}{#{answer.false_answer_explanation}}"
         "
             #{answer_tex}
-            #{false_hint_tex}
         "
       end
 
       "
       #{question_tex}
-      #{false_hint_tex}
 
       #{answers_tex.join }
       "
