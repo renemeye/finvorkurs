@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   belongs_to :vorkurs_test
   has_many :answers
   has_many :replies, :through => :answers
-  has_many :users, :through => :replies
+  has_many :users, :through => :replies, :uniq => true
   attr_accessible :text, :vorkurs_test_id, :false_answer_explanation, :question_type, :answers_attributes, :category
   accepts_nested_attributes_for :answers, allow_destroy: true
 
@@ -116,17 +116,17 @@ class Question < ActiveRecord::Base
 
   def self.get_tex_scheme
       "
-      # #####################
-      # Schema ist wie folgt:
-      # #####################
-      # \\aufgabe{Level}{Kategorie}{Wie viele die gesehen haben}{Text}
-      # \\falschhinweis{wenns einen zur Aufgabe gibt}
-      #
-      #     \\antwort{true}{korrekte anworten}{falsche antworten}{Text}
-      #     \\falschhinweis{wenns einen zur Antwort gibt}
-      #
-      #     \\antwort{false}{korrekte anworten}{falsche antworten}{Text}
-      #     \\falschhinweis{wenns einen zur Antwort gibt}
+      % #####################
+      % Schema ist wie folgt:
+      % #####################
+      % \\aufgabe{Level}{Kategorie}{Wie viele die gesehen haben}{Text}
+      % \\falschhinweis{wenns einen zur Aufgabe gibt}
+      %
+      %     \\antwort{true}{korrekte anworten}{falsche antworten}{Text}
+      %     \\falschhinweis{wenns einen zur Antwort gibt}
+      %
+      %     \\antwort{false}{korrekte anworten}{falsche antworten}{Text}
+      %     \\falschhinweis{wenns einen zur Antwort gibt}
       "
   end
 
@@ -134,13 +134,14 @@ class Question < ActiveRecord::Base
       question_tex = "\\aufgabe{#{self.vorkurs_test.name}}{#{self.category}}{#{self.users.count}}{#{self.text}}"
       false_hint_tex = "\\falschhinweis{#{self.false_answer_explanation}}" if self.false_answer_explanation && self.false_answer_explanation != ""
 
-      answers_tex = self.answers.collect{|answer| 
+      answers_tex = self.answers.collect do |answer| 
         answer_tex = "\\antwort{#{answer.correct}}{#{answer.replies.where(voted_as_correct: answer.correct).count}}{#{answer.replies.where(voted_as_correct: (not answer.correct)).count}}{#{answer.text}}"
         false_hint_tex =  "\\falschhinweis{#{answer.false_answer_explanation}}"  if answer.false_answer_explanation && answer.false_answer_explanation != ""
         "
             #{answer_tex}
             #{false_hint_tex}
-        "}
+        "
+      end
 
       "
       #{question_tex}
