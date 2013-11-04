@@ -123,6 +123,7 @@ class Question < ActiveRecord::Base
       % \\begin{antworten}
       %     \\antwort{true}{korrekte anworten}{falsche antworten}{Text}{falschhinweis (ggf leer)}
       %     \\antwort{false}{korrekte anworten}{falsche antworten}{Text}{falschhinweis (ggf leer)}
+      % \\end{antworten}
       "
   end
 
@@ -138,8 +139,9 @@ class Question < ActiveRecord::Base
 
       "
       #{question_tex}
-
-      #{answers_tex.join }
+      \\begin{antworten}
+        #{answers_tex.join }
+      \\end{antworten}
       "
   end
 
